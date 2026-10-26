@@ -6,6 +6,12 @@ built-in test cases, and an interactive custom-test mode.
 
 Only the standard library is needed to run the tests (`pytest` is optional).
 
+<p align="center">
+  <img src="docs/preview.gif" alt="code180 Two Sum 3Blue1Brown Animation Preview" width="900">
+  <br>
+  <em>Interactive 3Blue1Brown-style walkthrough for <a href="topics/01_arrays_and_hashing/two_sum/visualize.html"><b>Two Sum</b></a> featuring step-by-step animations, synchronized code tracing, and live state inspection.</em>
+</p>
+
 ## Quickstart
 
 ```bash

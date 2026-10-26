@@ -1836,6 +1836,10 @@ function mount() {
     }
     runFromInputs(inputsMap, true);
   }
+  const urlP = new URLSearchParams(window.location.search);
+  if (urlP.has("seek")) {
+    seekTo(Number(urlP.get("seek")), false);
+  }
 }
 
 function runFromInputs(inputsMap, quiet) {
