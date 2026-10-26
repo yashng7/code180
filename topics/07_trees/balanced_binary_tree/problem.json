@@ -1,0 +1,15 @@
+{
+  "id": "balanced_binary_tree",
+  "title": "Balanced Binary Tree",
+  "topic": "Trees",
+  "difficulty": "Easy",
+  "function": "is_balanced",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/balanced-binary-tree/",
+  "neetcode": "https://neetcode.io/problems/balanced-binary-tree"
+}

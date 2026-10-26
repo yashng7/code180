@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [[1, 2, 3, 0, 2]], "expected": 3, "note": "official example"},
+    {"args": [[1]], "expected": 0, "note": "single day"},
+    {"args": [[1, 2]], "expected": 1, "note": "one profitable sale"},
+    {"args": [[2, 1]], "expected": 0, "note": "only falling prices"},
+    {"args": [[1, 2, 3]], "expected": 2, "note": "one transaction beats two"},
+    {"args": [[2, 1, 4]], "expected": 3, "note": "buy low on day 2"},
+    {"args": [[1, 3, 2, 8, 4, 9]], "expected": 8, "note": "single buy/sell at the ends"},
+    {"args": [[1, 2, 3, 0, 2, 3]], "expected": 4, "note": "two trades with a cooldown day"},
+    {"args": [[6, 1, 3, 2, 4, 7]], "expected": 6, "note": "buy 1 sell 7"}
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      ],
+      "expected": 3,
+      "note": "classic example"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 1,
+      "note": "single edge"
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 0,
+      "note": "single node"
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": 0,
+      "note": "empty tree"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 2,
+      "note": "diameter through the root"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          null,
+          6
+        ]
+      ],
+      "expected": 4,
+      "note": "path bends at the root"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": 3,
+      "note": "skewed chain, diameter is its length"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      ],
+      "expected": 4,
+      "note": "perfect tree, 4 edges"
+    }
+  ]
+}

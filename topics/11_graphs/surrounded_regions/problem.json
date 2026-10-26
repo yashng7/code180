@@ -1,0 +1,11 @@
+{
+  "id": "surrounded_regions",
+  "title": "Surrounded Regions",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "solve",
+  "compare": "exact",
+  "tags": ["array", "matrix", "dfs", "bfs", "union-find"],
+  "leetcode": "https://leetcode.com/problems/surrounded-regions/",
+  "neetcode": "https://neetcode.io/problems/surrounded-regions"
+}

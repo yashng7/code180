@@ -1,0 +1,11 @@
+{
+  "id": "graph_valid_tree",
+  "title": "Graph Valid Tree",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "valid_tree",
+  "compare": "exact",
+  "tags": ["dfs", "bfs", "union-find", "graph"],
+  "leetcode": "https://leetcode.com/problems/graph-valid-tree/",
+  "neetcode": "https://neetcode.io/problems/valid-tree"
+}

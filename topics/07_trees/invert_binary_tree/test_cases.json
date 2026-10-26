@@ -1,0 +1,131 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          4,
+          2,
+          7,
+          1,
+          3,
+          6,
+          9
+        ]
+      ],
+      "expected": [
+        4,
+        7,
+        2,
+        9,
+        6,
+        3,
+        1
+      ],
+      "note": "classic example"
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          3
+        ]
+      ],
+      "expected": [
+        2,
+        3,
+        1
+      ],
+      "note": "three-node tree"
+    },
+    {
+      "args": [
+        []
+      ],
+      "expected": [],
+      "note": "empty tree"
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "note": "single node"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2
+      ],
+      "note": "only a left child becomes a right child"
+    },
+    {
+      "args": [
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "note": "only a right child becomes a left child"
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          5,
+          null,
+          2
+        ]
+      ],
+      "expected": [
+        3,
+        5,
+        1,
+        null,
+        null,
+        2
+      ],
+      "note": "unbalanced tree"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5,
+          null,
+          6
+        ]
+      ],
+      "expected": [
+        1,
+        3,
+        2,
+        6,
+        null,
+        5,
+        4
+      ],
+      "note": "sparse lower level"
+    }
+  ]
+}

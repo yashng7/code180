@@ -1,0 +1,11 @@
+{
+  "id": "decode_ways",
+  "title": "Decode Ways",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "num_decodings",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/decode-ways/",
+  "neetcode": "https://neetcode.io/problems/decode-ways"
+}

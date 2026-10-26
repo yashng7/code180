@@ -1,0 +1,11 @@
+{
+  "id": "largest_rectangle_in_histogram",
+  "title": "Largest Rectangle in Histogram",
+  "topic": "Stack",
+  "difficulty": "Hard",
+  "function": "largest_rectangle_area",
+  "compare": "exact",
+  "tags": ["array", "stack", "monotonic-stack"],
+  "leetcode": "https://leetcode.com/problems/largest-rectangle-in-histogram/",
+  "neetcode": "https://neetcode.io/problems/largest-rectangle-in-histogram"
+}

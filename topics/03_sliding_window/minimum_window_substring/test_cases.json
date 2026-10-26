@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["ADOBECODEBANC", "ABC"],
+      "expected": "BANC",
+      "note": "classic example"
+    },
+    {
+      "args": ["a", "a"],
+      "expected": "a",
+      "note": "single matching character"
+    },
+    {
+      "args": ["a", "aa"],
+      "expected": "",
+      "note": "t has more of a character than s"
+    },
+    {
+      "args": ["a", "b"],
+      "expected": "",
+      "note": "character absent from s"
+    },
+    {
+      "args": ["aa", "aa"],
+      "expected": "aa",
+      "note": "whole string needed"
+    },
+    {
+      "args": ["ab", "a"],
+      "expected": "a",
+      "note": "single-character window suffices"
+    },
+    {
+      "args": ["bba", "ab"],
+      "expected": "ba",
+      "note": "answer is a suffix"
+    },
+    {
+      "args": ["cabwefgewcwaefgcf", "cae"],
+      "expected": "cwae",
+      "note": "late overlapping window"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], "ABCCED"],
+      "expected": true,
+      "note": "official example, zig-zag path"
+    },
+    {
+      "args": [[["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], "SEE"],
+      "expected": true,
+      "note": "official example, short word"
+    },
+    {
+      "args": [[["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], "ABCB"],
+      "expected": false,
+      "note": "official example, would need to reuse B"
+    },
+    {
+      "args": [[["A"]], "A"],
+      "expected": true,
+      "note": "1x1 grid, match"
+    },
+    {
+      "args": [[["A"]], "B"],
+      "expected": false,
+      "note": "1x1 grid, no match"
+    },
+    {
+      "args": [[["A", "B"], ["C", "D"]], "ABDC"],
+      "expected": true,
+      "note": "path turns around the 2x2 grid"
+    },
+    {
+      "args": [[["A", "B"], ["C", "D"]], "ABCD"],
+      "expected": false,
+      "note": "cannot jump row 0 then row 1 directly"
+    },
+    {
+      "args": [[["a", "a"]], "aaa"],
+      "expected": false,
+      "note": "not enough cells, reuse not allowed"
+    },
+    {
+      "args": [[["C", "A", "A"], ["A", "A", "A"], ["B", "C", "D"]], "AAB"],
+      "expected": true,
+      "note": "requires backtracking through several A's"
+    }
+  ]
+}

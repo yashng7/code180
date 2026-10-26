@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["abcabcbb"],
+      "expected": 3,
+      "note": "classic example: abc"
+    },
+    {
+      "args": ["bbbbb"],
+      "expected": 1,
+      "note": "all identical characters"
+    },
+    {
+      "args": ["pwwkew"],
+      "expected": 3,
+      "note": "classic example: wke"
+    },
+    {
+      "args": [""],
+      "expected": 0,
+      "note": "empty string"
+    },
+    {
+      "args": [" "],
+      "expected": 1,
+      "note": "singleton space"
+    },
+    {
+      "args": ["dvdf"],
+      "expected": 3,
+      "note": "must shrink past the first d"
+    },
+    {
+      "args": ["abba"],
+      "expected": 2,
+      "note": "duplicate behind the left edge"
+    },
+    {
+      "args": ["tmmzuxt"],
+      "expected": 5,
+      "note": "longest window is mzuxt"
+    }
+  ]
+}

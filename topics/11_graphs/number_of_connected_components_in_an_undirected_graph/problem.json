@@ -1,0 +1,11 @@
+{
+  "id": "number_of_connected_components_in_an_undirected_graph",
+  "title": "Number of Connected Components in an Undirected Graph",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "count_components",
+  "compare": "exact",
+  "tags": ["dfs", "bfs", "union-find", "graph"],
+  "leetcode": "https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/",
+  "neetcode": "https://neetcode.io/problems/count-connected-components"
+}

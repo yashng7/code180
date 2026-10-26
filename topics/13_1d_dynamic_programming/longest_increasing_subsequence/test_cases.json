@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[10, 9, 2, 5, 3, 7, 101, 18]], "expected": 4, "note": "official example 1"},
+    {"args": [[0, 1, 0, 3, 2, 3]], "expected": 4, "note": "official example 2"},
+    {"args": [[7, 7, 7, 7, 7]], "expected": 1, "note": "official example 3 (strict)"},
+    {"args": [[1]], "expected": 1, "note": "single element"},
+    {"args": [[1, 2]], "expected": 2, "note": "already increasing"},
+    {"args": [[2, 1]], "expected": 1, "note": "decreasing"},
+    {"args": [[4, 10, 4, 3, 8, 9]], "expected": 3, "note": "skip the big early value"},
+    {"args": [[3, 4, -1, 0, 6, 2, 3]], "expected": 4, "note": "subsequence is not a subarray"}
+  ]
+}

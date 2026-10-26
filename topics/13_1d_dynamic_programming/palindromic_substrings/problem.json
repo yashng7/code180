@@ -1,0 +1,11 @@
+{
+  "id": "palindromic_substrings",
+  "title": "Palindromic Substrings",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "count_substrings",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/palindromic-substrings/",
+  "neetcode": "https://neetcode.io/problems/palindromic-substrings"
+}

@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[2, 3, 1, 1, 4]],
+      "expected": 2,
+      "note": "classic example (0 -> 1 -> 4)"
+    },
+    {
+      "args": [[2, 3, 0, 1, 4]],
+      "expected": 2,
+      "note": "classic example with a zero"
+    },
+    {
+      "args": [[0]],
+      "expected": 0,
+      "note": "single element already at the end"
+    },
+    {
+      "args": [[1]],
+      "expected": 0,
+      "note": "single element, no jump needed"
+    },
+    {
+      "args": [[2, 1]],
+      "expected": 1,
+      "note": "two elements, one jump"
+    },
+    {
+      "args": [[1, 2, 1, 1]],
+      "expected": 2,
+      "note": "jump to the strong middle index"
+    },
+    {
+      "args": [[1, 1, 1, 1]],
+      "expected": 3,
+      "note": "forced to step every index"
+    },
+    {
+      "args": [[3, 2, 1]],
+      "expected": 1,
+      "note": "first jump reaches the end"
+    }
+  ]
+}

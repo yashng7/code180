@@ -1,0 +1,11 @@
+{
+  "id": "plus_one",
+  "title": "Plus One",
+  "topic": "Math & Geometry",
+  "difficulty": "Easy",
+  "function": "plus_one",
+  "compare": "exact",
+  "tags": ["array", "math"],
+  "leetcode": "https://leetcode.com/problems/plus-one/",
+  "neetcode": "https://neetcode.io/problems/plus-one"
+}

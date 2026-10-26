@@ -1,0 +1,11 @@
+{
+  "id": "combination_sum_ii",
+  "title": "Combination Sum II",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "combination_sum2",
+  "compare": "unordered_inner",
+  "tags": ["array", "backtracking"],
+  "leetcode": "https://leetcode.com/problems/combination-sum-ii/",
+  "neetcode": "https://neetcode.io/problems/combination-target-sum-ii"
+}

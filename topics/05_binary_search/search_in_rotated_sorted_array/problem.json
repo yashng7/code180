@@ -1,0 +1,11 @@
+{
+  "id": "search_in_rotated_sorted_array",
+  "title": "Search in Rotated Sorted Array",
+  "topic": "Binary Search",
+  "difficulty": "Medium",
+  "function": "search",
+  "compare": "exact",
+  "tags": ["array", "binary-search", "rotated-array"],
+  "leetcode": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+  "neetcode": "https://neetcode.io/problems/search-in-rotated-sorted-array"
+}

@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": ["rabbbit", "rabbit"], "expected": 3, "note": "official example 1"},
+    {"args": ["babgbag", "bag"], "expected": 5, "note": "official example 2"},
+    {"args": ["abc", "abc"], "expected": 1, "note": "one exact subsequence"},
+    {"args": ["aaa", "a"], "expected": 3, "note": "three single-character picks"},
+    {"args": ["aaaaa", "aa"], "expected": 10, "note": "C(5,2) pairs"},
+    {"args": ["", "abc"], "expected": 0, "note": "empty source"},
+    {"args": ["abc", ""], "expected": 1, "note": "empty target counts once"},
+    {"args": ["abab", "ab"], "expected": 3, "note": "pairs (0,1),(0,3),(2,3)"}
+  ]
+}

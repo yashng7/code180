@@ -1,0 +1,11 @@
+{
+  "id": "swim_in_rising_water",
+  "title": "Swim in Rising Water",
+  "topic": "Advanced Graphs",
+  "difficulty": "Hard",
+  "function": "swim_in_water",
+  "compare": "exact",
+  "tags": ["graph", "dijkstra", "binary-search", "heap", "matrix"],
+  "leetcode": "https://leetcode.com/problems/swim-in-rising-water/",
+  "neetcode": "https://neetcode.io/problems/swim-in-rising-water"
+}

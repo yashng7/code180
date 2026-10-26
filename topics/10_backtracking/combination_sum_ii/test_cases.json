@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": [[10, 1, 2, 7, 6, 1, 5], 8],
+      "expected": [[1, 1, 6], [1, 2, 5], [1, 7], [2, 6]],
+      "note": "official example with duplicate 1s"
+    },
+    {
+      "args": [[2, 5, 2, 1, 2], 5],
+      "expected": [[1, 2, 2], [5]],
+      "note": "official example, three copies of 2"
+    },
+    {
+      "args": [[2], 1],
+      "expected": [],
+      "note": "no combination possible"
+    },
+    {
+      "args": [[1, 1, 1], 2],
+      "expected": [[1, 1]],
+      "note": "each copy used at most once"
+    },
+    {
+      "args": [[3, 1, 3, 5, 1], 8],
+      "expected": [[1, 1, 3, 3], [3, 5]],
+      "note": "duplicates plus a large candidate"
+    },
+    {
+      "args": [[1, 2, 3], 6],
+      "expected": [[1, 2, 3]],
+      "note": "the whole set is the only combination"
+    },
+    {
+      "args": [[4, 4, 4, 4], 8],
+      "expected": [[4, 4]],
+      "note": "repeated value used exactly twice"
+    }
+  ]
+}

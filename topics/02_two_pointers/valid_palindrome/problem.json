@@ -1,0 +1,11 @@
+{
+  "id": "valid_palindrome",
+  "title": "Valid Palindrome",
+  "topic": "Two Pointers",
+  "difficulty": "Easy",
+  "function": "is_palindrome",
+  "compare": "exact",
+  "tags": ["string", "two-pointers"],
+  "leetcode": "https://leetcode.com/problems/valid-palindrome/",
+  "neetcode": "https://neetcode.io/problems/is-palindrome"
+}

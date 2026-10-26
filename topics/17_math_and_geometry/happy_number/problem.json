@@ -1,0 +1,11 @@
+{
+  "id": "happy_number",
+  "title": "Happy Number",
+  "topic": "Math & Geometry",
+  "difficulty": "Easy",
+  "function": "is_happy",
+  "compare": "exact",
+  "tags": ["math", "hash-table", "two-pointers"],
+  "leetcode": "https://leetcode.com/problems/happy-number/",
+  "neetcode": "https://neetcode.io/problems/happy-number"
+}

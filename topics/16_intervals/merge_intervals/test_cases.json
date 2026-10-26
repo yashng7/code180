@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[[1, 3], [2, 6], [8, 10], [15, 18]]],
+      "expected": [[1, 6], [8, 10], [15, 18]],
+      "note": "classic example"
+    },
+    {
+      "args": [[[1, 4], [4, 5]]],
+      "expected": [[1, 5]],
+      "note": "touching endpoints merge"
+    },
+    {
+      "args": [[[1, 4], [0, 4]]],
+      "expected": [[0, 4]],
+      "note": "same end, smaller start"
+    },
+    {
+      "args": [[[1, 4], [2, 3]]],
+      "expected": [[1, 4]],
+      "note": "fully contained interval"
+    },
+    {
+      "args": [[[4, 7], [1, 4]]],
+      "expected": [[1, 7]],
+      "note": "unsorted input, touching"
+    },
+    {
+      "args": [[[1, 4], [5, 6]]],
+      "expected": [[1, 4], [5, 6]],
+      "note": "disjoint with a gap"
+    },
+    {
+      "args": [[[1, 2]]],
+      "expected": [[1, 2]],
+      "note": "single interval"
+    },
+    {
+      "args": [[[1, 4], [0, 2], [3, 5]]],
+      "expected": [[0, 5]],
+      "note": "chain merging three intervals"
+    },
+    {
+      "args": [[[2, 3], [4, 5], [6, 7], [8, 9], [1, 10]]],
+      "expected": [[1, 10]],
+      "note": "one interval covers all others"
+    }
+  ]
+}

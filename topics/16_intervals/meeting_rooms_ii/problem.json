@@ -1,0 +1,11 @@
+{
+  "id": "meeting_rooms_ii",
+  "title": "Meeting Rooms II",
+  "topic": "Intervals",
+  "difficulty": "Medium",
+  "function": "min_meeting_rooms",
+  "compare": "exact",
+  "tags": ["array", "sorting", "heap", "sweep-line", "intervals"],
+  "leetcode": "https://leetcode.com/problems/meeting-rooms-ii/",
+  "neetcode": "https://neetcode.io/problems/meeting-schedule-ii"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "pacific_atlantic_water_flow",
+  "title": "Pacific Atlantic Water Flow",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "pacific_atlantic",
+  "compare": "unordered",
+  "tags": ["array", "matrix", "dfs", "bfs"],
+  "leetcode": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+  "neetcode": "https://neetcode.io/problems/pacific-atlantic-water-flow"
+}

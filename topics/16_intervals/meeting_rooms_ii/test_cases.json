@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[[0, 30], [5, 10], [15, 20]]],
+      "expected": 2,
+      "note": "classic example"
+    },
+    {
+      "args": [[[7, 10], [2, 4]]],
+      "expected": 1,
+      "note": "classic example, single room"
+    },
+    {
+      "args": [[]],
+      "expected": 0,
+      "note": "no meetings"
+    },
+    {
+      "args": [[[1, 5]]],
+      "expected": 1,
+      "note": "single meeting"
+    },
+    {
+      "args": [[[1, 5], [5, 10]]],
+      "expected": 1,
+      "note": "touching endpoints reuse a room"
+    },
+    {
+      "args": [[[1, 5], [4, 10]]],
+      "expected": 2,
+      "note": "small overlap needs a second room"
+    },
+    {
+      "args": [[[0, 1], [1, 2], [2, 3]]],
+      "expected": 1,
+      "note": "fully chained back-to-back"
+    },
+    {
+      "args": [[[2, 11], [6, 16], [11, 16]]],
+      "expected": 2,
+      "note": "nested and touching"
+    },
+    {
+      "args": [[[1, 10], [2, 7], [3, 19], [8, 12], [10, 20], [11, 30]]],
+      "expected": 4,
+      "note": "peak of four concurrent meetings"
+    }
+  ]
+}

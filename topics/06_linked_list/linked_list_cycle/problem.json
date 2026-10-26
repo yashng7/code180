@@ -1,0 +1,11 @@
+{
+  "id": "linked_list_cycle",
+  "title": "Linked List Cycle",
+  "topic": "Linked List",
+  "difficulty": "Easy",
+  "function": "has_cycle",
+  "compare": "exact",
+  "tags": ["linked-list", "two-pointers", "hash-table"],
+  "leetcode": "https://leetcode.com/problems/linked-list-cycle/",
+  "neetcode": "https://neetcode.io/problems/linked-list-cycle-detection"
+}

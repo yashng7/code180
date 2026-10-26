@@ -1,0 +1,12 @@
+{
+  "id": "alien_dictionary",
+  "title": "Alien Dictionary",
+  "topic": "Advanced Graphs",
+  "difficulty": "Hard",
+  "function": "alien_order",
+  "compare": "custom",
+  "checker": "alien_order",
+  "tags": ["graph", "topological-sort", "bfs", "string"],
+  "leetcode": "https://leetcode.com/problems/alien-dictionary/",
+  "neetcode": "https://neetcode.io/problems/foreign-dictionary"
+}

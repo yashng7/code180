@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": ["horse", "ros"], "expected": 3, "note": "official example 1"},
+    {"args": ["intention", "execution"], "expected": 5, "note": "official example 2"},
+    {"args": ["", ""], "expected": 0, "note": "both empty"},
+    {"args": ["a", ""], "expected": 1, "note": "delete the only character"},
+    {"args": ["", "a"], "expected": 1, "note": "insert the only character"},
+    {"args": ["abc", "abc"], "expected": 0, "note": "identical strings"},
+    {"args": ["ab", "ba"], "expected": 2, "note": "either two replaces or delete+insert"},
+    {"args": ["kitten", "sitting"], "expected": 3, "note": "classic example"}
+  ]
+}

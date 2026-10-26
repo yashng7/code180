@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[[7, null], [13, 0], [11, 4], [10, 2], [1, 0]]],
+      "expected": [[7, null], [13, 0], [11, 4], [10, 2], [1, 0]],
+      "note": "classic example"
+    },
+    {
+      "args": [[[1, 1], [2, 1]]],
+      "expected": [[1, 1], [2, 1]],
+      "note": "two nodes with random to tail"
+    },
+    {
+      "args": [[[3, null], [3, 0], [3, null]]],
+      "expected": [[3, null], [3, 0], [3, null]],
+      "note": "duplicate values"
+    },
+    {
+      "args": [[]],
+      "expected": [],
+      "note": "empty list"
+    },
+    {
+      "args": [[[1, null]]],
+      "expected": [[1, null]],
+      "note": "single node, no random"
+    },
+    {
+      "args": [[[1, 0], [2, 0]]],
+      "expected": [[1, 0], [2, 0]],
+      "note": "random points to head"
+    },
+    {
+      "args": [[[1, 1], [2, 0]]],
+      "expected": [[1, 1], [2, 0]],
+      "note": "randoms point at each other"
+    },
+    {
+      "args": [[[5, null], [6, null], [7, null]]],
+      "expected": [[5, null], [6, null], [7, null]],
+      "note": "all randoms null"
+    },
+    {
+      "args": [[[1, 2], [2, 1], [3, 0]]],
+      "expected": [[1, 2], [2, 1], [3, 0]],
+      "note": "descending random indices"
+    }
+  ]
+}

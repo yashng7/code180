@@ -1,0 +1,11 @@
+{
+  "id": "interleaving_string",
+  "title": "Interleaving String",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "is_interleave",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/interleaving-string/",
+  "neetcode": "https://neetcode.io/problems/interleaving-string"
+}

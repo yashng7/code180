@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "args": {
+        "ops": ["Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"],
+        "vals": [[], [1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]]
+      },
+      "expected": [null, null, [5], null, null, [6, 5], null, [5]],
+      "note": "official example"
+    },
+    {
+      "args": {
+        "ops": ["Twitter", "postTweet", "postTweet", "follow", "getNewsFeed"],
+        "vals": [[], [1, 1], [2, 2], [1, 2], [1]]
+      },
+      "expected": [null, null, null, null, [2, 1]],
+      "note": "follow then merge own and followee tweets, newest first"
+    },
+    {
+      "args": {
+        "ops": ["Twitter", "postTweet", "postTweet", "follow", "unfollow", "getNewsFeed"],
+        "vals": [[], [1, 1], [2, 2], [1, 2], [1, 2], [1]]
+      },
+      "expected": [null, null, null, null, null, [1]],
+      "note": "unfollow hides the followee's tweets"
+    },
+    {
+      "args": {
+        "ops": ["Twitter", "getNewsFeed"],
+        "vals": [[], [1]]
+      },
+      "expected": [null, []],
+      "note": "no tweets — empty feed"
+    },
+    {
+      "args": {
+        "ops": ["Twitter", "postTweet", "postTweet", "follow", "getNewsFeed", "getNewsFeed"],
+        "vals": [[], [1, 1], [2, 2], [1, 2], [1], [2]]
+      },
+      "expected": [null, null, null, null, [2, 1], [2]],
+      "note": "following is one-directional"
+    },
+    {
+      "args": {
+        "ops": ["Twitter", "postTweet", "postTweet", "getNewsFeed"],
+        "vals": [[], [1, 7], [2, 8], [1]]
+      },
+      "expected": [null, null, null, [7]],
+      "note": "never-followed users are invisible"
+    },
+    {
+      "args": {
+        "ops": ["Twitter", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "postTweet", "getNewsFeed"],
+        "vals": [[], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [1, 6], [1, 7], [1, 8], [1, 9], [1, 10], [1, 11], [1]]
+      },
+      "expected": [null, null, null, null, null, null, null, null, null, null, null, null, [11, 10, 9, 8, 7, 6, 5, 4, 3, 2]],
+      "note": "feed is capped at the 10 most recent tweets"
+    }
+  ]
+}

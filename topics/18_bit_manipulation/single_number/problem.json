@@ -1,0 +1,11 @@
+{
+  "id": "single_number",
+  "title": "Single Number",
+  "topic": "Bit Manipulation",
+  "difficulty": "Easy",
+  "function": "single_number",
+  "compare": "exact",
+  "tags": ["array", "bit-manipulation"],
+  "leetcode": "https://leetcode.com/problems/single-number/",
+  "neetcode": "https://neetcode.io/problems/single-number"
+}

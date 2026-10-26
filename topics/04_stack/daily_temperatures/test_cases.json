@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "args": [[73, 74, 75, 71, 69, 72, 76, 73]],
+      "expected": [1, 1, 4, 2, 1, 1, 0, 0],
+      "note": "official example"
+    },
+    {"args": [[30, 40, 50, 60]], "expected": [1, 1, 1, 0], "note": "strictly increasing"},
+    {"args": [[30, 60, 90]], "expected": [1, 1, 0], "note": "official example 3"},
+    {"args": [[90, 80, 70, 60]], "expected": [0, 0, 0, 0], "note": "strictly decreasing, no warmer day"},
+    {"args": [[70, 70, 70]], "expected": [0, 0, 0], "note": "equal never counts as warmer"},
+    {"args": [[55]], "expected": [0], "note": "singleton"},
+    {
+      "args": [[34, 80, 80, 80, 34, 80, 34, 80]],
+      "expected": [1, 0, 0, 0, 1, 0, 1, 0],
+      "note": "plateaus of equal temperatures"
+    }
+  ]
+}

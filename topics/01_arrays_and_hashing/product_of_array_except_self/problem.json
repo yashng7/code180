@@ -1,0 +1,11 @@
+{
+  "id": "product_of_array_except_self",
+  "title": "Product of Array Except Self",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Medium",
+  "function": "product_except_self",
+  "compare": "exact",
+  "tags": ["array", "prefix-product"],
+  "leetcode": "https://leetcode.com/problems/product-of-array-except-self/",
+  "neetcode": "https://neetcode.io/problems/products-of-array-discluding-self"
+}

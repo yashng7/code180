@@ -1,0 +1,17 @@
+{
+  "id": "serialize_and_deserialize_binary_tree",
+  "title": "Serialize and Deserialize Binary Tree",
+  "topic": "Trees",
+  "difficulty": "Hard",
+  "function": "serialize_and_deserialize",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "breadth-first-search",
+    "design",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",
+  "neetcode": "https://neetcode.io/problems/serialize-and-deserialize-binary-tree"
+}

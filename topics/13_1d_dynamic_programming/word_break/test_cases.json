@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["leetcode", ["leet", "code"]], "expected": true, "note": "official example 1"},
+    {"args": ["applepenapple", ["apple", "pen"]], "expected": true, "note": "official example 2 (reuse allowed)"},
+    {"args": ["catsandog", ["cats", "dog", "sand", "and", "cat"]], "expected": false, "note": "official example 3"},
+    {"args": ["a", ["a"]], "expected": true, "note": "single character hit"},
+    {"args": ["a", ["b"]], "expected": false, "note": "single character miss"},
+    {"args": ["cars", ["car", "ca", "rs"]], "expected": true, "note": "split ca+rs beats car"},
+    {"args": ["aaaaaa", ["aaaa", "aa"]], "expected": true, "note": "many overlapping splits"},
+    {"args": ["abcd", ["a", "abc", "b", "cd"]], "expected": true, "note": "a+b+cd"},
+    {"args": ["goalspecial", ["go", "goal", "goals", "special"]], "expected": true, "note": "greedy-longest still works"}
+  ]
+}

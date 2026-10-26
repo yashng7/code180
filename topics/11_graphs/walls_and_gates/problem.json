@@ -1,0 +1,11 @@
+{
+  "id": "walls_and_gates",
+  "title": "Walls and Gates",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "walls_and_gates",
+  "compare": "exact",
+  "tags": ["array", "matrix", "bfs"],
+  "leetcode": "https://leetcode.com/problems/walls-and-gates/",
+  "neetcode": "https://neetcode.io/problems/islands-and-treasure"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "clone_graph",
+  "title": "Clone Graph",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "clone_graph",
+  "compare": "exact",
+  "tags": ["hash-table", "dfs", "bfs", "graph"],
+  "leetcode": "https://leetcode.com/problems/clone-graph/",
+  "neetcode": "https://neetcode.io/problems/clone-graph"
+}

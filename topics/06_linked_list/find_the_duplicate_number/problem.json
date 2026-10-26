@@ -1,0 +1,11 @@
+{
+  "id": "find_the_duplicate_number",
+  "title": "Find the Duplicate Number",
+  "topic": "Linked List",
+  "difficulty": "Medium",
+  "function": "find_duplicate",
+  "compare": "exact",
+  "tags": ["array", "two-pointers", "binary-search", "bit-manipulation"],
+  "leetcode": "https://leetcode.com/problems/find-the-duplicate-number/",
+  "neetcode": "https://neetcode.io/problems/find-duplicate-integer"
+}

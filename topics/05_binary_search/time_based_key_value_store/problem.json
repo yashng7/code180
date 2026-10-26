@@ -1,0 +1,12 @@
+{
+  "id": "time_based_key_value_store",
+  "title": "Time Based Key-Value Store",
+  "topic": "Binary Search",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "TimeMap",
+  "compare": "exact",
+  "tags": ["hash-table", "binary-search", "design"],
+  "leetcode": "https://leetcode.com/problems/time-based-key-value-store/",
+  "neetcode": "https://neetcode.io/problems/time-based-key-value-store"
+}

@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[2, 3, -2, 4]], "expected": 6, "note": "official example 1"},
+    {"args": [[-2, 0, -1]], "expected": 0, "note": "official example 2"},
+    {"args": [[2]], "expected": 2, "note": "single positive"},
+    {"args": [[-2]], "expected": -2, "note": "single negative"},
+    {"args": [[-2, -3, -4]], "expected": 12, "note": "two negatives beat the triple"},
+    {"args": [[0, 2]], "expected": 2, "note": "zero resets the product"},
+    {"args": [[2, -5, -2, -4, 3]], "expected": 24, "note": "official-style sign flips"},
+    {"args": [[-2, 3, -4]], "expected": 24, "note": "all three multiplied"}
+  ]
+}

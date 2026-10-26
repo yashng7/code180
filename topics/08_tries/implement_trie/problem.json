@@ -1,0 +1,12 @@
+{
+  "id": "implement_trie",
+  "title": "Implement Trie (Prefix Tree)",
+  "topic": "Tries",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "Trie",
+  "compare": "exact",
+  "tags": ["trie", "design", "hash-table", "string"],
+  "leetcode": "https://leetcode.com/problems/implement-trie-prefix-tree/",
+  "neetcode": "https://neetcode.io/problems/implement-prefix-tree"
+}

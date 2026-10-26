@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["hit", "cog", ["hot", "dot", "dog", "lot", "log", "cog"]],
+      "expected": 5,
+      "note": "official example 1: hit -> hot -> dot -> dog -> cog"
+    },
+    {
+      "args": ["hit", "cog", ["hot", "dot", "dog", "lot", "log"]],
+      "expected": 0,
+      "note": "official example 2: end word absent"
+    },
+    {
+      "args": ["hot", "dog", ["hot", "dog", "dot"]],
+      "expected": 3,
+      "note": "short two-step ladder"
+    },
+    {
+      "args": ["a", "c", ["a", "b", "c"]],
+      "expected": 2,
+      "note": "single-letter words: a -> c directly"
+    },
+    {
+      "args": ["hot", "dog", ["hot"]],
+      "expected": 0,
+      "note": "end word not in the list"
+    },
+    {
+      "args": ["abc", "xyz", ["abc", "xyz"]],
+      "expected": 0,
+      "note": "end present but no one-letter bridge"
+    },
+    {
+      "args": ["ab", "cd", ["ad", "cb", "cd"]],
+      "expected": 3,
+      "note": "requires a one-letter intermediate word"
+    },
+    {
+      "args": ["red", "tax", ["ted", "tex", "red", "tax", "tad", "den", "rex", "pee"]],
+      "expected": 4,
+      "note": "two different shortest routes of length 4"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[3, 4, 5, 1, 2]],
+      "expected": 1,
+      "note": "classic example"
+    },
+    {
+      "args": [[4, 5, 6, 7, 0, 1, 2]],
+      "expected": 0,
+      "note": "classic example, minimum in the middle"
+    },
+    {
+      "args": [[11, 12, 13, 14, 15]],
+      "expected": 11,
+      "note": "not rotated (rotation count 0)"
+    },
+    {
+      "args": [[2, 1]],
+      "expected": 1,
+      "note": "two elements, rotated"
+    },
+    {
+      "args": [[1]],
+      "expected": 1,
+      "note": "singleton"
+    },
+    {
+      "args": [[3, 1, 2]],
+      "expected": 1,
+      "note": "minimum just after the head"
+    },
+    {
+      "args": [[5, 1, 2, 3, 4]],
+      "expected": 1,
+      "note": "rotation count 1"
+    },
+    {
+      "args": [[1, 2, 3]],
+      "expected": 1,
+      "note": "already sorted, minimum first"
+    },
+    {
+      "args": [[7, 8, 1, 2, 3, 4, 5, 6]],
+      "expected": 1,
+      "note": "even length, minimum near the middle"
+    }
+  ]
+}

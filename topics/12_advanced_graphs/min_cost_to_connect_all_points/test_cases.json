@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]],
+      "expected": 20,
+      "note": "classic example, five points"
+    },
+    {
+      "args": [[[3, 12], [-2, 5], [-4, 1]]],
+      "expected": 18,
+      "note": "official example with negative coordinates"
+    },
+    {
+      "args": [[[0, 0]]],
+      "expected": 0,
+      "note": "single point, no edges needed"
+    },
+    {
+      "args": [[[0, 0], [1, 1]]],
+      "expected": 2,
+      "note": "two points, Manhattan diagonal"
+    },
+    {
+      "args": [[[0, 0], [0, 0], [0, 0]]],
+      "expected": 0,
+      "note": "duplicate points have zero-cost edges"
+    },
+    {
+      "args": [[[0, 0], [0, 10], [10, 0]]],
+      "expected": 20,
+      "note": "right triangle; avoids the longest edge"
+    },
+    {
+      "args": [[[0, 0], [1, 0], [0, 1], [1, 1]]],
+      "expected": 3,
+      "note": "unit square, three unit edges"
+    },
+    {
+      "args": [[[0, 0], [3, 0], [10, 0]]],
+      "expected": 10,
+      "note": "collinear points, must skip the spanning edge"
+    }
+  ]
+}

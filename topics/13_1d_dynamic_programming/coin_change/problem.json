@@ -1,0 +1,11 @@
+{
+  "id": "coin_change",
+  "title": "Coin Change",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "coin_change",
+  "compare": "exact",
+  "tags": ["dynamic-programming", "bfs"],
+  "leetcode": "https://leetcode.com/problems/coin-change/",
+  "neetcode": "https://neetcode.io/problems/coin-change"
+}

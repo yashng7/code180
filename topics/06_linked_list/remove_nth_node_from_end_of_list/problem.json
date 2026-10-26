@@ -1,0 +1,11 @@
+{
+  "id": "remove_nth_node_from_end_of_list",
+  "title": "Remove Nth Node From End of List",
+  "topic": "Linked List",
+  "difficulty": "Medium",
+  "function": "remove_nth_from_end",
+  "compare": "exact",
+  "tags": ["linked-list", "two-pointers"],
+  "leetcode": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+  "neetcode": "https://neetcode.io/problems/remove-node-from-end-of-linked-list"
+}

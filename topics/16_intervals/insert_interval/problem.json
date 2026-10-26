@@ -1,0 +1,11 @@
+{
+  "id": "insert_interval",
+  "title": "Insert Interval",
+  "topic": "Intervals",
+  "difficulty": "Medium",
+  "function": "insert",
+  "compare": "exact",
+  "tags": ["array", "intervals"],
+  "leetcode": "https://leetcode.com/problems/insert-interval/",
+  "neetcode": "https://neetcode.io/problems/insert-new-interval"
+}

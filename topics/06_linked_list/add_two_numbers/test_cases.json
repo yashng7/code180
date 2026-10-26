@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[2, 4, 3], [5, 6, 4]],
+      "expected": [7, 0, 8],
+      "note": "classic example (342 + 465 = 807)"
+    },
+    {
+      "args": [[0], [0]],
+      "expected": [0],
+      "note": "both zero"
+    },
+    {
+      "args": [[9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9]],
+      "expected": [8, 9, 9, 9, 0, 0, 0, 1],
+      "note": "classic carry chain"
+    },
+    {
+      "args": [[1, 8], [0]],
+      "expected": [1, 8],
+      "note": "adding zero"
+    },
+    {
+      "args": [[5], [5]],
+      "expected": [0, 1],
+      "note": "single digits that carry"
+    },
+    {
+      "args": [[9], [1]],
+      "expected": [0, 1],
+      "note": "creates a new leading digit"
+    },
+    {
+      "args": [[1], [9, 9]],
+      "expected": [0, 0, 1],
+      "note": "different lengths"
+    },
+    {
+      "args": [[2, 4], [5, 6]],
+      "expected": [7, 0, 1],
+      "note": "42 + 65 = 107"
+    }
+  ]
+}

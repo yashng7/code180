@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[]], "expected": [], "note": "empty list round-trips"},
+    {"args": [[""]], "expected": [""], "note": "single empty string"},
+    {"args": [["", ""]], "expected": ["", ""], "note": "two empty strings"},
+    {"args": [["hello", "world"]], "expected": ["hello", "world"], "note": "basic words"},
+    {"args": [["#", "##", "a#b"]], "expected": ["#", "##", "a#b"], "note": "delimiter inside payload"},
+    {"args": [["we", "say", ":", "yes", "!@#$%^&*()"]], "expected": ["we", "say", ":", "yes", "!@#$%^&*()"], "note": "punctuation and symbols"},
+    {"args": [["hello", "world", "hello"]], "expected": ["hello", "world", "hello"], "note": "repeated values"},
+    {"args": [["123", "45", "6"]], "expected": ["123", "45", "6"], "note": "numeric-looking strings"}
+  ]
+}

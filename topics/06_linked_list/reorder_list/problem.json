@@ -1,0 +1,11 @@
+{
+  "id": "reorder_list",
+  "title": "Reorder List",
+  "topic": "Linked List",
+  "difficulty": "Medium",
+  "function": "reorder_list",
+  "compare": "exact",
+  "tags": ["linked-list", "two-pointers", "stack", "recursion"],
+  "leetcode": "https://leetcode.com/problems/reorder-list/",
+  "neetcode": "https://neetcode.io/problems/reorder-linked-list"
+}

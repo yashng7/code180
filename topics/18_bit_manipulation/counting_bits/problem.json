@@ -1,0 +1,11 @@
+{
+  "id": "counting_bits",
+  "title": "Counting Bits",
+  "topic": "Bit Manipulation",
+  "difficulty": "Easy",
+  "function": "count_bits",
+  "compare": "exact",
+  "tags": ["dynamic-programming", "bit-manipulation"],
+  "leetcode": "https://leetcode.com/problems/counting-bits/",
+  "neetcode": "https://neetcode.io/problems/counting-bits"
+}

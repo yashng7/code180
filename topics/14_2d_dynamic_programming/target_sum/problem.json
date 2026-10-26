@@ -1,0 +1,11 @@
+{
+  "id": "target_sum",
+  "title": "Target Sum",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "find_target_sum_ways",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming", "subset-sum"],
+  "leetcode": "https://leetcode.com/problems/target-sum/",
+  "neetcode": "https://neetcode.io/problems/target-sum"
+}

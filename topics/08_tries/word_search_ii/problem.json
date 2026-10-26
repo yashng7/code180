@@ -1,0 +1,11 @@
+{
+  "id": "word_search_ii",
+  "title": "Word Search II",
+  "topic": "Tries",
+  "difficulty": "Hard",
+  "function": "find_words",
+  "compare": "unordered",
+  "tags": ["trie", "backtracking", "matrix", "depth-first-search"],
+  "leetcode": "https://leetcode.com/problems/word-search-ii/",
+  "neetcode": "https://neetcode.io/problems/search-for-word-ii"
+}

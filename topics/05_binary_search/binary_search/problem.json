@@ -1,0 +1,11 @@
+{
+  "id": "binary_search",
+  "title": "Binary Search",
+  "topic": "Binary Search",
+  "difficulty": "Easy",
+  "function": "search",
+  "compare": "exact",
+  "tags": ["array", "binary-search"],
+  "leetcode": "https://leetcode.com/problems/binary-search/",
+  "neetcode": "https://neetcode.io/problems/binary-search"
+}

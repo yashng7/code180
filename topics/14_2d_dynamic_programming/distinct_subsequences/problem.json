@@ -1,0 +1,11 @@
+{
+  "id": "distinct_subsequences",
+  "title": "Distinct Subsequences",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Hard",
+  "function": "num_distinct",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/distinct-subsequences/",
+  "neetcode": "https://neetcode.io/problems/count-subsequences"
+}

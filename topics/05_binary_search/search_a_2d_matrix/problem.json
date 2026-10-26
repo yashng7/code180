@@ -1,0 +1,11 @@
+{
+  "id": "search_a_2d_matrix",
+  "title": "Search a 2D Matrix",
+  "topic": "Binary Search",
+  "difficulty": "Medium",
+  "function": "search_matrix",
+  "compare": "exact",
+  "tags": ["array", "binary-search", "matrix"],
+  "leetcode": "https://leetcode.com/problems/search-a-2d-matrix/",
+  "neetcode": "https://neetcode.io/problems/search-2d-matrix"
+}

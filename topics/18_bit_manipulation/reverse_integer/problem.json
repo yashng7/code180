@@ -1,0 +1,11 @@
+{
+  "id": "reverse_integer",
+  "title": "Reverse Integer",
+  "topic": "Bit Manipulation",
+  "difficulty": "Medium",
+  "function": "reverse",
+  "compare": "exact",
+  "tags": ["math"],
+  "leetcode": "https://leetcode.com/problems/reverse-integer/",
+  "neetcode": "https://neetcode.io/problems/reverse-integer"
+}

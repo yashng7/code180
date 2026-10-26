@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 3],
+      "expected": true,
+      "note": "classic example present"
+    },
+    {
+      "args": [[[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 13],
+      "expected": false,
+      "note": "classic example absent, falls in a gap"
+    },
+    {
+      "args": [[[1]], 1],
+      "expected": true,
+      "note": "single cell found"
+    },
+    {
+      "args": [[[1]], 0],
+      "expected": false,
+      "note": "single cell absent"
+    },
+    {
+      "args": [[[1, 3, 5, 7]], 7],
+      "expected": true,
+      "note": "single row, last element"
+    },
+    {
+      "args": [[[1, 3, 5, 7]], 6],
+      "expected": false,
+      "note": "single row, between two values"
+    },
+    {
+      "args": [[[1], [3], [5]], 3],
+      "expected": true,
+      "note": "single column, middle element"
+    },
+    {
+      "args": [[[1], [3], [5]], 4],
+      "expected": false,
+      "note": "single column, absent"
+    },
+    {
+      "args": [[[1, 3, 5, 7], [10, 11, 16, 20], [23, 30, 34, 60]], 60],
+      "expected": true,
+      "note": "classic example, very last element"
+    }
+  ]
+}

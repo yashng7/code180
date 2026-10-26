@@ -1,0 +1,16 @@
+{
+  "id": "binary_tree_right_side_view",
+  "title": "Binary Tree Right Side View",
+  "topic": "Trees",
+  "difficulty": "Medium",
+  "function": "right_side_view",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "breadth-first-search",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/binary-tree-right-side-view/",
+  "neetcode": "https://neetcode.io/problems/binary-tree-right-side-view"
+}

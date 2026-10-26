@@ -1,0 +1,68 @@
+{
+  "cases": [
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "add", "add", "count", "count", "add", "count"],
+        "vals": [[], [[3, 10]], [[11, 2]], [[3, 2]], [[11, 10]], [[14, 8]], [[11, 2]], [[11, 10]]]
+      },
+      "expected": [null, null, null, null, 1, 0, null, 2],
+      "note": "official example"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "count"],
+        "vals": [[], [[0, 0]]]
+      },
+      "expected": [null, 0],
+      "note": "no points added yet"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "count"],
+        "vals": [[], [[1, 1]], [[1, 1]]]
+      },
+      "expected": [null, null, 0],
+      "note": "a lone point cannot form a square (side must be positive)"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "add", "add", "add", "count"],
+        "vals": [[], [[0, 0]], [[2, 0]], [[0, 2]], [[2, 2]], [[0, 0]]]
+      },
+      "expected": [null, null, null, null, null, 1],
+      "note": "one 2x2 axis-aligned square"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "add", "add", "add", "add", "count"],
+        "vals": [[], [[0, 0]], [[0, 2]], [[2, 2]], [[2, 0]], [[2, 0]], [[0, 0]]]
+      },
+      "expected": [null, null, null, null, null, null, 2],
+      "note": "duplicate corner multiplies the count"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "add", "add", "add", "count"],
+        "vals": [[], [[0, 0]], [[3, 0]], [[0, 2]], [[3, 2]], [[0, 0]]]
+      },
+      "expected": [null, null, null, null, null, 0],
+      "note": "rectangle is not a square (classic wrong approach)"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "add", "add", "add", "add", "add", "add", "count"],
+        "vals": [[], [[0, 0]], [[1, 0]], [[0, 1]], [[1, 1]], [[0, 2]], [[2, 0]], [[2, 2]], [[0, 0]]]
+      },
+      "expected": [null, null, null, null, null, null, null, null, 2],
+      "note": "two different squares sharing the query point"
+    },
+    {
+      "args": {
+        "ops": ["DetectSquares", "add", "add", "add", "count"],
+        "vals": [[], [[0, 0]], [[1, 0]], [[2, 0]], [[1, 0]]]
+      },
+      "expected": [null, null, null, null, 0],
+      "note": "collinear points, no square"
+    }
+  ]
+}

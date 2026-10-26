@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {"args": [[1, 2, 3, 1]], "expected": true, "note": "classic duplicate"},
+    {"args": [[1, 2, 3, 4]], "expected": false, "note": "all unique"},
+    {"args": [[1, 1, 1, 3, 3, 4, 3, 2, 4, 2]], "expected": true, "note": "many duplicates"},
+    {"args": [[]], "expected": false, "note": "empty array"},
+    {"args": [[7]], "expected": false, "note": "single element"},
+    {"args": [[-1, -1]], "expected": true, "note": "negatives"},
+    {"args": [[0, 0]], "expected": true, "note": "zeros"}
+  ]
+}

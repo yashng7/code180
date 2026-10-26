@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[3, 6, 7, 11], 8],
+      "expected": 4,
+      "note": "classic example"
+    },
+    {
+      "args": [[30, 11, 23, 4, 20], 5],
+      "expected": 30,
+      "note": "one hour per pile forces speed = max pile"
+    },
+    {
+      "args": [[30, 11, 23, 4, 20], 6],
+      "expected": 23,
+      "note": "one extra hour allows a slower speed"
+    },
+    {
+      "args": [[1], 1],
+      "expected": 1,
+      "note": "singleton pile, minimum hours"
+    },
+    {
+      "args": [[1, 1, 1, 1], 4],
+      "expected": 1,
+      "note": "minimum speed is enough"
+    },
+    {
+      "args": [[10], 1],
+      "expected": 10,
+      "note": "single pile in one hour needs the whole pile"
+    },
+    {
+      "args": [[3, 6, 7, 11], 4],
+      "expected": 11,
+      "note": "h equals the pile count"
+    },
+    {
+      "args": [[1000000000], 2],
+      "expected": 500000000,
+      "note": "large pile exercises ceiling division"
+    },
+    {
+      "args": [[312884470], 968709470],
+      "expected": 1,
+      "note": "huge h, slowest workable speed"
+    }
+  ]
+}

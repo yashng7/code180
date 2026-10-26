@@ -1,0 +1,11 @@
+{
+  "id": "merge_two_sorted_lists",
+  "title": "Merge Two Sorted Lists",
+  "topic": "Linked List",
+  "difficulty": "Easy",
+  "function": "merge_two_lists",
+  "compare": "exact",
+  "tags": ["linked-list", "recursion"],
+  "leetcode": "https://leetcode.com/problems/merge-two-sorted-lists/",
+  "neetcode": "https://neetcode.io/problems/merge-two-sorted-linked-lists"
+}

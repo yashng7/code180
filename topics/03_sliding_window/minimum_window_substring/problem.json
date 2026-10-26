@@ -1,0 +1,11 @@
+{
+  "id": "minimum_window_substring",
+  "title": "Minimum Window Substring",
+  "topic": "Sliding Window",
+  "difficulty": "Hard",
+  "function": "min_window",
+  "compare": "exact",
+  "tags": ["hash-table", "string", "sliding-window"],
+  "leetcode": "https://leetcode.com/problems/minimum-window-substring/",
+  "neetcode": "https://neetcode.io/problems/minimum-window-with-characters"
+}

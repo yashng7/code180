@@ -1,0 +1,10 @@
+{
+  "cases": [
+    {"args": [[1, 1, 1, 2, 2, 3], 2], "expected": [1, 2], "note": "classic example"},
+    {"args": [[1], 1], "expected": [1], "note": "single element"},
+    {"args": [[1, 2], 2], "expected": [1, 2], "note": "k equals distinct count"},
+    {"args": [[1, 2, 1, 2, 1, 2, 3, 1, 3, 2], 2], "expected": [1, 2], "note": "tie at the top"},
+    {"args": [[4, 4, 4, 5, 5, 6], 2], "expected": [4, 5], "note": "clear ordering"},
+    {"args": [[1, 1, 2, 2, 3, 3], 3], "expected": [1, 2, 3], "note": "all equal frequency"}
+  ]
+}

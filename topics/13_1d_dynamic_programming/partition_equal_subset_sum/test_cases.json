@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[1, 5, 11, 5]], "expected": true, "note": "official example 1"},
+    {"args": [[1, 2, 3, 5]], "expected": false, "note": "official example 2"},
+    {"args": [[1, 1]], "expected": true, "note": "two equal singletons"},
+    {"args": [[1]], "expected": false, "note": "odd total"},
+    {"args": [[2, 2, 2]], "expected": false, "note": "half = 3, unreachable from twos"},
+    {"args": [[1, 2, 5]], "expected": false, "note": "half = 4, no subset"},
+    {"args": [[2, 2, 1, 1]], "expected": true, "note": "2 + 1 = 3 on each side"},
+    {"args": [[3, 3, 3, 4, 5]], "expected": true, "note": "4 + 5 = 9 out of 18"}
+  ]
+}

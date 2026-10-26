@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": [[[1, 1, 1], [1, 0, 1], [1, 1, 1]]],
+      "expected": [[1, 0, 1], [0, 0, 0], [1, 0, 1]],
+      "note": "official example, zero in the middle"
+    },
+    {
+      "args": [[[0, 1, 2, 0], [3, 4, 5, 2], [1, 3, 1, 5]]],
+      "expected": [[0, 0, 0, 0], [0, 4, 5, 0], [0, 3, 1, 0]],
+      "note": "official example with zeros in the first and last column"
+    },
+    {
+      "args": [[[1, 2], [3, 4]]],
+      "expected": [[1, 2], [3, 4]],
+      "note": "no zeros, unchanged"
+    },
+    {
+      "args": [[[0]]],
+      "expected": [[0]],
+      "note": "single zero"
+    },
+    {
+      "args": [[[5]]],
+      "expected": [[5]],
+      "note": "single non-zero"
+    },
+    {
+      "args": [[[1, 0], [0, 1]]],
+      "expected": [[0, 0], [0, 0]],
+      "note": "anti-diagonal zeros wipe everything"
+    },
+    {
+      "args": [[[1, 2, 0], [4, 5, 6]]],
+      "expected": [[0, 0, 0], [4, 5, 0]],
+      "note": "zero in the last column of the first row"
+    }
+  ]
+}

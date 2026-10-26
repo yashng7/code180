@@ -1,0 +1,11 @@
+{
+  "id": "missing_number",
+  "title": "Missing Number",
+  "topic": "Bit Manipulation",
+  "difficulty": "Easy",
+  "function": "missing_number",
+  "compare": "exact",
+  "tags": ["array", "hash-table", "math", "bit-manipulation"],
+  "leetcode": "https://leetcode.com/problems/missing-number/",
+  "neetcode": "https://neetcode.io/problems/missing-number"
+}

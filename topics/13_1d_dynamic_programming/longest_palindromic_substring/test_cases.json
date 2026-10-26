@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["babad"], "expected": "bab", "note": "official example, tie with aba"},
+    {"args": ["cbbd"], "expected": "bb", "note": "official example, even length"},
+    {"args": ["a"], "expected": "a", "note": "single character"},
+    {"args": ["ac"], "expected": "a", "note": "no repeated character"},
+    {"args": ["bb"], "expected": "bb", "note": "even palindrome"},
+    {"args": ["ccc"], "expected": "ccc", "note": "all identical"},
+    {"args": ["racecar"], "expected": "racecar", "note": "whole string is a palindrome"},
+    {"args": ["aacabdkacaa"], "expected": "aca", "note": "palindrome in the middle"},
+    {"args": ["forgeeksskeegfor"], "expected": "geeksskeeg", "note": "long inner palindrome"}
+  ]
+}

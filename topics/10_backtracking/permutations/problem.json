@@ -1,0 +1,11 @@
+{
+  "id": "permutations",
+  "title": "Permutations",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "permute",
+  "compare": "unordered",
+  "tags": ["array", "backtracking"],
+  "leetcode": "https://leetcode.com/problems/permutations/",
+  "neetcode": "https://neetcode.io/problems/permutations"
+}

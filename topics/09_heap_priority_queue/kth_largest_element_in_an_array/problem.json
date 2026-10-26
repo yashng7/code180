@@ -1,0 +1,11 @@
+{
+  "id": "kth_largest_element_in_an_array",
+  "title": "Kth Largest Element in an Array",
+  "topic": "Heap / Priority Queue",
+  "difficulty": "Medium",
+  "function": "find_kth_largest",
+  "compare": "exact",
+  "tags": ["heap", "array", "divide-and-conquer", "quickselect"],
+  "leetcode": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+  "neetcode": "https://neetcode.io/problems/kth-largest-element-in-an-array"
+}

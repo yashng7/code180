@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": ["2", "3"],
+      "expected": "6",
+      "note": "official example, single digits"
+    },
+    {
+      "args": ["123", "456"],
+      "expected": "56088",
+      "note": "official example, three digits each"
+    },
+    {
+      "args": ["0", "0"],
+      "expected": "0",
+      "note": "zero times zero"
+    },
+    {
+      "args": ["9", "9"],
+      "expected": "81",
+      "note": "largest single-digit product, forces a carry"
+    },
+    {
+      "args": ["99", "99"],
+      "expected": "9801",
+      "note": "carry chains across two digits"
+    },
+    {
+      "args": ["123", "0"],
+      "expected": "0",
+      "note": "one factor is zero (not a string of all zeros)"
+    },
+    {
+      "args": ["123456789", "987654321"],
+      "expected": "121932631112635269",
+      "note": "large product, catches 32-bit overflow"
+    }
+  ]
+}

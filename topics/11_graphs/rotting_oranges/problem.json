@@ -1,0 +1,11 @@
+{
+  "id": "rotting_oranges",
+  "title": "Rotting Oranges",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "oranges_rotting",
+  "compare": "exact",
+  "tags": ["array", "matrix", "bfs"],
+  "leetcode": "https://leetcode.com/problems/rotting-oranges/",
+  "neetcode": "https://neetcode.io/problems/rotting-fruit"
+}

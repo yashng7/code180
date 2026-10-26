@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[[0, 30], [5, 10], [15, 20]]],
+      "expected": false,
+      "note": "classic example, conflict"
+    },
+    {
+      "args": [[[7, 10], [2, 4]]],
+      "expected": true,
+      "note": "classic example, no conflict"
+    },
+    {
+      "args": [[]],
+      "expected": true,
+      "note": "no meetings"
+    },
+    {
+      "args": [[[1, 5]]],
+      "expected": true,
+      "note": "single meeting"
+    },
+    {
+      "args": [[[1, 5], [5, 10]]],
+      "expected": true,
+      "note": "touching endpoints are fine"
+    },
+    {
+      "args": [[[1, 5], [4, 10]]],
+      "expected": false,
+      "note": "one minute of overlap"
+    },
+    {
+      "args": [[[0, 1], [1, 2], [2, 3]]],
+      "expected": true,
+      "note": "back-to-back chain"
+    },
+    {
+      "args": [[[13, 15], [1, 13]]],
+      "expected": true,
+      "note": "reverse order, touching"
+    },
+    {
+      "args": [[[1, 5], [2, 6], [3, 7]]],
+      "expected": false,
+      "note": "many overlapping"
+    }
+  ]
+}

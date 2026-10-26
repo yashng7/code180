@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [2], "expected": [0, 1, 1], "note": "classic example"},
+    {"args": [5], "expected": [0, 1, 1, 2, 1, 2], "note": "classic example 2"},
+    {"args": [0], "expected": [0], "note": "only zero"},
+    {"args": [1], "expected": [0, 1], "note": "smallest non-zero"},
+    {"args": [8], "expected": [0, 1, 1, 2, 1, 2, 2, 3, 1], "note": "power of two boundary"},
+    {"args": [10], "expected": [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2], "note": "past a power of two"},
+    {"args": [3], "expected": [0, 1, 1, 2], "note": "tiny range"},
+    {"args": [16], "expected": [0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4, 1], "note": "up to 2^4"}
+  ]
+}

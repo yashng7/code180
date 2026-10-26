@@ -1,0 +1,11 @@
+{
+  "id": "two_sum_ii",
+  "title": "Two Sum II - Input Array Is Sorted",
+  "topic": "Two Pointers",
+  "difficulty": "Medium",
+  "function": "two_sum",
+  "compare": "unordered",
+  "tags": ["array", "two-pointers", "binary-search"],
+  "leetcode": "https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/",
+  "neetcode": "https://neetcode.io/problems/two-integer-sum-ii"
+}

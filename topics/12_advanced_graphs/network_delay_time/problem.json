@@ -1,0 +1,11 @@
+{
+  "id": "network_delay_time",
+  "title": "Network Delay Time",
+  "topic": "Advanced Graphs",
+  "difficulty": "Medium",
+  "function": "network_delay_time",
+  "compare": "exact",
+  "tags": ["graph", "dijkstra", "shortest-path", "heap"],
+  "leetcode": "https://leetcode.com/problems/network-delay-time/",
+  "neetcode": "https://neetcode.io/problems/network-delay-time"
+}

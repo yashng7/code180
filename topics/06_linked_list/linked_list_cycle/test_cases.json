@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[3, 2, 0, -4], 1],
+      "expected": true,
+      "note": "classic cyclic example"
+    },
+    {
+      "args": [[1, 2], 0],
+      "expected": true,
+      "note": "cycle back to head"
+    },
+    {
+      "args": [[1], -1],
+      "expected": false,
+      "note": "classic acyclic example"
+    },
+    {
+      "args": [[1, 2], -1],
+      "expected": false,
+      "note": "two nodes, no cycle"
+    },
+    {
+      "args": [[], -1],
+      "expected": false,
+      "note": "empty list"
+    },
+    {
+      "args": [[1], 0],
+      "expected": true,
+      "note": "single node self-loop"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 4],
+      "expected": true,
+      "note": "tail links to itself"
+    },
+    {
+      "args": [[1, 2, 3, 4], 0],
+      "expected": true,
+      "note": "tail links to head"
+    }
+  ]
+}

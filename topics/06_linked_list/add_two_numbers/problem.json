@@ -1,0 +1,11 @@
+{
+  "id": "add_two_numbers",
+  "title": "Add Two Numbers",
+  "topic": "Linked List",
+  "difficulty": "Medium",
+  "function": "add_two_numbers",
+  "compare": "exact",
+  "tags": ["linked-list", "math", "recursion"],
+  "leetcode": "https://leetcode.com/problems/add-two-numbers/",
+  "neetcode": "https://neetcode.io/problems/add-two-numbers"
+}

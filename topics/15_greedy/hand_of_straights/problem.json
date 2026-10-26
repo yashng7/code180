@@ -1,0 +1,11 @@
+{
+  "id": "hand_of_straights",
+  "title": "Hand of Straights",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "is_n_straight_hand",
+  "compare": "exact",
+  "tags": ["array", "hash-table", "greedy", "sorting"],
+  "leetcode": "https://leetcode.com/problems/hand-of-straights/",
+  "neetcode": "https://neetcode.io/problems/hand-of-straights"
+}

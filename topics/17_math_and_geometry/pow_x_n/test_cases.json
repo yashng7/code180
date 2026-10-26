@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [2.0, 10],
+      "expected": 1024.0,
+      "note": "official example, positive exponent"
+    },
+    {
+      "args": [2.1, 3],
+      "expected": 9.261,
+      "note": "official example, non-integer base"
+    },
+    {
+      "args": [2.0, -2],
+      "expected": 0.25,
+      "note": "official example, negative exponent"
+    },
+    {
+      "args": [2.0, 0],
+      "expected": 1.0,
+      "note": "anything to the power zero"
+    },
+    {
+      "args": [-2.0, 3],
+      "expected": -8.0,
+      "note": "negative base, odd exponent keeps the sign"
+    },
+    {
+      "args": [0.5, -3],
+      "expected": 8.0,
+      "note": "fractional base with negative exponent"
+    },
+    {
+      "args": [2.0, 31],
+      "expected": 2147483648.0,
+      "note": "large positive exponent (2^31)"
+    },
+    {
+      "args": [1.0, 2147483647],
+      "expected": 1.0,
+      "note": "maximum exponent with base 1"
+    }
+  ]
+}

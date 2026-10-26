@@ -1,0 +1,21 @@
+{
+  "cases": [
+    {"args": [1], "expected": ["()"], "note": "smallest non-trivial input"},
+    {"args": [2], "expected": ["(())", "()()"], "note": "two pairs"},
+    {
+      "args": [3],
+      "expected": ["((()))", "(()())", "(())()", "()(())", "()()()"],
+      "note": "official example, five combinations"
+    },
+    {
+      "args": [4],
+      "expected": [
+        "(((())))", "((()()))", "((())())", "((()))()",
+        "(()(()))", "(()()())", "(()())()", "(())(())", "(())()()",
+        "()((()))", "()(()())", "()(())()", "()()(())", "()()()()"
+      ],
+      "note": "four pairs, Catalan number C4 = 14"
+    },
+    {"args": [0], "expected": [""], "note": "zero pairs yields the empty string"}
+  ]
+}

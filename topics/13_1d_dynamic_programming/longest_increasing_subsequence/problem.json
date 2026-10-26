@@ -1,0 +1,11 @@
+{
+  "id": "longest_increasing_subsequence",
+  "title": "Longest Increasing Subsequence",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "length_of_lis",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming", "binary-search"],
+  "leetcode": "https://leetcode.com/problems/longest-increasing-subsequence/",
+  "neetcode": "https://neetcode.io/problems/longest-increasing-subsequence"
+}

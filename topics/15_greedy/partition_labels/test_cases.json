@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["ababcbacadefegdehijhklij"],
+      "expected": [9, 7, 8],
+      "note": "classic example"
+    },
+    {
+      "args": ["eccbbbbdec"],
+      "expected": [10],
+      "note": "whole string is a single part"
+    },
+    {
+      "args": ["a"],
+      "expected": [1],
+      "note": "single character"
+    },
+    {
+      "args": ["ab"],
+      "expected": [1, 1],
+      "note": "two distinct characters split"
+    },
+    {
+      "args": ["aa"],
+      "expected": [2],
+      "note": "one repeated character stays together"
+    },
+    {
+      "args": ["abc"],
+      "expected": [1, 1, 1],
+      "note": "all distinct characters"
+    },
+    {
+      "args": ["abac"],
+      "expected": [3, 1],
+      "note": "part must stretch to the last 'a'"
+    },
+    {
+      "args": ["aab"],
+      "expected": [2, 1],
+      "note": "duplicate letters extend the first part"
+    }
+  ]
+}

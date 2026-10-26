@@ -1,0 +1,11 @@
+{
+  "id": "koko_eating_bananas",
+  "title": "Koko Eating Bananas",
+  "topic": "Binary Search",
+  "difficulty": "Medium",
+  "function": "min_eating_speed",
+  "compare": "exact",
+  "tags": ["array", "binary-search", "search-on-answer"],
+  "leetcode": "https://leetcode.com/problems/koko-eating-bananas/",
+  "neetcode": "https://neetcode.io/problems/eating-bananas"
+}

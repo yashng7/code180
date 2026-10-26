@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "args": {
+        "ops": ["MinStack", "push", "push", "push", "getMin", "pop", "top", "getMin"],
+        "vals": [[], [-2], [0], [-3], [], [], [], []]
+      },
+      "expected": [null, null, null, null, -3, null, 0, -2],
+      "note": "official example"
+    },
+    {
+      "args": {
+        "ops": ["MinStack", "push", "push", "top", "getMin", "pop", "top", "getMin"],
+        "vals": [[], [-2], [0], [], [], [], [], []]
+      },
+      "expected": [null, null, null, 0, -2, null, -2, -2],
+      "note": "top after push, then pop restores previous top"
+    },
+    {
+      "args": {
+        "ops": ["MinStack", "push", "push", "push", "getMin", "pop", "pop", "getMin"],
+        "vals": [[], [0], [0], [0], [], [], [], []]
+      },
+      "expected": [null, null, null, null, 0, null, null, 0],
+      "note": "duplicate values (classic wrong approach)"
+    },
+    {
+      "args": {
+        "ops": ["MinStack", "push", "push", "push", "getMin", "pop", "getMin", "pop", "getMin"],
+        "vals": [[], [5], [2], [1], [], [], [], [], []]
+      },
+      "expected": [null, null, null, null, 1, null, 2, null, 5],
+      "note": "strictly decreasing pushes; min restores on pop"
+    },
+    {
+      "args": {
+        "ops": ["MinStack", "push", "getMin", "top", "pop", "push", "getMin"],
+        "vals": [[], [1], [], [], [], [9], []]
+      },
+      "expected": [null, null, 1, 1, null, null, 9],
+      "note": "singleton, then pop to empty and push again"
+    },
+    {
+      "args": {
+        "ops": ["MinStack", "push", "push", "pop", "getMin", "push", "pop", "getMin"],
+        "vals": [[], [-2], [0], [], [], [1], [], []]
+      },
+      "expected": [null, null, null, null, -2, null, null, -2],
+      "note": "min survives removing a larger element"
+    },
+    {
+      "args": {
+        "ops": ["MinStack", "push", "push", "push", "getMin", "top", "pop", "getMin", "pop", "getMin"],
+        "vals": [[], [-1], [-2], [-3], [], [], [], [], [], []]
+      },
+      "expected": [null, null, null, null, -3, -3, null, -2, null, -1],
+      "note": "all negative, min tracks each pop"
+    }
+  ]
+}

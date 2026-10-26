@@ -1,0 +1,141 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9,
+          null,
+          null,
+          3,
+          5
+        ],
+        2,
+        8
+      ],
+      "expected": 6,
+      "note": "classic example, split at the root"
+    },
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9,
+          null,
+          null,
+          3,
+          5
+        ],
+        2,
+        4
+      ],
+      "expected": 2,
+      "note": "one node is an ancestor of the other"
+    },
+    {
+      "args": [
+        [
+          2,
+          1
+        ],
+        2,
+        1
+      ],
+      "expected": 2,
+      "note": "root is the ancestor"
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          3
+        ],
+        1,
+        3
+      ],
+      "expected": 2,
+      "note": "nodes in different subtrees"
+    },
+    {
+      "args": [
+        [
+          5,
+          3,
+          8,
+          1,
+          4,
+          7,
+          9
+        ],
+        3,
+        4
+      ],
+      "expected": 3,
+      "note": "LCA sits below the root"
+    },
+    {
+      "args": [
+        [
+          6,
+          2,
+          8,
+          0,
+          4,
+          7,
+          9,
+          null,
+          null,
+          3,
+          5
+        ],
+        3,
+        5
+      ],
+      "expected": 4,
+      "note": "deep split"
+    },
+    {
+      "args": [
+        [
+          4,
+          2,
+          6,
+          1,
+          3,
+          5,
+          7
+        ],
+        1,
+        7
+      ],
+      "expected": 4,
+      "note": "opposite extremes"
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          4,
+          null,
+          2
+        ],
+        2,
+        4
+      ],
+      "expected": 3,
+      "note": "nested ancestor"
+    }
+  ]
+}

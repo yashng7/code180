@@ -1,0 +1,11 @@
+{
+  "id": "generate_parentheses",
+  "title": "Generate Parentheses",
+  "topic": "Stack",
+  "difficulty": "Medium",
+  "function": "generate_parenthesis",
+  "compare": "unordered",
+  "tags": ["string", "dynamic-programming", "backtracking"],
+  "leetcode": "https://leetcode.com/problems/generate-parentheses/",
+  "neetcode": "https://neetcode.io/problems/generate-parentheses"
+}

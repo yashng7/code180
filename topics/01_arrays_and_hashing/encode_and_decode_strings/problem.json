@@ -1,0 +1,11 @@
+{
+  "id": "encode_and_decode_strings",
+  "title": "Encode and Decode Strings",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Medium",
+  "function": "encode_and_decode",
+  "compare": "exact",
+  "tags": ["array", "string", "design"],
+  "leetcode": "https://leetcode.com/problems/encode-and-decode-strings/",
+  "neetcode": "https://neetcode.io/problems/string-encode-and-decode"
+}

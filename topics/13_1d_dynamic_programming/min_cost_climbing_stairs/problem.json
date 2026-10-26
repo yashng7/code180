@@ -1,0 +1,11 @@
+{
+  "id": "min_cost_climbing_stairs",
+  "title": "Min Cost Climbing Stairs",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Easy",
+  "function": "min_cost_climbing_stairs",
+  "compare": "exact",
+  "tags": ["dynamic-programming", "array"],
+  "leetcode": "https://leetcode.com/problems/min-cost-climbing-stairs/",
+  "neetcode": "https://neetcode.io/problems/min-cost-climbing-stairs"
+}

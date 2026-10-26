@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[2, 3, 2]], "expected": 3, "note": "official example 1"},
+    {"args": [[1, 2, 3, 1]], "expected": 4, "note": "official example 2"},
+    {"args": [[1, 2, 3]], "expected": 3, "note": "official example 3"},
+    {"args": [[1]], "expected": 1, "note": "single house circle"},
+    {"args": [[1, 2]], "expected": 2, "note": "two houses are adjacent in a circle"},
+    {"args": [[5, 1, 1, 5]], "expected": 6, "note": "cannot take both ends"},
+    {"args": [[2, 7, 9, 3, 1]], "expected": 11, "note": "skip one end to maximise"},
+    {"args": [[200, 3, 140, 20, 10]], "expected": 340, "note": "skip the last house"}
+  ]
+}

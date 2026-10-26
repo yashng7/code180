@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["aa", "a"], "expected": false, "note": "official example 1"},
+    {"args": ["aa", "a*"], "expected": true, "note": "official example 2"},
+    {"args": ["ab", ".*"], "expected": true, "note": "official example 3"},
+    {"args": ["aab", "c*a*b"], "expected": true, "note": "official example 4"},
+    {"args": ["mississippi", "mis*is*p*."], "expected": false, "note": "official example 5"},
+    {"args": ["", ""], "expected": true, "note": "both empty"},
+    {"args": ["", "c*"], "expected": true, "note": "star matches empty"},
+    {"args": ["", "."], "expected": false, "note": "dot needs one character"},
+    {"args": ["abc", "abc"], "expected": true, "note": "literal exact match"}
+  ]
+}

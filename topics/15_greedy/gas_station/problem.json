@@ -1,0 +1,11 @@
+{
+  "id": "gas_station",
+  "title": "Gas Station",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "can_complete_circuit",
+  "compare": "exact",
+  "tags": ["array", "greedy"],
+  "leetcode": "https://leetcode.com/problems/gas-station/",
+  "neetcode": "https://neetcode.io/problems/gas-station"
+}

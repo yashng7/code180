@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[-2, 1, -3, 4, -1, 2, 1, -5, 4]],
+      "expected": 6,
+      "note": "classic example (subarray [4,-1,2,1])"
+    },
+    {
+      "args": [[1]],
+      "expected": 1,
+      "note": "singleton positive"
+    },
+    {
+      "args": [[5, 4, -1, 7, 8]],
+      "expected": 23,
+      "note": "classic example (whole array)"
+    },
+    {
+      "args": [[-1]],
+      "expected": -1,
+      "note": "singleton negative — must not clamp to 0"
+    },
+    {
+      "args": [[-3, -1, -2]],
+      "expected": -1,
+      "note": "all negatives — best is the largest single element"
+    },
+    {
+      "args": [[8, -19, 5, -4, 20]],
+      "expected": 21,
+      "note": "gain from skipping the deep negative"
+    },
+    {
+      "args": [[1, 2, 3, 4]],
+      "expected": 10,
+      "note": "all positive — the whole array"
+    },
+    {
+      "args": [[2, -1, 2, 3, -5, 4]],
+      "expected": 6,
+      "note": "restart after a large dip"
+    }
+  ]
+}

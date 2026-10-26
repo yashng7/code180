@@ -1,0 +1,11 @@
+{
+  "id": "partition_labels",
+  "title": "Partition Labels",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "partition_labels",
+  "compare": "exact",
+  "tags": ["hash-table", "two-pointers", "string", "greedy"],
+  "leetcode": "https://leetcode.com/problems/partition-labels/",
+  "neetcode": "https://neetcode.io/problems/partition-labels"
+}

@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["A man, a plan, a canal: Panama"],
+      "expected": true,
+      "note": "classic example"
+    },
+    {
+      "args": ["race a car"],
+      "expected": false,
+      "note": "classic non-palindrome"
+    },
+    {
+      "args": [" "],
+      "expected": true,
+      "note": "no alphanumeric characters"
+    },
+    {
+      "args": [""],
+      "expected": true,
+      "note": "empty string"
+    },
+    {
+      "args": ["abba"],
+      "expected": true,
+      "note": "even length palindrome"
+    },
+    {
+      "args": ["abcba"],
+      "expected": true,
+      "note": "odd length palindrome"
+    },
+    {
+      "args": ["0P"],
+      "expected": false,
+      "note": "case-insensitive compare of digit vs letter"
+    },
+    {
+      "args": [".;,"],
+      "expected": true,
+      "note": "only punctuation, effectively empty"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "regular_expression_matching",
+  "title": "Regular Expression Matching",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Hard",
+  "function": "is_match",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming", "recursion"],
+  "leetcode": "https://leetcode.com/problems/regular-expression-matching/",
+  "neetcode": "https://neetcode.io/problems/regular-expression-matching"
+}

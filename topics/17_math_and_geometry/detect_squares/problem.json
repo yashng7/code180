@@ -1,0 +1,12 @@
+{
+  "id": "detect_squares",
+  "title": "Detect Squares",
+  "topic": "Math & Geometry",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "DetectSquares",
+  "compare": "exact",
+  "tags": ["array", "hash-table", "design", "geometry"],
+  "leetcode": "https://leetcode.com/problems/detect-squares/",
+  "neetcode": "https://neetcode.io/problems/count-squares"
+}

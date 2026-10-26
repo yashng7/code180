@@ -1,0 +1,11 @@
+{
+  "id": "group_anagrams",
+  "title": "Group Anagrams",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Medium",
+  "function": "group_anagrams",
+  "compare": "unordered_inner",
+  "tags": ["array", "hash-table", "string", "sorting"],
+  "leetcode": "https://leetcode.com/problems/group-anagrams/",
+  "neetcode": "https://neetcode.io/problems/anagram-groups"
+}

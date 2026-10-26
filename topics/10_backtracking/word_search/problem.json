@@ -1,0 +1,11 @@
+{
+  "id": "word_search",
+  "title": "Word Search",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "exist",
+  "compare": "exact",
+  "tags": ["array", "backtracking", "matrix", "depth-first-search"],
+  "leetcode": "https://leetcode.com/problems/word-search/",
+  "neetcode": "https://neetcode.io/problems/search-for-word"
+}

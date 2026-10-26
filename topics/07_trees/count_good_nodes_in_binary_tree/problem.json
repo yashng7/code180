@@ -1,0 +1,16 @@
+{
+  "id": "count_good_nodes_in_binary_tree",
+  "title": "Count Good Nodes in Binary Tree",
+  "topic": "Trees",
+  "difficulty": "Medium",
+  "function": "good_nodes",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "breadth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/count-good-nodes-in-binary-tree/",
+  "neetcode": "https://neetcode.io/problems/count-good-nodes-in-binary-tree"
+}

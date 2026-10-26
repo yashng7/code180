@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "args": {
+        "ops": ["WordDictionary", "addWord", "addWord", "addWord", "search", "search", "search", "search"],
+        "vals": [[], ["bad"], ["dad"], ["mad"], ["pad"], ["bad"], [".ad"], ["b.."]]
+      },
+      "expected": [null, null, null, null, false, true, true, true],
+      "note": "official example"
+    },
+    {
+      "args": {
+        "ops": ["WordDictionary", "addWord", "search", "search", "search", "search"],
+        "vals": [[], ["a"], ["a"], ["."], [".."], ["b"]]
+      },
+      "expected": [null, null, true, true, false, false],
+      "note": "singleton word, wildcard length matters"
+    },
+    {
+      "args": {
+        "ops": ["WordDictionary", "addWord", "search", "search", "search", "search"],
+        "vals": [[], ["abc"], ["..."], ["...."], ["a.c"], [".b."]]
+      },
+      "expected": [null, null, true, false, true, true],
+      "note": "all-dot and mixed wildcards"
+    },
+    {
+      "args": {
+        "ops": ["WordDictionary", "addWord", "search", "search", "search", "search"],
+        "vals": [[], ["apple"], ["app"], ["app.."], [".pple"], ["ap.le"]]
+      },
+      "expected": [null, null, false, true, true, true],
+      "note": "prefix alone is not a word; wildcards complete it"
+    },
+    {
+      "args": {
+        "ops": ["WordDictionary", "search", "search"],
+        "vals": [[], ["."], ["a"]]
+      },
+      "expected": [null, false, false],
+      "note": "empty dictionary (classic wrong approach: wildcard matches nothing)"
+    },
+    {
+      "args": {
+        "ops": ["WordDictionary", "addWord", "addWord", "search", "search", "search", "search"],
+        "vals": [[], ["bad"], ["badly"], ["bad"], ["b.."], ["b...."], ["b..."]]
+      },
+      "expected": [null, null, null, true, true, true, false],
+      "note": "words of different lengths share a prefix"
+    },
+    {
+      "args": {
+        "ops": ["WordDictionary", "addWord", "addWord", "search", "search"],
+        "vals": [[], ["cat"], ["cat"], ["cat"], ["c.t"]]
+      },
+      "expected": [null, null, null, true, true],
+      "note": "duplicate addWord is idempotent"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["ABAB", 2],
+      "expected": 4,
+      "note": "classic example"
+    },
+    {
+      "args": ["AABABBA", 1],
+      "expected": 4,
+      "note": "classic example"
+    },
+    {
+      "args": ["BAAAB", 2],
+      "expected": 5,
+      "note": "whole string replaceable"
+    },
+    {
+      "args": ["A", 0],
+      "expected": 1,
+      "note": "singleton, no replacements"
+    },
+    {
+      "args": ["ABCDE", 1],
+      "expected": 2,
+      "note": "all distinct, one replacement"
+    },
+    {
+      "args": ["ABAB", 0],
+      "expected": 1,
+      "note": "all distinct, no replacements"
+    },
+    {
+      "args": ["AABBCC", 2],
+      "expected": 4,
+      "note": "two pairs, two replacements"
+    },
+    {
+      "args": ["AAAA", 0],
+      "expected": 4,
+      "note": "already uniform"
+    }
+  ]
+}

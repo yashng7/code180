@@ -1,0 +1,15 @@
+{
+  "id": "binary_tree_level_order_traversal",
+  "title": "Binary Tree Level Order Traversal",
+  "topic": "Trees",
+  "difficulty": "Medium",
+  "function": "level_order",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "breadth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+  "neetcode": "https://neetcode.io/problems/level-order-traversal-of-binary-tree"
+}

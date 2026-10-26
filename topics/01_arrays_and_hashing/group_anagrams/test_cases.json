@@ -1,0 +1,18 @@
+{
+  "cases": [
+    {
+      "args": [["eat", "tea", "tan", "ate", "nat", "bat"]],
+      "expected": [["bat"], ["nat", "tan"], ["ate", "eat", "tea"]],
+      "note": "classic example"
+    },
+    {"args": [[]], "expected": [], "note": "empty input"},
+    {"args": [[""]], "expected": [[""]], "note": "single empty string"},
+    {"args": [["", ""]], "expected": [["", ""]], "note": "two empty strings group together"},
+    {"args": [["a"]], "expected": [["a"]], "note": "single char"},
+    {
+      "args": [["abc", "bca", "cab", "xyz"]],
+      "expected": [["abc", "bca", "cab"], ["xyz"]],
+      "note": "two groups of different sizes"
+    }
+  ]
+}

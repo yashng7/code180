@@ -1,0 +1,16 @@
+{
+  "id": "subtree_of_another_tree",
+  "title": "Subtree of Another Tree",
+  "topic": "Trees",
+  "difficulty": "Easy",
+  "function": "is_subtree",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "string-matching",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/subtree-of-another-tree/",
+  "neetcode": "https://neetcode.io/problems/subtree-of-a-binary-tree"
+}

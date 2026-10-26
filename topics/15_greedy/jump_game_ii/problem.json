@@ -1,0 +1,11 @@
+{
+  "id": "jump_game_ii",
+  "title": "Jump Game II",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "jump",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming", "greedy"],
+  "leetcode": "https://leetcode.com/problems/jump-game-ii/",
+  "neetcode": "https://neetcode.io/problems/jump-game-ii"
+}

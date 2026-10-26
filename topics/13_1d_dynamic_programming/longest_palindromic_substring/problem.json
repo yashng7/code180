@@ -1,0 +1,12 @@
+{
+  "id": "longest_palindromic_substring",
+  "title": "Longest Palindromic Substring",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "longest_palindrome",
+  "compare": "custom",
+  "checker": "longest_palindrome",
+  "tags": ["string", "dynamic-programming", "two-pointers"],
+  "leetcode": "https://leetcode.com/problems/longest-palindromic-substring/",
+  "neetcode": "https://neetcode.io/problems/longest-palindromic-substring"
+}

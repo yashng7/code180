@@ -1,0 +1,176 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          3,
+          9,
+          20,
+          15,
+          7
+        ],
+        [
+          9,
+          3,
+          15,
+          20,
+          7
+        ]
+      ],
+      "expected": [
+        3,
+        9,
+        20,
+        null,
+        null,
+        15,
+        7
+      ],
+      "note": "classic example"
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": [
+        1
+      ],
+      "note": "single node"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2
+      ],
+      "note": "left-only child"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2
+      ],
+      "note": "right-only child"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          4,
+          5,
+          3,
+          6,
+          7
+        ],
+        [
+          4,
+          2,
+          5,
+          1,
+          6,
+          3,
+          7
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "note": "balanced tree"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          3,
+          2,
+          1
+        ]
+      ],
+      "expected": [
+        1,
+        2,
+        null,
+        3
+      ],
+      "note": "left-skewed chain"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": [
+        1,
+        null,
+        2,
+        null,
+        3
+      ],
+      "note": "right-skewed chain"
+    },
+    {
+      "args": [
+        [
+          -1,
+          0,
+          1
+        ],
+        [
+          0,
+          -1,
+          1
+        ]
+      ],
+      "expected": [
+        -1,
+        0,
+        1
+      ],
+      "note": "negative values"
+    }
+  ]
+}

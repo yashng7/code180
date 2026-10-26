@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[["MUC", "LHR"], ["JFK", "MUC"], ["SFO", "SJC"], ["LHR", "SFO"]]],
+      "expected": ["JFK", "MUC", "LHR", "SFO", "SJC"],
+      "note": "classic example, single chain"
+    },
+    {
+      "args": [[["JFK", "SFO"], ["JFK", "ATL"], ["SFO", "ATL"], ["ATL", "JFK"], ["ATL", "SFO"]]],
+      "expected": ["JFK", "ATL", "JFK", "SFO", "ATL", "SFO"],
+      "note": "two valid itineraries, must pick lexicographically smallest"
+    },
+    {
+      "args": [[["JFK", "KUL"], ["JFK", "NRT"], ["NRT", "JFK"]]],
+      "expected": ["JFK", "NRT", "JFK", "KUL"],
+      "note": "greedy JFK->KUL greedily dead-ends; must back out"
+    },
+    {
+      "args": [[["JFK", "SFO"]]],
+      "expected": ["JFK", "SFO"],
+      "note": "single ticket, minimum input"
+    },
+    {
+      "args": [[["JFK", "ATL"], ["ATL", "JFK"]]],
+      "expected": ["JFK", "ATL", "JFK"],
+      "note": "simple two-city cycle"
+    },
+    {
+      "args": [[["JFK", "MUC"], ["MUC", "JFK"], ["JFK", "MUC"]]],
+      "expected": ["JFK", "MUC", "JFK", "MUC"],
+      "note": "repeated destination, must consume all tickets"
+    },
+    {
+      "args": [[["JFK", "B"], ["JFK", "A"], ["A", "JFK"]]],
+      "expected": ["JFK", "A", "JFK", "B"],
+      "note": "prefers the smaller branch A before B"
+    },
+    {
+      "args": [[["JFK", "A"], ["A", "B"], ["B", "A"]]],
+      "expected": ["JFK", "A", "B", "A"],
+      "note": "three tickets, ends at the revisited city"
+    }
+  ]
+}

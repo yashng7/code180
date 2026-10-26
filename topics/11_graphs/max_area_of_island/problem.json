@@ -1,0 +1,11 @@
+{
+  "id": "max_area_of_island",
+  "title": "Max Area of Island",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "max_area_of_island",
+  "compare": "exact",
+  "tags": ["array", "matrix", "dfs", "bfs", "union-find"],
+  "leetcode": "https://leetcode.com/problems/max-area-of-island/",
+  "neetcode": "https://neetcode.io/problems/max-area-of-island"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "rotate_image",
+  "title": "Rotate Image",
+  "topic": "Math & Geometry",
+  "difficulty": "Medium",
+  "function": "rotate",
+  "compare": "exact",
+  "tags": ["array", "matrix", "in-place"],
+  "leetcode": "https://leetcode.com/problems/rotate-image/",
+  "neetcode": "https://neetcode.io/problems/rotate-matrix"
+}

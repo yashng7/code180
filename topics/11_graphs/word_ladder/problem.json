@@ -1,0 +1,11 @@
+{
+  "id": "word_ladder",
+  "title": "Word Ladder",
+  "topic": "Graphs",
+  "difficulty": "Hard",
+  "function": "ladder_length",
+  "compare": "exact",
+  "tags": ["hash-table", "string", "bfs", "graph"],
+  "leetcode": "https://leetcode.com/problems/word-ladder/",
+  "neetcode": "https://neetcode.io/problems/word-ladder"
+}

@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": [[[1, 2, 3], [4, 5, 6], [7, 8, 9]]],
+      "expected": [1, 2, 3, 6, 9, 8, 7, 4, 5],
+      "note": "official example 3x3"
+    },
+    {
+      "args": [[[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]]],
+      "expected": [1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7],
+      "note": "official example 3x4"
+    },
+    {
+      "args": [[[7]]],
+      "expected": [7],
+      "note": "singleton"
+    },
+    {
+      "args": [[[1, 2, 3, 4, 5]]],
+      "expected": [1, 2, 3, 4, 5],
+      "note": "single row"
+    },
+    {
+      "args": [[[1], [2], [3], [4]]],
+      "expected": [1, 2, 3, 4],
+      "note": "single column"
+    },
+    {
+      "args": [[[1, 2], [3, 4]]],
+      "expected": [1, 2, 4, 3],
+      "note": "2x2 to exercise overlap guard"
+    },
+    {
+      "args": [[[1, 2, 3], [4, 5, 6]]],
+      "expected": [1, 2, 3, 6, 5, 4],
+      "note": "2x3 wide matrix"
+    }
+  ]
+}

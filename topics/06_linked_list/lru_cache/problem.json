@@ -1,0 +1,12 @@
+{
+  "id": "lru_cache",
+  "title": "LRU Cache",
+  "topic": "Linked List",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "LRUCache",
+  "compare": "exact",
+  "tags": ["hash-table", "linked-list", "design", "doubly-linked-list"],
+  "leetcode": "https://leetcode.com/problems/lru-cache/",
+  "neetcode": "https://neetcode.io/problems/lru-cache"
+}

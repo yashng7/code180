@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[1, 2, 3, 4, 5], 2],
+      "expected": [1, 2, 3, 5],
+      "note": "classic example"
+    },
+    {
+      "args": [[1], 1],
+      "expected": [],
+      "note": "single node removed"
+    },
+    {
+      "args": [[1, 2], 1],
+      "expected": [1],
+      "note": "remove tail of two"
+    },
+    {
+      "args": [[1, 2], 2],
+      "expected": [2],
+      "note": "remove head of two"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 5],
+      "expected": [2, 3, 4, 5],
+      "note": "remove head of five"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 1],
+      "expected": [1, 2, 3, 4],
+      "note": "remove tail"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5, 6], 4],
+      "expected": [1, 2, 4, 5, 6],
+      "note": "remove a middle node"
+    },
+    {
+      "args": [[1, 2, 3], 3],
+      "expected": [2, 3],
+      "note": "remove head of three"
+    }
+  ]
+}

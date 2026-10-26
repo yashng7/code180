@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": ["ab", "eidbaooo"],
+      "expected": true,
+      "note": "classic example: ba"
+    },
+    {
+      "args": ["ab", "eidboaoo"],
+      "expected": false,
+      "note": "classic example"
+    },
+    {
+      "args": ["a", "a"],
+      "expected": true,
+      "note": "single matching character"
+    },
+    {
+      "args": ["ab", "a"],
+      "expected": false,
+      "note": "s2 shorter than s1"
+    },
+    {
+      "args": ["adc", "dcda"],
+      "expected": true,
+      "note": "cda is a permutation of adc"
+    },
+    {
+      "args": ["hello", "ooolleoooleh"],
+      "expected": false,
+      "note": "same counts but never contiguous"
+    },
+    {
+      "args": ["abc", "bbbca"],
+      "expected": true,
+      "note": "bca at the end"
+    },
+    {
+      "args": ["abc", "ccccbbbbaaaa"],
+      "expected": false,
+      "note": "counts never match"
+    }
+  ]
+}

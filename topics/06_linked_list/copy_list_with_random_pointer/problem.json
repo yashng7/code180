@@ -1,0 +1,11 @@
+{
+  "id": "copy_list_with_random_pointer",
+  "title": "Copy List With Random Pointer",
+  "topic": "Linked List",
+  "difficulty": "Medium",
+  "function": "copy_random_list",
+  "compare": "exact",
+  "tags": ["linked-list", "hash-table"],
+  "leetcode": "https://leetcode.com/problems/copy-list-with-random-pointer/",
+  "neetcode": "https://neetcode.io/problems/copy-linked-list-with-random-pointer"
+}

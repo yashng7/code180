@@ -1,0 +1,11 @@
+{
+  "id": "subsets",
+  "title": "Subsets",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "subsets",
+  "compare": "unordered_inner",
+  "tags": ["array", "backtracking", "bit-manipulation"],
+  "leetcode": "https://leetcode.com/problems/subsets/",
+  "neetcode": "https://neetcode.io/problems/subsets"
+}

@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [11], "expected": 3, "note": "classic example 0b1011"},
+    {"args": [128], "expected": 1, "note": "single set bit"},
+    {"args": [2147483645], "expected": 30, "note": "0x7FFFFFFD, boundary"},
+    {"args": [1], "expected": 1, "note": "smallest set bit"},
+    {"args": [0], "expected": 0, "note": "no set bits"},
+    {"args": [255], "expected": 8, "note": "one full byte set"},
+    {"args": [4294967295], "expected": 32, "note": "all 32 bits set"},
+    {"args": [1024], "expected": 1, "note": "power of two (bit 10)"},
+    {"args": [7], "expected": 3, "note": "three low bits set"}
+  ]
+}

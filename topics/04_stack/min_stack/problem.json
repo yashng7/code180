@@ -1,0 +1,12 @@
+{
+  "id": "min_stack",
+  "title": "Min Stack",
+  "topic": "Stack",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "MinStack",
+  "compare": "exact",
+  "tags": ["stack", "design"],
+  "leetcode": "https://leetcode.com/problems/min-stack/",
+  "neetcode": "https://neetcode.io/problems/minimum-stack"
+}

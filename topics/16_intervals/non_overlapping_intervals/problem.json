@@ -1,0 +1,11 @@
+{
+  "id": "non_overlapping_intervals",
+  "title": "Non-overlapping Intervals",
+  "topic": "Intervals",
+  "difficulty": "Medium",
+  "function": "erase_overlap_intervals",
+  "compare": "exact",
+  "tags": ["array", "greedy", "sorting", "intervals"],
+  "leetcode": "https://leetcode.com/problems/non-overlapping-intervals/",
+  "neetcode": "https://neetcode.io/problems/non-overlapping-intervals"
+}

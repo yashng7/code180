@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": [[1, 2, 3]],
+      "expected": [1, 2, 4],
+      "note": "official example, no carry"
+    },
+    {
+      "args": [[4, 3, 2, 1]],
+      "expected": [4, 3, 2, 2],
+      "note": "official example, longest non-carry"
+    },
+    {
+      "args": [[9]],
+      "expected": [1, 0],
+      "note": "official example, grows a digit"
+    },
+    {
+      "args": [[9, 9]],
+      "expected": [1, 0, 0],
+      "note": "all nines, two digits"
+    },
+    {
+      "args": [[1, 9, 9]],
+      "expected": [2, 0, 0],
+      "note": "carry ripples through trailing nines"
+    },
+    {
+      "args": [[0]],
+      "expected": [1],
+      "note": "zero represents the number 0"
+    },
+    {
+      "args": [[9, 8, 9]],
+      "expected": [9, 9, 0],
+      "note": "mixed digits, only the last carries"
+    }
+  ]
+}

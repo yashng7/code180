@@ -1,0 +1,11 @@
+{
+  "id": "merge_intervals",
+  "title": "Merge Intervals",
+  "topic": "Intervals",
+  "difficulty": "Medium",
+  "function": "merge",
+  "compare": "exact",
+  "tags": ["array", "sorting", "intervals"],
+  "leetcode": "https://leetcode.com/problems/merge-intervals/",
+  "neetcode": "https://neetcode.io/problems/merge-intervals"
+}

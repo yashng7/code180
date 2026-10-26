@@ -1,0 +1,11 @@
+{
+  "id": "reverse_nodes_in_k_group",
+  "title": "Reverse Nodes in K-Group",
+  "topic": "Linked List",
+  "difficulty": "Hard",
+  "function": "reverse_k_group",
+  "compare": "exact",
+  "tags": ["linked-list", "recursion"],
+  "leetcode": "https://leetcode.com/problems/reverse-nodes-in-k-group/",
+  "neetcode": "https://neetcode.io/problems/reverse-nodes-in-k-group"
+}

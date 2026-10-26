@@ -1,0 +1,11 @@
+{
+  "id": "house_robber",
+  "title": "House Robber",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "rob",
+  "compare": "exact",
+  "tags": ["dynamic-programming", "array"],
+  "leetcode": "https://leetcode.com/problems/house-robber/",
+  "neetcode": "https://neetcode.io/problems/house-robber"
+}

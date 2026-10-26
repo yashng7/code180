@@ -1,0 +1,11 @@
+{
+  "id": "valid_anagram",
+  "title": "Valid Anagram",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Easy",
+  "function": "is_anagram",
+  "compare": "exact",
+  "tags": ["string", "hash-table", "counting"],
+  "leetcode": "https://leetcode.com/problems/valid-anagram/",
+  "neetcode": "https://neetcode.io/problems/is-anagram"
+}

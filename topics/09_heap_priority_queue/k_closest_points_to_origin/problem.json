@@ -1,0 +1,11 @@
+{
+  "id": "k_closest_points_to_origin",
+  "title": "K Closest Points to Origin",
+  "topic": "Heap / Priority Queue",
+  "difficulty": "Medium",
+  "function": "k_closest",
+  "compare": "unordered",
+  "tags": ["heap", "array", "geometry", "quickselect"],
+  "leetcode": "https://leetcode.com/problems/k-closest-points-to-origin/",
+  "neetcode": "https://neetcode.io/problems/k-closest-points-to-origin"
+}

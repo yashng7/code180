@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {"args": [[100, 4, 200, 1, 3, 2]], "expected": 4, "note": "classic example (1,2,3,4)"},
+    {"args": [[0, 3, 7, 2, 5, 8, 4, 6, 0, 1]], "expected": 9, "note": "0..8 with a duplicate"},
+    {"args": [[]], "expected": 0, "note": "empty array"},
+    {"args": [[1]], "expected": 1, "note": "single element"},
+    {"args": [[1, 2, 0, 1]], "expected": 3, "note": "unsorted with duplicate"},
+    {"args": [[5, 4, 3, 2, 1]], "expected": 5, "note": "reverse sorted run"},
+    {"args": [[10, 5, 12, 3, 55, 11, 4]], "expected": 3, "note": "runs of three"}
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": [[2, 3, 6, 7], 7],
+      "expected": [[2, 2, 3], [7]],
+      "note": "official example"
+    },
+    {
+      "args": [[2, 3, 5], 8],
+      "expected": [[2, 2, 2, 2], [2, 3, 3], [3, 5]],
+      "note": "official example, several combinations"
+    },
+    {
+      "args": [[2], 1],
+      "expected": [],
+      "note": "official example, no combination"
+    },
+    {
+      "args": [[3], 9],
+      "expected": [[3, 3, 3]],
+      "note": "single candidate reused"
+    },
+    {
+      "args": [[2, 4, 6], 8],
+      "expected": [[2, 2, 2, 2], [2, 2, 4], [2, 6], [4, 4]],
+      "note": "even candidates only"
+    },
+    {
+      "args": [[7], 7],
+      "expected": [[7]],
+      "note": "target equals a single candidate"
+    },
+    {
+      "args": [[2, 3], 7],
+      "expected": [[2, 2, 3]],
+      "note": "unique combination, no reordering duplicates"
+    }
+  ]
+}

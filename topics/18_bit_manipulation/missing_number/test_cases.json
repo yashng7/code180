@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[3, 0, 1]], "expected": 2, "note": "classic example"},
+    {"args": [[0, 1]], "expected": 2, "note": "classic example 2"},
+    {"args": [[9, 6, 4, 2, 3, 5, 7, 0, 1]], "expected": 8, "note": "classic example 3"},
+    {"args": [[0]], "expected": 1, "note": "singleton, missing is 1"},
+    {"args": [[1]], "expected": 0, "note": "singleton, missing is 0"},
+    {"args": [[0, 2]], "expected": 1, "note": "gap in the middle"},
+    {"args": [[0, 1, 2]], "expected": 3, "note": "missing the last value n"},
+    {"args": [[1, 2, 3]], "expected": 0, "note": "missing the first value 0"}
+  ]
+}

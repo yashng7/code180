@@ -1,0 +1,12 @@
+{
+  "id": "course_schedule_ii",
+  "title": "Course Schedule II",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "find_order",
+  "compare": "custom",
+  "checker": "topo_order",
+  "tags": ["dfs", "bfs", "graph", "topological-sort"],
+  "leetcode": "https://leetcode.com/problems/course-schedule-ii/",
+  "neetcode": "https://neetcode.io/problems/course-schedule-ii"
+}

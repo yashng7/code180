@@ -1,0 +1,11 @@
+{
+  "id": "task_scheduler",
+  "title": "Task Scheduler",
+  "topic": "Heap / Priority Queue",
+  "difficulty": "Medium",
+  "function": "least_interval",
+  "compare": "exact",
+  "tags": ["heap", "greedy", "hash-table", "counting"],
+  "leetcode": "https://leetcode.com/problems/task-scheduler/",
+  "neetcode": "https://neetcode.io/problems/task-scheduling"
+}

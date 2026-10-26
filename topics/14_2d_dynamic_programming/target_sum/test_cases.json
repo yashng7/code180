@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [[1, 1, 1, 1, 1], 3], "expected": 5, "note": "official example 1"},
+    {"args": [[1], 1], "expected": 1, "note": "single plus"},
+    {"args": [[1], -1], "expected": 1, "note": "single minus"},
+    {"args": [[1, 0], 1], "expected": 2, "note": "official example 2 (zero doubles)"},
+    {"args": [[1, 2, 3], 0], "expected": 2, "note": "subsets {3} and {1,2}"},
+    {"args": [[0], 0], "expected": 2, "note": "+0 and -0 both give zero"},
+    {"args": [[1, 2], 3], "expected": 1, "note": "+1+2 only"},
+    {"args": [[2, 2, 2], 2], "expected": 3, "note": "choose one negative sign"},
+    {"args": [[1, 2, 3, 4, 5], 5], "expected": 3, "note": "goal subset sum 10"}
+  ]
+}

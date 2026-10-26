@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [43261596], "expected": 964176192, "note": "classic example"},
+    {"args": [0], "expected": 0, "note": "all zero bits"},
+    {"args": [1], "expected": 2147483648, "note": "LSB becomes the MSB"},
+    {"args": [2], "expected": 1073741824, "note": "bit 1 becomes bit 30"},
+    {"args": [4294967295], "expected": 4294967295, "note": "all 32 bits set is its own reverse"},
+    {"args": [2147483648], "expected": 1, "note": "MSB becomes the LSB"},
+    {"args": [4294967294], "expected": 2147483647, "note": "0xFFFFFFFE -> 0x7FFFFFFF"},
+    {"args": [65535], "expected": 4294901760, "note": "0x0000FFFF -> 0xFFFF0000"}
+  ]
+}

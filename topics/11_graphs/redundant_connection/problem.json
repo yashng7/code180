@@ -1,0 +1,11 @@
+{
+  "id": "redundant_connection",
+  "title": "Redundant Connection",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "find_redundant_connection",
+  "compare": "exact",
+  "tags": ["dfs", "bfs", "union-find", "graph"],
+  "leetcode": "https://leetcode.com/problems/redundant-connection/",
+  "neetcode": "https://neetcode.io/problems/redundant-connection"
+}

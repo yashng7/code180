@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["abc"], "expected": 3, "note": "official example 1"},
+    {"args": ["aaa"], "expected": 6, "note": "official example 2"},
+    {"args": ["a"], "expected": 1, "note": "single character"},
+    {"args": ["aa"], "expected": 3, "note": "two singles and one pair"},
+    {"args": ["aba"], "expected": 4, "note": "adds the whole-string palindrome"},
+    {"args": ["abba"], "expected": 6, "note": "even-length innermost palindrome"},
+    {"args": ["abcba"], "expected": 7, "note": "nested palindromes"},
+    {"args": ["aaaa"], "expected": 10, "note": "every substring is a palindrome"},
+    {"args": ["racecar"], "expected": 10, "note": "larger nested case"}
+  ]
+}

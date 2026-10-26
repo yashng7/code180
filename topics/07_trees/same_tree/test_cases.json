@@ -1,0 +1,121 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": true,
+      "note": "identical trees"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          null,
+          2
+        ]
+      ],
+      "expected": false,
+      "note": "same values, different shape"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          1
+        ],
+        [
+          1,
+          1,
+          2
+        ]
+      ],
+      "expected": false,
+      "note": "mirrored values"
+    },
+    {
+      "args": [
+        [],
+        []
+      ],
+      "expected": true,
+      "note": "both empty"
+    },
+    {
+      "args": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": false,
+      "note": "one empty, one not"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          null,
+          4
+        ],
+        [
+          1,
+          2,
+          3,
+          null,
+          4
+        ]
+      ],
+      "expected": true,
+      "note": "deeper identical trees"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          1,
+          2,
+          3,
+          null,
+          null,
+          null,
+          4
+        ]
+      ],
+      "expected": false,
+      "note": "extra node on one side"
+    },
+    {
+      "args": [
+        [
+          5
+        ],
+        [
+          5
+        ]
+      ],
+      "expected": true,
+      "note": "single-node trees"
+    }
+  ]
+}

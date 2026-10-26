@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {"args": ["anagram", "nagaram"], "expected": true, "note": "classic anagram"},
+    {"args": ["rat", "car"], "expected": false, "note": "different letters"},
+    {"args": ["a", "a"], "expected": true, "note": "single char"},
+    {"args": ["a", "ab"], "expected": false, "note": "different lengths"},
+    {"args": ["", ""], "expected": true, "note": "both empty"},
+    {"args": ["ab", "ba"], "expected": true, "note": "two chars swapped"},
+    {"args": ["aacc", "ccac"], "expected": false, "note": "same letters, wrong counts"}
+  ]
+}

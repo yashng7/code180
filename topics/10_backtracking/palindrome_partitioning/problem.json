@@ -1,0 +1,11 @@
+{
+  "id": "palindrome_partitioning",
+  "title": "Palindrome Partitioning",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "partition",
+  "compare": "unordered",
+  "tags": ["string", "backtracking", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/palindrome-partitioning/",
+  "neetcode": "https://neetcode.io/problems/palindrome-partitioning"
+}

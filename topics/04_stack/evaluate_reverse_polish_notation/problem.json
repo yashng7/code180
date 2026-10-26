@@ -1,0 +1,11 @@
+{
+  "id": "evaluate_reverse_polish_notation",
+  "title": "Evaluate Reverse Polish Notation",
+  "topic": "Stack",
+  "difficulty": "Medium",
+  "function": "eval_rpn",
+  "compare": "exact",
+  "tags": ["array", "math", "stack"],
+  "leetcode": "https://leetcode.com/problems/evaluate-reverse-polish-notation/",
+  "neetcode": "https://neetcode.io/problems/evaluate-reverse-polish-notation"
+}

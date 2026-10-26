@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "args": ["23"],
+      "expected": ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"],
+      "note": "official example"
+    },
+    {
+      "args": [""],
+      "expected": [],
+      "note": "official example, empty digits"
+    },
+    {
+      "args": ["2"],
+      "expected": ["a", "b", "c"],
+      "note": "single digit"
+    },
+    {
+      "args": ["9"],
+      "expected": ["w", "x", "y", "z"],
+      "note": "single digit with four letters"
+    },
+    {
+      "args": ["58"],
+      "expected": ["jt", "ju", "jv", "kt", "ku", "kv", "lt", "lu", "lv"],
+      "note": "two three-letter digits"
+    },
+    {
+      "args": ["79"],
+      "expected": [
+        "pw", "px", "py", "pz", "qw", "qx", "qy", "qz",
+        "rw", "rx", "ry", "rz", "sw", "sx", "sy", "sz"
+      ],
+      "note": "two four-letter digits, 4 x 4 = 16"
+    }
+  ]
+}

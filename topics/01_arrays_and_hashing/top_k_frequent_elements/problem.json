@@ -1,0 +1,11 @@
+{
+  "id": "top_k_frequent_elements",
+  "title": "Top K Frequent Elements",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Medium",
+  "function": "top_k_frequent",
+  "compare": "unordered",
+  "tags": ["array", "hash-table", "heap", "bucket-sort"],
+  "leetcode": "https://leetcode.com/problems/top-k-frequent-elements/",
+  "neetcode": "https://neetcode.io/problems/top-k-elements-in-list"
+}

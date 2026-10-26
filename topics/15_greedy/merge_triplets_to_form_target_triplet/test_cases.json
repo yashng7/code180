@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[[2, 5, 3], [1, 8, 4], [1, 7, 5]], [2, 7, 5]],
+      "expected": true,
+      "note": "classic example"
+    },
+    {
+      "args": [[[3, 4, 5], [4, 5, 6]], [3, 5, 6]],
+      "expected": false,
+      "note": "classic example — first coordinate unreachable"
+    },
+    {
+      "args": [[[2, 5, 3], [2, 3, 4], [1, 2, 5], [5, 2, 3]], [5, 5, 5]],
+      "expected": true,
+      "note": "classic example assembling all coordinates"
+    },
+    {
+      "args": [[[1, 1, 1]], [1, 1, 1]],
+      "expected": true,
+      "note": "single matching triplet"
+    },
+    {
+      "args": [[[1, 1, 1]], [2, 1, 1]],
+      "expected": false,
+      "note": "target coordinate cannot be raised"
+    },
+    {
+      "args": [[[1, 2, 3], [4, 5, 6]], [4, 5, 6]],
+      "expected": true,
+      "note": "one triplet already equals the target"
+    },
+    {
+      "args": [[[2, 5, 3], [1, 8, 4]], [2, 7, 5]],
+      "expected": false,
+      "note": "the second triplet overshoots and must be discarded"
+    },
+    {
+      "args": [[[1, 5, 3], [2, 6, 4]], [2, 6, 4]],
+      "expected": true,
+      "note": "merge of two under-target triplets"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "id": "find_median_from_data_stream",
+  "title": "Find Median from Data Stream",
+  "topic": "Heap / Priority Queue",
+  "difficulty": "Hard",
+  "type": "design",
+  "class": "MedianFinder",
+  "compare": "float",
+  "tags": ["heap", "design", "data-stream", "two-heaps"],
+  "leetcode": "https://leetcode.com/problems/find-median-from-data-stream/",
+  "neetcode": "https://neetcode.io/problems/find-median-in-a-data-stream"
+}

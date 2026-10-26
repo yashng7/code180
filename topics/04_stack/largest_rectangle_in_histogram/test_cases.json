@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [[2, 1, 5, 6, 2, 3]], "expected": 10, "note": "official example"},
+    {"args": [[2, 4]], "expected": 4, "note": "official example 2"},
+    {"args": [[2, 1, 2]], "expected": 3, "note": "valley-and-peaks: full-width bar wins"},
+    {"args": [[1, 1]], "expected": 2, "note": "flat histogram"},
+    {"args": [[5]], "expected": 5, "note": "singleton"},
+    {"args": [[0]], "expected": 0, "note": "zero height"},
+    {"args": [[1, 2, 3, 4, 5]], "expected": 9, "note": "strictly increasing"},
+    {"args": [[5, 4, 3, 2, 1]], "expected": 9, "note": "strictly decreasing"}
+  ]
+}

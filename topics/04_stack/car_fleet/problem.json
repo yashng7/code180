@@ -1,0 +1,11 @@
+{
+  "id": "car_fleet",
+  "title": "Car Fleet",
+  "topic": "Stack",
+  "difficulty": "Medium",
+  "function": "car_fleet",
+  "compare": "exact",
+  "tags": ["array", "stack", "sorting", "monotonic-stack"],
+  "leetcode": "https://leetcode.com/problems/car-fleet/",
+  "neetcode": "https://neetcode.io/problems/car-fleet"
+}

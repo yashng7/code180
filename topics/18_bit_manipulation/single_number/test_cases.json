@@ -1,0 +1,11 @@
+{
+  "cases": [
+    {"args": [[2, 2, 1]], "expected": 1, "note": "classic example"},
+    {"args": [[4, 1, 2, 1, 2]], "expected": 4, "note": "classic example 2"},
+    {"args": [[1]], "expected": 1, "note": "singleton array"},
+    {"args": [[-1, -1, -2]], "expected": -2, "note": "negative unique value"},
+    {"args": [[0, 1, 1]], "expected": 0, "note": "unique value is zero"},
+    {"args": [[7, 3, 5, 4, 5, 3, 4]], "expected": 7, "note": "unique value first"},
+    {"args": [[1, 1, 2, 2, 3, 3, 4]], "expected": 4, "note": "larger list, unique last"}
+  ]
+}

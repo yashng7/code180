@@ -1,0 +1,11 @@
+{
+  "id": "maximum_subarray",
+  "title": "Maximum Subarray",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "max_subarray",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming", "divide-and-conquer"],
+  "leetcode": "https://leetcode.com/problems/maximum-subarray/",
+  "neetcode": "https://neetcode.io/problems/maximum-subarray"
+}

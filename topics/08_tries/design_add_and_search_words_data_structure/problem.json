@@ -1,0 +1,12 @@
+{
+  "id": "design_add_and_search_words_data_structure",
+  "title": "Design Add and Search Words Data Structure",
+  "topic": "Tries",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "WordDictionary",
+  "compare": "exact",
+  "tags": ["trie", "design", "string", "depth-first-search"],
+  "leetcode": "https://leetcode.com/problems/design-add-and-search-words-data-structure/",
+  "neetcode": "https://neetcode.io/problems/design-word-search-data-structure"
+}

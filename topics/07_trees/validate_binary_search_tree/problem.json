@@ -1,0 +1,16 @@
+{
+  "id": "validate_binary_search_tree",
+  "title": "Validate Binary Search Tree",
+  "topic": "Trees",
+  "difficulty": "Medium",
+  "function": "is_valid_bst",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "binary-search-tree",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/validate-binary-search-tree/",
+  "neetcode": "https://neetcode.io/problems/valid-binary-search-tree"
+}

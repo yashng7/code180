@@ -1,0 +1,11 @@
+{
+  "id": "longest_consecutive_sequence",
+  "title": "Longest Consecutive Sequence",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Medium",
+  "function": "longest_consecutive",
+  "compare": "exact",
+  "tags": ["array", "hash-table", "union-find"],
+  "leetcode": "https://leetcode.com/problems/longest-consecutive-sequence/",
+  "neetcode": "https://neetcode.io/problems/longest-consecutive-sequence"
+}

@@ -1,0 +1,772 @@
+/* Shared Topic 11 scene kit.
+ *
+ * These helpers are inlined into every Topic 11 scene so each generated page
+ * stays completely self-contained.  They only cover presentation scaffolding;
+ * every algorithm, simulation and timeline remains in the problem scene.
+ */
+"use strict";
+
+function kClamp(v, lo, hi) {
+  return Math.max(lo, Math.min(hi, v));
+}
+
+function kHeader(ctx, scene, title, subtitle) {
+  const { txt, C, setOpacity, STAGE_W } = ctx;
+  scene.title = txt(title, {
+    x: 64, y: 62, "font-size": 40, fill: C.white, "letter-spacing": 0.4,
+  }, scene.layers.text);
+  scene.titleWriter = ctx.makeWritable()(scene.title);
+  scene.writers.push(scene.titleWriter);
+  scene.subtitle = txt(subtitle, {
+    x: 64, y: 98, "font-size": 17, fill: C.grey,
+  }, scene.layers.text);
+  setOpacity(scene.subtitle, 0);
+  scene.hideNodes.push(scene.subtitle);
+}
+
+function kBase(ctx, scene) {
+  scene.ctx = ctx;
+  scene.layers = {
+    arcs: ctx.layer("arcs"),
+    chips: ctx.layer("chips"),
+    text: ctx.layer("text"),
+    result: ctx.layer("result"),
+  };
+  scene.hideNodes = [];
+  scene.introNodes = [];
+  scene.writers = [];
+  scene.resetters = [];
+  scene.reset = () => {
+    for (const w of scene.writers) w.reset();
+    for (const node of scene.hideNodes) ctx.setOpacity(node, 0);
+    for (const fn of scene.resetters) fn();
+  };
+}
+
+function kPanel(ctx, scene, x, y, w, h, title, color, opts) {
+  const { el, txt, C, setOpacity } = ctx;
+  const o = opts || {};
+  const g = el("g", {}, scene.layers.chips);
+  const rect = el("rect", {
+    x, y, width: w, height: h, rx: 14,
+    fill: o.fill || "#0f141c",
+    stroke: o.stroke || C.greyDark,
+    "stroke-width": o.strokeWidth || 1.5,
+  }, g);
+  setOpacity(g, 0);
+  scene.hideNodes.push(g);
+  scene.introNodes.push(g);
+  let titleNode = null;
+  if (title) {
+    titleNode = txt(title, {
+      x: x + 20, y: y + 30, "font-size": 18, fill: color || C.blue,
+    }, scene.layers.text);
+    setOpacity(titleNode, 0);
+    scene.hideNodes.push(titleNode);
+    scene.introNodes.push(titleNode);
+  }
+  return { g, rect, title: titleNode, x, y, w, h };
+}
+
+function kGrid(ctx, scene, grid, opts) {
+  const { el, txt, C, setOpacity } = ctx;
+  const o = opts || {};
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const maxCell = o.maxCell || 58;
+  const cell = Math.min(maxCell, (o.w - 34) / cols, (o.h - 54) / rows);
+  const bw = cell * cols;
+  const bh = cell * rows;
+  const x0 = o.x + (o.w - bw) / 2;
+  const y0 = o.y + (o.h - bh) / 2 + (o.label ? 8 : 0);
+  const board = el("g", {}, scene.layers.chips);
+  setOpacity(board, 0);
+  scene.hideNodes.push(board);
+  scene.introNodes.push(board);
+  const cells = [];
+  const font = kClamp(cell * 0.36, 9, 24);
+  const gap = Math.min(3, Math.max(1.5, cell * 0.04));
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x = x0 + c * cell;
+      const y = y0 + r * cell;
+      const g = el("g", {}, board);
+      const rect = el("rect", {
+        x: x + gap / 2, y: y + gap / 2,
+        width: cell - gap, height: cell - gap, rx: Math.min(8, cell * 0.18),
+        fill: C.chipFill, stroke: C.greyDark, "stroke-width": 1.6,
+      }, g);
+      const t = txt("", {
+        x: x + cell / 2, y: y + cell / 2 + 1,
+        "text-anchor": "middle", "dominant-baseline": "central",
+        "font-size": font, fill: C.white,
+      }, g);
+      cells.push({ r, c, x, y, cx: x + cell / 2, cy: y + cell / 2, g, rect, t });
+    }
+  }
+  if (o.label) {
+    const labels = el("g", {}, scene.layers.text);
+    setOpacity(labels, 0);
+    scene.hideNodes.push(labels);
+    scene.introNodes.push(labels);
+    for (let c = 0; c < cols; c++) {
+      const t = txt(String(c), {
+        x: x0 + c * cell + cell / 2, y: y0 - 8,
+        "text-anchor": "middle", "font-size": 10, fill: C.grey,
+      }, labels);
+      setOpacity(t, 0.8);
+    }
+    for (let r = 0; r < rows; r++) {
+      const t = txt(String(r), {
+        x: x0 - 10, y: y0 + r * cell + cell / 2 + 1,
+        "text-anchor": "middle", "dominant-baseline": "central",
+        "font-size": 10, fill: C.grey,
+      }, labels);
+      setOpacity(t, 0.8);
+    }
+  }
+  const cursor = el("rect", {
+    x: 0, y: 0, width: cell - gap, height: cell - gap,
+    rx: Math.min(8, cell * 0.18), fill: "none", stroke: C.gold,
+    "stroke-width": 3, filter: "url(#glow-gold)",
+  }, board);
+  setOpacity(cursor, 0);
+
+  let styleFn = o.style || ((v) => ({
+    fill: C.chipFill, stroke: C.greyDark, text: C.white,
+  }));
+  let displayFn = o.display || ((v) => String(v));
+
+  const applyNow = (snapshot, extra, active) => {
+    for (const cell of cells) {
+      const value = snapshot ? snapshot[cell.r][cell.c] : grid[cell.r][cell.c];
+      const st = styleFn(value, cell.r, cell.c, extra || {}, cell) || {};
+      cell.t.textContent = displayFn(value, cell.r, cell.c, extra || {});
+      cell.rect.setAttribute("fill", st.fill || C.chipFill);
+      cell.rect.setAttribute("stroke", st.stroke || C.greyDark);
+      cell.rect.setAttribute("stroke-width", String(st.strokeWidth || 1.6));
+      cell.t.setAttribute("fill", st.text || C.white);
+      setOpacity(cell.g, st.opacity === undefined ? 1 : st.opacity);
+    }
+    if (active && active[0] >= 0) {
+      const x = x0 + active[1] * cell;
+      const y = y0 + active[0] * cell;
+      cursor.setAttribute("x", String(x + gap / 2));
+      cursor.setAttribute("y", String(y + gap / 2));
+      cursor.setAttribute("stroke", (extra && extra.cursorColor) || C.gold);
+      setOpacity(cursor, 1);
+    } else {
+      setOpacity(cursor, 0);
+    }
+  };
+
+  const apply = (tl, snapshot, extra, active) => {
+    tl.add(0.01, () => applyNow(snapshot, extra, active));
+  };
+
+  const reset = () => {
+    applyNow(grid, {}, null);
+    setOpacity(board, 0);
+  };
+  reset();
+  scene.resetters.push(reset);
+
+  return {
+    rows, cols, cell, x0, y0, cells, board, cursor,
+    apply, applyNow, reset,
+    setStyle(fn) { styleFn = fn; },
+    setDisplay(fn) { displayFn = fn; },
+    cellAt(r, c) { return cells[r * cols + c]; },
+  };
+}
+
+function kLines(ctx, scene, opts) {
+  const { txt, C, setOpacity } = ctx;
+  const o = opts || {};
+  const nodes = [];
+  const max = o.max || 8;
+  const lineH = o.lineH || 26;
+  const font = o.font || 14;
+  for (let i = 0; i < max; i++) {
+    const node = txt("", {
+      x: o.x, y: o.y + i * lineH,
+      "font-size": font, fill: o.color || C.white,
+      "font-family": o.mono ? "ui-monospace, monospace" : undefined,
+    }, scene.layers.text);
+    setOpacity(node, 0);
+    nodes.push(node);
+  }
+  return {
+    nodes,
+    set(tl, lines, color) {
+      tl.add(0.01, () => {
+        for (let i = 0; i < nodes.length; i++) {
+          const line = lines[i];
+          nodes[i].textContent = line === undefined ? "" : String(line);
+          nodes[i].setAttribute("fill", color || o.color || C.white);
+          setOpacity(nodes[i], line === undefined || line === "" ? 0 : 1);
+        }
+      });
+    },
+    reset() {
+      for (const n of nodes) { n.textContent = ""; setOpacity(n, 0); }
+    },
+  };
+}
+
+function kGraph(ctx, scene, opts) {
+  const { el, txt, C, setOpacity } = ctx;
+  const o = opts || {};
+  const nodesIn = o.nodes || [];
+  const edgesIn = o.edges || [];
+  const n = nodesIn.length;
+  const r = o.r || kClamp(Math.min(o.w, o.h) / (Math.max(3, Math.sqrt(Math.max(1, n))) * 3.0), 18, 30);
+  const graphG = el("g", {}, scene.layers.chips);
+  setOpacity(graphG, 0);
+  scene.hideNodes.push(graphG);
+  scene.introNodes.push(graphG);
+  const cx = o.x + o.w / 2;
+  const cy = o.y + o.h / 2;
+  const rx = Math.max(0, o.w / 2 - r - (o.padX || 18));
+  const ry = Math.max(0, o.h / 2 - r - (o.padY || 18));
+  const positions = new Map();
+  nodesIn.forEach((node, i) => {
+    let x, y;
+    if (node.x !== undefined) { x = node.x; y = node.y; }
+    else if (o.layout === "row") {
+      x = o.x + o.w * (i + 0.5) / Math.max(1, n);
+      y = cy;
+    } else if (o.layout === "column") {
+      x = cx;
+      y = o.y + o.h * (i + 0.5) / Math.max(1, n);
+    } else if (n === 1) {
+      x = cx; y = cy;
+    } else {
+      const a = -Math.PI / 2 + 2 * Math.PI * i / n;
+      x = cx + rx * Math.cos(a);
+      y = cy + ry * Math.sin(a);
+    }
+    positions.set(node.id, { x, y });
+  });
+
+  const edgeMap = new Map();
+  const edgeNodes = [];
+  for (const edge of edgesIn) {
+    const a = positions.get(edge.u);
+    const b = positions.get(edge.v);
+    if (!a || !b) continue;
+    let x1 = a.x, y1 = a.y, x2 = b.x, y2 = b.y;
+    const dx = x2 - x1, dy = y2 - y1;
+    const len = Math.hypot(dx, dy) || 1;
+    const ux = dx / len, uy = dy / len;
+    x1 += ux * (r + 2); y1 += uy * (r + 2);
+    x2 -= ux * (r + 2); y2 -= uy * (r + 2);
+    const line = el("line", {
+      x1, y1, x2, y2, stroke: C.greyDark, "stroke-width": 2.2,
+    }, scene.layers.arcs);
+    setOpacity(line, 0);
+    let arrow = null;
+    if (edge.directed) {
+      const bx = x2 - ux * 9, by = y2 - uy * 9;
+      const px = -uy * 5, py = ux * 5;
+      arrow = el("polygon", {
+        points: `${x2},${y2} ${bx + px},${by + py} ${bx - px},${by - py}`,
+        fill: C.greyDark,
+      }, scene.layers.arcs);
+      setOpacity(arrow, 0);
+    }
+    const key = edge.u + "|" + edge.v;
+    const keyR = edge.v + "|" + edge.u;
+    const item = { edge, line, arrow, key, keyR };
+    edgeMap.set(key, item);
+    if (!edge.directed) edgeMap.set(keyR, item);
+    edgeNodes.push(item);
+  }
+
+  const nodeMap = new Map();
+  const nodeNodes = [];
+  const font = o.font || kClamp(r * 0.72, 10, 22);
+  for (const node of nodesIn) {
+    const p = positions.get(node.id);
+    const g = el("g", { transform: `translate(${p.x} ${p.y})` }, graphG);
+    const circle = el("circle", {
+      cx: 0, cy: 0, r, fill: C.chipFill, stroke: C.greyDark, "stroke-width": 2.2,
+    }, g);
+    const ring = el("circle", {
+      cx: 0, cy: 0, r: r + 4, fill: "none", stroke: C.gold,
+      "stroke-width": 2.6, filter: "url(#glow-gold)",
+    }, g);
+    const label = txt(String(node.label === undefined ? node.id : node.label), {
+      x: 0, y: 1, "text-anchor": "middle", "dominant-baseline": "central",
+      "font-size": font, fill: C.white,
+    }, g);
+    let badge = null;
+    if (node.badge !== undefined) {
+      badge = txt(String(node.badge), {
+        x: 0, y: r + 14, "text-anchor": "middle", "font-size": 10, fill: C.grey,
+      }, g);
+    }
+    setOpacity(ring, 0);
+    const item = { node, g, circle, ring, label, badge, x: p.x, y: p.y, r };
+    nodeMap.set(node.id, item);
+    nodeNodes.push(item);
+  }
+
+  const reset = () => {
+    for (const item of nodeNodes) {
+      setOpacity(item.g, 1);
+      item.circle.setAttribute("fill", C.chipFill);
+      item.circle.setAttribute("stroke", C.greyDark);
+      item.circle.setAttribute("stroke-width", "2.2");
+      item.label.setAttribute("fill", C.white);
+      setOpacity(item.ring, 0);
+      if (item.badge) { item.badge.setAttribute("fill", C.grey); item.badge.textContent = String(item.node.badge === undefined ? "" : item.node.badge); }
+    }
+    for (const item of edgeNodes) {
+      setOpacity(item.line, 1);
+      item.line.setAttribute("stroke", C.greyDark);
+      item.line.setAttribute("stroke-width", "2.2");
+      setOpacity(item.line, 0);
+      if (item.arrow) { item.arrow.setAttribute("fill", C.greyDark); setOpacity(item.arrow, 0); }
+    }
+  };
+  reset();
+  scene.resetters.push(reset);
+
+  const apply = (tl, states, edgeStates, badges, active) => {
+    tl.add(0.01, () => {
+      const stMap = states || {};
+      for (const item of nodeNodes) {
+        const s = stMap[item.node.id] || {};
+        setOpacity(item.g, s.opacity === undefined ? 1 : s.opacity);
+        item.circle.setAttribute("fill", s.fill || C.chipFill);
+        item.circle.setAttribute("stroke", s.stroke || C.greyDark);
+        item.circle.setAttribute("stroke-width", String(s.strokeWidth || 2.2));
+        item.label.setAttribute("fill", s.text || C.white);
+        setOpacity(item.ring, s.ring ? 1 : 0);
+        if (s.ring) item.ring.setAttribute("stroke", s.ringColor || C.gold);
+        if (item.badge) {
+          item.badge.textContent = badges && badges[item.node.id] !== undefined
+            ? String(badges[item.node.id]) : String(item.node.badge === undefined ? "" : item.node.badge);
+          item.badge.setAttribute("fill", s.badgeColor || C.grey);
+        }
+      }
+      const esMap = edgeStates || {};
+      for (const item of edgeNodes) {
+        const s = esMap[item.key] || esMap[item.keyR] || {};
+        item.line.setAttribute("stroke", s.stroke || C.greyDark);
+        item.line.setAttribute("stroke-width", String(s.strokeWidth || 2.2));
+        setOpacity(item.line, s.opacity === undefined ? 1 : s.opacity);
+        if (item.arrow) {
+          item.arrow.setAttribute("fill", s.arrow || s.stroke || C.greyDark);
+          setOpacity(item.arrow, s.opacity === undefined ? 1 : s.opacity);
+        }
+      }
+    });
+  };
+
+  return {
+    nodes: nodeNodes, edges: edgeNodes, positions, r,
+    node(id) { return nodeMap.get(id); },
+    edge(u, v) { return edgeMap.get(u + "|" + v) || edgeMap.get(v + "|" + u); },
+    apply, reset,
+  };
+}
+
+function kSay(scene, tl, text, color, detail, hold) {
+  const { C, setOpacity } = scene.ctx;
+  tl.add(0.01, () => {
+    scene.status.textContent = text;
+    scene.status.setAttribute("fill", color || C.gold);
+    setOpacity(scene.status, 1);
+    if (detail !== undefined) {
+      scene.detail.textContent = detail;
+      scene.detail.setAttribute("fill", C.grey);
+      setOpacity(scene.detail, 1);
+    }
+  });
+  if (hold === false) tl.log(text, color || C.gold, { hold: false });
+  else tl.log(text, color || C.gold);
+}
+
+function kNarration(ctx, scene) {
+  const { txt, C, setOpacity } = ctx;
+  scene.status = txt("", {
+    x: 64, y: 598, "font-size": 20, fill: C.gold,
+  }, scene.layers.text);
+  scene.detail = txt("", {
+    x: 64, y: 626, "font-size": 15, fill: C.grey,
+  }, scene.layers.text);
+  scene.result = txt("", {
+    x: ctx.STAGE_W / 2, y: 688, "text-anchor": "middle",
+    "font-size": 25, fill: C.green,
+  }, scene.layers.result);
+  for (const node of [scene.status, scene.detail, scene.result]) {
+    setOpacity(node, 0);
+    scene.hideNodes.push(node);
+  }
+}
+
+function kIntro(scene, tl) {
+  const { ease, setOpacity } = scene.ctx;
+  tl.add(0.55, scene.titleWriter, ease.outCubic);
+  tl.add(0.35, u => setOpacity(scene.subtitle, u), ease.outCubic);
+  for (const node of scene.introNodes) {
+    tl.add(0.12, u => setOpacity(node, u), ease.outCubic);
+  }
+}
+
+function kFinish(scene, tl, text, color) {
+  const { ease, setOpacity, C } = scene.ctx;
+  tl.add(0.01, () => {
+    scene.result.textContent = text;
+    scene.result.setAttribute("fill", color || C.green);
+    setOpacity(scene.result, 1);
+  });
+  tl.add(0.5, u => setOpacity(scene.result, u), ease.outCubic);
+  tl.log(text, color || C.green);
+  tl.wait(0.8);
+  return tl.finish();
+}
+
+function kParseGrid(raw, mode) {
+  let text = String(raw || "").trim();
+  if (!text) return null;
+  if (text[0] === "[") {
+    try {
+      const data = JSON.parse(text);
+      if (!Array.isArray(data) || !data.length || !Array.isArray(data[0])) return null;
+      const rows = data.map(row => row.map(v => String(v)));
+      if (!rows.every(row => row.length === rows[0].length)) return null;
+      return rows;
+    } catch (_) {
+      return null;
+    }
+  }
+  const lines = text.split(/[\/\n]+/).map(line => line.trim()).filter(Boolean);
+  if (!lines.length) return null;
+  const rows = lines.map(line => {
+    if (mode === "chars") return line.replace(/\s+/g, "").split("");
+    return line.split(/[,\s]+/).filter(Boolean);
+  });
+  if (!rows.length || !rows[0].length) return null;
+  if (!rows.every(row => row.length === rows[0].length)) return null;
+  return rows;
+}
+
+function kParseNumberRows(raw) {
+  const rows = kParseGrid(raw, "tokens");
+  if (!rows) return null;
+  const out = rows.map(row => row.map(v => Number(v)));
+  if (!out.every(row => row.every(Number.isFinite))) return null;
+  return out;
+}
+
+function kParseEdges(raw) {
+  let text = String(raw || "").trim();
+  if (!text) return [];
+  if (text[0] === "[") {
+    try {
+      const data = JSON.parse(text);
+      if (!Array.isArray(data)) return null;
+      if (!data.every(e => Array.isArray(e) && e.length >= 2)) return null;
+      return data.map(e => e.slice(0, 2).map(Number));
+    } catch (_) { return null; }
+  }
+  const lines = text.split(/[;\n]+/).map(s => s.trim()).filter(Boolean);
+  const out = [];
+  for (const line of lines) {
+    const parts = line.replace(/[\[\]()]/g, "").split(/[,\s]+/).filter(Boolean).map(Number);
+    if (parts.length < 2 || !parts.slice(0, 2).every(Number.isFinite)) return null;
+    out.push([parts[0], parts[1]]);
+  }
+  return out;
+}
+const SCENE = {
+  meta: {
+    title: "Pacific Atlantic Water Flow",
+    subtitle: "two reverse BFS floods · Pacific from top/left · Atlantic from bottom/right · intersect",
+    inputs: [
+      {
+        id: "heights",
+        label: "heights (rows joined by /)",
+        type: "text",
+        default: "1,2,2,3,5/3,2,3,4,4/2,4,5,3,1/6,7,1,4,5/5,1,1,2,4",
+        width: "wide",
+      },
+    ],
+    legend: [
+      { color: "#58C4DD", text: "reaches Pacific" },
+      { color: "#F0AC5F", text: "reaches Atlantic" },
+      { color: "#83C167", text: "reaches both" },
+      { color: "#6b7684", text: "unvisited" },
+    ],
+  },
+
+  code: [
+    "def pacific_atlantic(heights: List[List[int]]) -> List[List[int]]:",
+    "    if not heights or not heights[0]:",
+    "        return []",
+    "    rows, cols = len(heights), len(heights[0])",
+    "    directions = ((1, 0), (-1, 0), (0, 1), (0, -1))",
+    "    def flood(starts: List[Tuple[int, int]]) -> Set[Tuple[int, int]]:",
+    "        reachable = set(starts)",
+    "        queue = deque(starts)",
+    "        while queue:",
+    "            r, c = queue.popleft()",
+    "            for dr, dc in directions:",
+    "                nr, nc = r + dr, c + dc",
+    "                if (",
+    "                    0 <= nr < rows",
+    "                    and 0 <= nc < cols",
+    "                    and (nr, nc) not in reachable",
+    "                    and heights[nr][nc] >= heights[r][c]   # water flows r -> nr downhill",
+    "                ):",
+    "                    reachable.add((nr, nc))",
+    "                    queue.append((nr, nc))",
+    "        return reachable",
+    "    pacific = [(0, c) for c in range(cols)] + [(r, 0) for r in range(1, rows)]",
+    "    atlantic = [(rows - 1, c) for c in range(cols)] + [",
+    "        (r, cols - 1) for r in range(rows - 1)",
+    "    ]",
+    "    from_pacific = flood(pacific)",
+    "    from_atlantic = flood(atlantic)",
+    "    return [",
+    "        [r, c]",
+    "        for r in range(rows)",
+    "        for c in range(cols)",
+    "        if (r, c) in from_pacific and (r, c) in from_atlantic",
+    "    ]",
+  ],
+
+  read(values) {
+    const raw = kParseGrid(values.heights, "tokens");
+    if (!raw || raw.length > 10 || raw[0].length > 12) return null;
+    const heights = raw.map(row => row.map(Number));
+    if (!heights.every(row => row.every(Number.isFinite))) return null;
+    return { heights };
+  },
+
+  fromArgs(args) {
+    if (!Array.isArray(args) || args.length !== 1 || !Array.isArray(args[0])) return null;
+    return { heights: JSON.stringify(args[0]) };
+  },
+
+  buildScene(params, ctx) {
+    const { C } = ctx;
+    const scene = {};
+    kBase(ctx, scene);
+    kHeader(ctx, scene, "Pacific Atlantic Water Flow",
+      "search uphill from each ocean · a cell belongs to both when the floods meet");
+    const heights = params.heights;
+    const sim = simulatePacific(heights);
+    scene.heights = heights;
+    scene.sim = sim;
+
+    kPanel(ctx, scene, 40, 128, 676, 452, "heights", C.blue);
+    const gv = kGrid(ctx, scene, heights, {
+      x: 50, y: 138, w: 656, h: 432, maxCell: 70, label: true,
+      style(value, r, c, extra) {
+        const key = r + "," + c;
+        const p = extra.pSet || [];
+        const a = extra.aSet || [];
+        const inP = p.includes(key);
+        const inA = a.includes(key);
+        if (inP && inA) {
+          return { fill: "#17251a", stroke: C.green, strokeWidth: 2.6, text: C.green };
+        }
+        if (inP) {
+          return { fill: "#10283a", stroke: C.blue, strokeWidth: 2.2, text: C.blue };
+        }
+        if (inA) {
+          return { fill: "#2a2115", stroke: C.gold, strokeWidth: 2.2, text: C.gold };
+        }
+        return { fill: "#0f151d", stroke: "#263244", text: "#67788c" };
+      },
+      display(value) { return String(value); },
+    });
+    scene.gv = gv;
+
+    kPanel(ctx, scene, 740, 128, 492, 452, "reverse floods", C.green);
+    const stats = kLines(ctx, scene, {
+      x: 764, y: 188, max: 4, lineH: 34, font: 16, color: C.white,
+    });
+    scene.stats = stats;
+    const resultTitle = ctx.txt("both oceans", {
+      x: 764, y: 330, "font-size": 16, fill: C.green,
+    }, scene.layers.text);
+    ctx.setOpacity(resultTitle, 0);
+    scene.hideNodes.push(resultTitle);
+    scene.introNodes.push(resultTitle);
+    const resultLines = kLines(ctx, scene, {
+      x: 764, y: 358, max: 9, lineH: 20, font: 13, color: C.green, mono: true,
+    });
+    scene.resultLines = resultLines;
+    const note = ctx.txt("Reverse BFS climbs to equal-or-higher neighbours, so it finds every cell that can drain downhill.", {
+      x: 764, y: 548, "font-size": 12, fill: C.grey,
+    }, scene.layers.text);
+    ctx.setOpacity(note, 0);
+    scene.hideNodes.push(note);
+    scene.introNodes.push(note);
+    scene.note = note;
+
+    kNarration(ctx, scene);
+    return scene;
+  },
+
+  buildTimeline(scene, tl, ctx) {
+    const { C } = ctx;
+    const { heights, sim, gv, stats, resultLines } = scene;
+
+    scene.reset();
+    kIntro(scene, tl);
+    tl.line([1, 2, 3, 4, 5]);
+    kSay(scene, tl, "define the two ocean border sets", C.blue,
+      "water flows downhill, so the search runs uphill from each ocean");
+    gv.apply(tl, heights, { pSet: [], aSet: [] }, null);
+    stats.set(tl, ["Pacific = 0 cells", "Atlantic = 0 cells", "queue = 0", "phase = seeding"]);
+    resultLines.set(tl, []);
+
+    for (const ev of sim.events) {
+      const base = [
+        "Pacific = " + ev.pSet.length + " cells",
+        "Atlantic = " + ev.aSet.length + " cells",
+        "queue = " + ev.queue.length,
+        "phase = " + ev.phase,
+      ];
+      if (ev.kind === "pseed" || ev.kind === "aseed") {
+        if (ev.kind === "pseed") tl.line(22);
+        else tl.line([23, 24, 25]);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, ev.active);
+        stats.set(tl, base);
+        kSay(scene, tl, ev.kind === "pseed"
+          ? "seed the Pacific border: top row + left column"
+          : "seed the Atlantic border: bottom row + right column",
+        ev.kind === "pseed" ? C.blue : C.gold,
+        "every border cell can already reach that ocean without moving", false);
+      } else if (ev.kind === "ppop" || ev.kind === "apop") {
+        tl.line([6, 7, 8, 9, 10]);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, ev.active);
+        stats.set(tl, base);
+        kSay(scene, tl, "pop (" + ev.active[0] + ", " + ev.active[1] + ") from the " +
+          (ev.kind === "ppop" ? "Pacific" : "Atlantic") + " flood", C.blue,
+          "inspect four neighbours that are at least as high", false);
+      } else if (ev.kind === "padd" || ev.kind === "aadd") {
+        tl.line([11, 12, 13, 14, 15, 16, 17, 18, 19, 20]);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, ev.active);
+        stats.set(tl, base);
+        kSay(scene, tl, "reachable uphill from (" + ev.active[0] + ", " + ev.active[1] + ") → (" +
+          ev.cell[0] + ", " + ev.cell[1] + ")", C.green,
+          "add the new cell to this ocean's reachable set and queue", false);
+      } else if (ev.kind === "pdone" || ev.kind === "adone") {
+        tl.line(21);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, null);
+        stats.set(tl, base);
+        kSay(scene, tl, (ev.kind === "pdone" ? "Pacific" : "Atlantic") +
+          " flood complete · " + (ev.kind === "pdone" ? ev.pSet.length : ev.aSet.length) + " cells", C.green,
+          "return this reachable set and start the other ocean", false);
+      } else if (ev.kind === "pstart") {
+        tl.line(26);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, null);
+        stats.set(tl, base);
+        kSay(scene, tl, "from_pacific = flood(pacific)", C.blue,
+          "run the whole reverse flood for the Pacific", false);
+      } else if (ev.kind === "astart") {
+        tl.line(27);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, null);
+        stats.set(tl, base);
+        kSay(scene, tl, "from_atlantic = flood(atlantic)", C.gold,
+          "run the same helper for the Atlantic", false);
+      } else if (ev.kind === "done") {
+        tl.line([28, 29, 30, 31, 32, 33]);
+        gv.apply(tl, heights, { pSet: ev.pSet, aSet: ev.aSet }, null);
+        stats.set(tl, base);
+        resultLines.set(tl, ev.both.map(p => "[" + p[0] + ", " + p[1] + "]"));
+        kSay(scene, tl, "intersect the two reachable sets", C.green,
+          ev.both.length + " cell(s) reach both oceans", false);
+      }
+      tl.wait(0.09);
+    }
+
+    return kFinish(scene, tl, "return " + sim.result + " qualifying cell" + (sim.result === 1 ? "" : "s"));
+  },
+};
+
+function simulatePacific(heights) {
+  const rows = heights.length;
+  const cols = heights[0].length;
+  const p = new Set();
+  const a = new Set();
+  const events = [];
+  let queue = [];
+  let phase = "seeding";
+
+  const keys = set => [...set];
+  const snapshot = (kind, line, extra) => {
+    events.push({
+      kind, line, phase,
+      pSet: keys(p), aSet: keys(a),
+      queue: queue.map(q => q.r + "," + q.c),
+      ...(extra || {}),
+    });
+  };
+
+  const seed = (target, starts, tag) => {
+    phase = tag === "p" ? "Pacific seed" : "Atlantic seed";
+    for (const [r, c] of starts) {
+      const key = r + "," + c;
+      if (target.has(key)) continue;
+      target.add(key);
+      queue.push({ r, c });
+      snapshot(tag + "seed", [], { active: [r, c], cell: [r, c] });
+    }
+    if (!starts.length) snapshot(tag + "seed", [], { active: null, cell: null });
+  };
+
+  const flood = (target, tag) => {
+    phase = tag === "p" ? "Pacific BFS" : "Atlantic BFS";
+    while (queue.length) {
+      const cur = queue.shift();
+      snapshot(tag + "pop", [], { active: [cur.r, cur.c], cell: null });
+      const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+      for (const d of dirs) {
+        const nr = cur.r + d[0];
+        const nc = cur.c + d[1];
+        if (nr < 0 || nr >= rows || nc < 0 || nc >= cols) continue;
+        const key = nr + "," + nc;
+        if (target.has(key)) continue;
+        if (heights[nr][nc] < heights[cur.r][cur.c]) continue;
+        target.add(key);
+        queue.push({ r: nr, c: nc });
+        snapshot(tag + "add", [], { active: [cur.r, cur.c], cell: [nr, nc] });
+      }
+    }
+    snapshot(tag + "done", 21, { active: null, cell: null });
+  };
+
+  const pacificStarts = [];
+  for (let c = 0; c < cols; c++) pacificStarts.push([0, c]);
+  for (let r = 1; r < rows; r++) pacificStarts.push([r, 0]);
+  const atlanticStarts = [];
+  for (let c = 0; c < cols; c++) atlanticStarts.push([rows - 1, c]);
+  for (let r = 0; r < rows - 1; r++) atlanticStarts.push([r, cols - 1]);
+
+  snapshot("start", [1, 2, 3, 4, 5], { active: null, cell: null });
+  seed(p, pacificStarts, "p");
+  snapshot("pstart", 26, { active: null, cell: null });
+  flood(p, "p");
+  seed(a, atlanticStarts, "a");
+  snapshot("astart", 27, { active: null, cell: null });
+  flood(a, "a");
+
+  const both = [];
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const key = r + "," + c;
+      if (p.has(key) && a.has(key)) both.push([r, c]);
+    }
+  }
+  phase = "intersection";
+  snapshot("done", [28, 29, 30, 31, 32, 33], { active: null, cell: null, both });
+  return { events, result: both.length };
+}

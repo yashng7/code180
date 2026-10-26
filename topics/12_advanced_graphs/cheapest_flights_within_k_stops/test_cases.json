@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [4, [[0, 1, 100], [1, 2, 100], [2, 0, 100], [1, 3, 600], [2, 3, 200]], 0, 3, 1],
+      "expected": 700,
+      "note": "classic example: cheaper 2-stop route is not allowed"
+    },
+    {
+      "args": [3, [[0, 1, 100], [1, 2, 100], [0, 2, 500]], 0, 2, 1],
+      "expected": 200,
+      "note": "one stop allowed, take the cheap connection"
+    },
+    {
+      "args": [3, [[0, 1, 100], [1, 2, 100], [0, 2, 500]], 0, 2, 0],
+      "expected": 500,
+      "note": "no stops allowed, only the direct flight"
+    },
+    {
+      "args": [5, [[0, 1, 1], [1, 2, 1], [2, 3, 1], [3, 4, 1], [0, 4, 10]], 0, 4, 2],
+      "expected": 10,
+      "note": "Dijkstra ignoring stops would report 4; the hop limit forces the direct edge"
+    },
+    {
+      "args": [3, [[0, 1, 100]], 0, 2, 1],
+      "expected": -1,
+      "note": "destination unreachable"
+    },
+    {
+      "args": [2, [[0, 1, 100]], 0, 1, 0],
+      "expected": 100,
+      "note": "direct flight with zero stops"
+    },
+    {
+      "args": [4, [[0, 1, 100], [1, 2, 100], [2, 3, 100], [0, 3, 500]], 0, 3, 2],
+      "expected": 300,
+      "note": "longer chain is cheaper and fits within the stop budget"
+    },
+    {
+      "args": [2, [[0, 1, 100]], 0, 0, 0],
+      "expected": 0,
+      "note": "source equals destination, cost is zero"
+    }
+  ]
+}

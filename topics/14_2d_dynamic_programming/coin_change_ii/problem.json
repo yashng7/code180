@@ -1,0 +1,11 @@
+{
+  "id": "coin_change_ii",
+  "title": "Coin Change II",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "change",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming", "knapsack"],
+  "leetcode": "https://leetcode.com/problems/coin-change-ii/",
+  "neetcode": "https://neetcode.io/problems/coin-change-ii"
+}

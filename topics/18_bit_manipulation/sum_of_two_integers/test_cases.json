@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [1, 2], "expected": 3, "note": "classic example"},
+    {"args": [2, 3], "expected": 5, "note": "classic example 2"},
+    {"args": [-1, 1], "expected": 0, "note": "cancel to zero"},
+    {"args": [0, 0], "expected": 0, "note": "both zero"},
+    {"args": [-5, -3], "expected": -8, "note": "both negative"},
+    {"args": [-1, -1], "expected": -2, "note": "negative carry chain"},
+    {"args": [7, 0], "expected": 7, "note": "additive identity"},
+    {"args": [-8, 4], "expected": -4, "note": "negative plus positive"},
+    {"args": [1000, -1000], "expected": 0, "note": "large opposing magnitudes"}
+  ]
+}

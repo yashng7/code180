@@ -1,0 +1,60 @@
+{
+  "cases": [
+    {
+      "args": {
+        "ops": ["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
+        "vals": [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+      },
+      "expected": [null, null, true, false, true, null, true],
+      "note": "official example"
+    },
+    {
+      "args": {
+        "ops": ["Trie", "insert", "search", "search", "startsWith", "startsWith"],
+        "vals": [[], ["a"], ["a"], ["ab"], ["a"], ["b"]]
+      },
+      "expected": [null, null, true, false, true, false],
+      "note": "singleton word: exact match vs prefix"
+    },
+    {
+      "args": {
+        "ops": ["Trie", "insert", "search", "startsWith", "search", "startsWith"],
+        "vals": [[], ["apple"], ["app"], ["app"], ["apple"], ["apple"]]
+      },
+      "expected": [null, null, false, true, true, true],
+      "note": "prefix is not a complete word (classic wrong approach)"
+    },
+    {
+      "args": {
+        "ops": ["Trie", "insert", "insert", "insert", "search", "search", "startsWith", "search"],
+        "vals": [[], ["app"], ["apple"], ["apply"], ["app"], ["appl"], ["appl"], ["apply"]]
+      },
+      "expected": [null, null, null, null, true, false, true, true],
+      "note": "several words sharing the prefix 'appl'"
+    },
+    {
+      "args": {
+        "ops": ["Trie", "search", "search", "startsWith"],
+        "vals": [[], ["a"], ["abc"], ["a"]]
+      },
+      "expected": [null, false, false, false],
+      "note": "empty trie, nothing inserted"
+    },
+    {
+      "args": {
+        "ops": ["Trie", "insert", "insert", "search", "search", "startsWith", "search"],
+        "vals": [[], ["ban"], ["banana"], ["ban"], ["banan"], ["banan"], ["banana"]]
+      },
+      "expected": [null, null, null, true, false, true, true],
+      "note": "short word is a strict prefix of a longer one"
+    },
+    {
+      "args": {
+        "ops": ["Trie", "insert", "insert", "search", "startsWith"],
+        "vals": [[], ["cat"], ["cat"], ["cat"], ["ca"]]
+      },
+      "expected": [null, null, null, true, true],
+      "note": "duplicate insert is idempotent"
+    }
+  ]
+}

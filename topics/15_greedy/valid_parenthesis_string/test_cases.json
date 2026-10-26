@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": ["()"],
+      "expected": true,
+      "note": "classic example"
+    },
+    {
+      "args": ["(*)"],
+      "expected": true,
+      "note": "classic example with a single star"
+    },
+    {
+      "args": ["(*))"],
+      "expected": true,
+      "note": "classic example — star fills the balance"
+    },
+    {
+      "args": ["*"],
+      "expected": true,
+      "note": "a lone star can be empty"
+    },
+    {
+      "args": [""],
+      "expected": true,
+      "note": "empty string is trivially balanced"
+    },
+    {
+      "args": ["(((*)"],
+      "expected": false,
+      "note": "too many opens for one star to close"
+    },
+    {
+      "args": [")*("],
+      "expected": false,
+      "note": "leading close is unrecoverable"
+    },
+    {
+      "args": ["((*)"],
+      "expected": true,
+      "note": "star acts as a close to finish two pairs"
+    },
+    {
+      "args": ["((("],
+      "expected": false,
+      "note": "opens only, never closes"
+    }
+  ]
+}

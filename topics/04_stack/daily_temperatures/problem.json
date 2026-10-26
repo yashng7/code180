@@ -1,0 +1,11 @@
+{
+  "id": "daily_temperatures",
+  "title": "Daily Temperatures",
+  "topic": "Stack",
+  "difficulty": "Medium",
+  "function": "daily_temperatures",
+  "compare": "exact",
+  "tags": ["array", "stack", "monotonic-stack"],
+  "leetcode": "https://leetcode.com/problems/daily-temperatures/",
+  "neetcode": "https://neetcode.io/problems/daily-temperatures"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "valid_parentheses",
+  "title": "Valid Parentheses",
+  "topic": "Stack",
+  "difficulty": "Easy",
+  "function": "is_valid",
+  "compare": "exact",
+  "tags": ["string", "stack"],
+  "leetcode": "https://leetcode.com/problems/valid-parentheses/",
+  "neetcode": "https://neetcode.io/problems/validate-parentheses"
+}

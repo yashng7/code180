@@ -1,0 +1,1128 @@
+/* code180 mini-Manim engine — shared, problem-agnostic, inlined at build time.
+ *
+ * A scene module (global `SCENE`) supplies the problem-specific story:
+ *
+ *   meta        : { title, subtitle,
+ *                   inputs: [{ id, label, type, default, width? }],
+ *                   legend: [{ color, text }] }
+ *   read(v)     : v = {inputId: rawString} -> params object, or null if invalid
+ *   fromArgs(a) : optional; parsed ?args= JSON list -> {inputId: rawString}
+ *   buildScene(params, ctx)      : returns a scene object (may define scene.reset)
+ *   buildTimeline(scene, tl, ctx): schedules eased actions onto tl (a Timeline)
+ *
+ * Everything is a pure function of time: `Timeline.render(t)` resets to the
+ * build-time baseline and replays, so scrubbing backwards is always correct.
+ */
+"use strict";
+
+const NS = "http://www.w3.org/2000/svg";
+const STAGE_W = 1280;
+const STAGE_H = 720;
+
+const C = {
+  white: "#ececec",
+  grey: "#6b7684",
+  greyDark: "#2a3342",
+  blue: "#58C4DD",
+  teal: "#5CD0B3",
+  green: "#83C167",
+  gold: "#F0AC5F",
+  red: "#FC6255",
+  purple: "#B58CD6",
+  chipFill: "#151b26",
+  stage: "#0d1117",
+};
+
+const ease = {
+  linear: u => u,
+  inOutSine: u => -(Math.cos(Math.PI * u) - 1) / 2,
+  outCubic: u => 1 - Math.pow(1 - u, 3),
+  outBack: u => {
+    const c1 = 1.70158, c3 = c1 + 1;
+    return 1 + c3 * Math.pow(u - 1, 3) + c1 * Math.pow(u - 1, 2);
+  },
+};
+
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+/* Learning pace: every scheduled duration (actions and waits) is stretched by
+ * this factor, so scenes can be authored at "natural" speed while the page
+ * plays slowly enough to follow. 1 = authored speed; raise it to slow down.
+ * The speed menu (0.25× … 2×) still multiplies on top of this. */
+const PACE = 1.75;
+
+function el(tag, attrs, parent) {
+  const node = document.createElementNS(NS, tag);
+  if (attrs) for (const key in attrs) node.setAttribute(key, attrs[key]);
+  if (parent) parent.appendChild(node);
+  return node;
+}
+
+function txt(str, attrs, parent) {
+  const node = el("text", attrs, parent);
+  node.textContent = str;
+  return node;
+}
+
+const setOpacity = (node, o) => { node.style.opacity = String(clamp(o, 0, 1)); };
+const setTranslate = (node, x, y) => node.setAttribute("transform", "translate(" + x + " " + y + ")");
+const setScaleAt = (node, cx, cy, s) =>
+  node.setAttribute("transform", "translate(" + cx + " " + cy + ") scale(" + s + ") translate(" + -cx + " " + -cy + ")");
+
+/* ------------------------------------------------------------------ *
+ * Narration transcript helpers
+ * ------------------------------------------------------------------ */
+
+/* Reading time added after every narration line, in authored seconds (PACE
+ * still applies): a base plus a per-character allowance, clamped. */
+const READ_BASE = 0.6;
+const READ_PER_CHAR = 0.035;
+const READ_MIN = 1.0;
+const READ_MAX = 3.0;
+const readingTime = text => clamp(READ_BASE + text.length * READ_PER_CHAR, READ_MIN, READ_MAX);
+
+/* Split an SVG <text> (optionally built from coloured <tspan>s) into
+ * [{ text, fill }] runs so the transcript keeps the stage's colours. */
+function richParts(node) {
+  const base = (node.getAttribute && node.getAttribute("fill")) || C.white;
+  const kids = node.children ? Array.from(node.children) : [];
+  if (kids.length) {
+    return kids.map(k => ({
+      text: k.textContent || "",
+      fill: (k.getAttribute && k.getAttribute("fill")) || base,
+    }));
+  }
+  return [{ text: node.textContent || "", fill: base }];
+}
+
+/* ------------------------------------------------------------------ *
+ * Seekable timeline
+ *
+ * Every write-on text (a writer from ctx.makeWritable) is recorded in
+ * `transcript` and followed by an automatic reading pause. Scenes that change
+ * text by hand can call `tl.log(text, color)` to do the same.
+ * ------------------------------------------------------------------ */
+class Timeline {
+  constructor() {
+    this.actions = [];
+    this.duration = 0;
+    this.resetFn = null;
+    this.transcript = [];
+    this.lineEvents = [];
+    this._currentLines = [];
+  }
+  /* Mark which 1-based source code line(s) are executing from this point on. */
+  line(lines) {
+    const arr = Array.isArray(lines) ? lines.map(Number) : (lines ? [Number(lines)] : []);
+    this._currentLines = arr;
+    const marker = { start: 0, dur: 0, apply: () => {}, easeFn: ease.linear, lines: arr };
+    this.actions.push(marker);
+    this.lineEvents.push({ action: marker, lines: arr });
+    return this;
+  }
+  add(dur, apply, easeFn) {
+    const curLines = (apply && apply.lines) ? (Array.isArray(apply.lines) ? apply.lines : [apply.lines]) : this._currentLines.slice();
+    const action = { start: 0, dur: dur * PACE, apply, easeFn: easeFn || ease.inOutSine, lines: curLines };
+    this.actions.push(action);
+    if (apply && apply.node && !apply.noLog) {
+      const y = Number(apply.node.getAttribute && apply.node.getAttribute("y")) || 0;
+      if (y > 95) {
+        const parts = richParts(apply.node);
+        const text = parts.map(p => p.text).join("").trim();
+        if (text) {
+          this.transcript.push({ action, parts, text, lines: curLines });
+          this._hold(text);
+        }
+      }
+    }
+    return this;
+  }
+  wait(dur) { return this.add(dur, () => {}, ease.linear); }
+  /* Record a narration line that the scene displays by other means. */
+  log(text, color, opts) {
+    text = String(text);
+    const curLines = (opts && opts.lines) ? (Array.isArray(opts.lines) ? opts.lines : [opts.lines]) : this._currentLines.slice();
+    const action = { start: 0, dur: 0, apply: () => {}, easeFn: ease.linear, lines: curLines };
+    this.actions.push(action);
+    this.transcript.push({ action, parts: [{ text, fill: color || C.white }], text, lines: curLines });
+    if (!opts || opts.hold !== false) this._hold(text);
+    return this;
+  }
+  _hold(text) {
+    this.actions.push({
+      start: 0,
+      dur: readingTime(text) * PACE,
+      apply: () => {},
+      easeFn: ease.linear,
+      lines: this._currentLines.slice(),
+    });
+  }
+  finish() {
+    let t = 0;
+    for (const a of this.actions) { a.start = t; t += a.dur; }
+    this.duration = t;
+    return this;
+  }
+  linesAt(t) {
+    let active = [];
+    for (const le of this.lineEvents) {
+      if (le.action.start <= t + 1e-4) active = le.lines;
+      else break;
+    }
+    return active;
+  }
+  render(t) {
+    t = clamp(t, 0, this.duration);
+    if (this.resetFn) this.resetFn();
+    for (const a of this.actions) {
+      if (t < a.start) continue;
+      const raw = a.dur <= 0 ? 1 : clamp((t - a.start) / a.dur, 0, 1);
+      a.apply(a.easeFn(raw), raw);
+    }
+  }
+  /* Step targets: the moment each narration line has finished writing. */
+  stops() {
+    if (!this.transcript.length) return this.actions.map(a => a.start);
+    return this.transcript.map(e => e.action.start + e.action.dur);
+  }
+  nextStop(t) {
+    for (const s of this.stops()) if (s > t + 1e-4) return s;
+    return this.duration;
+  }
+  prevStop(t) {
+    let best = 0;
+    for (const s of this.stops()) if (s < t - 1e-4) best = s;
+    return best;
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Stage context handed to a scene
+ * ------------------------------------------------------------------ */
+let clipSeq = 0;
+
+function createContext(stage) {
+  while (stage.firstChild) stage.removeChild(stage.firstChild);
+  const defs = el("defs", {}, stage);
+  clipSeq = 0;
+
+  const layers = {};
+  const layer = name => {
+    if (!layers[name]) layers[name] = el("g", {}, stage);
+    return layers[name];
+  };
+  layer("bg"); layer("arcs"); layer("chips"); layer("pointer"); layer("text"); layer("result");
+
+  const glow = (id, color) => {
+    const f = el("filter", { id, x: "-60%", y: "-60%", width: "220%", height: "220%" }, defs);
+    el("feDropShadow", { dx: 0, dy: 0, stdDeviation: 6.5, "flood-color": color, "flood-opacity": 0.9 }, f);
+    return id;
+  };
+
+  const makeWritable = () => {
+    return function writable(node, pad) {
+      pad = pad === undefined ? 14 : pad;
+      let rect = null, x0 = 0, full = 0;
+      node.style.opacity = "0";
+      const writer = u => {
+        const clamped = clamp(u, 0, 1);
+        if (clamped <= 0) {
+          if (rect) rect.setAttribute("width", "0");
+          node.style.opacity = "0";
+          return;
+        }
+        if (!rect) {
+          const b = node.getBBox();
+          let bx = b.x, bw = b.width;
+          if (node.getAttribute("text-anchor") === "middle" && node.getAttribute("x") != null) {
+            const cx = Number(node.getAttribute("x"));
+            const half = Math.max(bw / 2, cx - bx, (bx + bw) - cx) + pad;
+            bx = cx - half;
+            bw = half * 2;
+          }
+          x0 = bx - pad;
+          full = bw + 2 * pad;
+          const cp = el("clipPath", { id: "write-clip-" + (clipSeq++) }, defs);
+          rect = el("rect", {
+            x: x0, y: b.y - pad, width: 0, height: Math.max(b.height, 16) + 2 * pad,
+          }, cp);
+          node.setAttribute("clip-path", "url(#" + cp.id + ")");
+        }
+        if (clamped >= 0.999) {
+          rect.setAttribute("x", "0");
+          rect.setAttribute("width", String(STAGE_W));
+        } else {
+          rect.setAttribute("x", String(x0));
+          rect.setAttribute("width", String(full * clamped));
+        }
+        node.style.opacity = "1";
+      };
+      writer.reset = () => {
+        if (rect) {
+          rect.setAttribute("x", String(x0));
+          rect.setAttribute("width", "0");
+        }
+        node.style.opacity = "0";
+      };
+      // Lets Timeline.add recognise a write-on and log it to the transcript.
+      writer.node = node;
+      return writer;
+    };
+  };
+
+  const backdrop = () => {
+    const bg = layers.bg;
+    const dots = el("pattern", { id: "dots", width: 44, height: 44, patternUnits: "userSpaceOnUse" }, defs);
+    el("circle", { cx: 2, cy: 2, r: 1.4, fill: "#1b2433" }, dots);
+    el("rect", { x: 0, y: 0, width: STAGE_W, height: STAGE_H, fill: C.stage }, bg);
+    el("rect", { x: 0, y: 0, width: STAGE_W, height: STAGE_H, fill: "url(#dots)" }, bg);
+    const vig = el("radialGradient", { id: "vignette", cx: "50%", cy: "40%", r: "78%" }, defs);
+    el("stop", { offset: "0%", "stop-color": "#ffffff", "stop-opacity": 0.05 }, vig);
+    el("stop", { offset: "55%", "stop-color": "#000000", "stop-opacity": 0 }, vig);
+    el("stop", { offset: "100%", "stop-color": "#000000", "stop-opacity": 0.55 }, vig);
+    el("rect", { x: 0, y: 0, width: STAGE_W, height: STAGE_H, fill: "url(#vignette)" }, bg);
+  };
+
+  return {
+    stage, defs, layers, layer, glow, backdrop, makeWritable,
+    el, txt, C, ease, clamp, setOpacity, setTranslate, setScaleAt, Timeline,
+    NS, STAGE_W, STAGE_H,
+  };
+}
+
+/* ------------------------------------------------------------------ *
+ * Header inputs + legend
+ * ------------------------------------------------------------------ */
+function buildInputs(meta, onChange) {
+  const host = document.getElementById("inputs");
+  host.innerHTML = "";
+  const map = {};
+  for (const spec of meta.inputs || []) {
+    const label = document.createElement("label");
+    label.textContent = spec.label;
+    const input = document.createElement("input");
+    input.id = spec.id + "-input";
+    input.spellcheck = false;
+    if (spec.type === "number") input.type = "number";
+    if (spec.width) input.classList.add(spec.width);
+    if (spec.default != null) input.value = String(spec.default);
+    input.addEventListener("keydown", ev => { if (ev.key === "Enter") onChange(); });
+    label.appendChild(input);
+    host.appendChild(label);
+    map[spec.id] = input;
+  }
+  const run = document.createElement("button");
+  run.id = "run-btn";
+  run.textContent = "Animate ⏎";
+  run.addEventListener("click", onChange);
+  host.appendChild(run);
+  return map;
+}
+
+function buildLegend(meta, brandEl) {
+  brandEl.innerHTML = "";
+  const title = document.createElement("span");
+  title.textContent = meta.title || "code180";
+  brandEl.appendChild(title);
+  if (meta.subtitle) {
+    const small = document.createElement("small");
+    small.textContent = meta.subtitle;
+    brandEl.appendChild(small);
+  }
+  const host = document.getElementById("legend");
+  host.innerHTML = "";
+  for (const item of meta.legend || []) {
+    const span = document.createElement("span");
+    const dot = document.createElement("i");
+    dot.style.setProperty("--c", item.color);
+    span.appendChild(dot);
+    span.appendChild(document.createTextNode(item.text));
+    host.appendChild(span);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Boot / player
+ * ------------------------------------------------------------------ */
+const ui = {
+  appShell: document.getElementById("app-shell"),
+  stageWrap: document.getElementById("stage-wrap"),
+  videoCard: document.getElementById("video-card"),
+  bezel: document.getElementById("yt-bezel"),
+  toast: document.getElementById("yt-toast"),
+  play: document.getElementById("play-btn"),
+  prev: document.getElementById("prev-btn"),
+  next: document.getElementById("next-btn"),
+  restart: document.getElementById("restart-btn"),
+  speed: document.getElementById("speed-select"),
+  sidebar: document.getElementById("timestamps-panel"),
+  sidebarSash: document.getElementById("sidebar-sash"),
+  paneSash: document.getElementById("pane-sash"),
+  tPane: document.getElementById("t-pane"),
+  tHead: document.getElementById("t-head"),
+  tFold: document.getElementById("t-fold-btn"),
+  tPip: document.getElementById("t-pip-btn"),
+  tClose: document.getElementById("t-close-btn"),
+  tPipResize: document.getElementById("t-pip-resize"),
+  codePane: document.getElementById("code-pane"),
+  cHead: document.getElementById("code-head"),
+  cFold: document.getElementById("c-fold-btn"),
+  cPip: document.getElementById("c-pip-btn"),
+  cClose: document.getElementById("c-close-btn"),
+  cPipResize: document.getElementById("c-pip-resize"),
+  sidebarToggle: document.getElementById("sidebar-toggle-btn"),
+  codeToggle: document.getElementById("code-toggle-btn"),
+  fullscreen: document.getElementById("fullscreen-btn"),
+  scrub: document.getElementById("scrub"),
+  clock: document.getElementById("clock"),
+  stage: document.getElementById("stage"),
+  transcript: document.getElementById("transcript-list"),
+  tCountLabel: document.getElementById("t-count-label"),
+  codeList: document.getElementById("code-list"),
+  codeLineBadge: document.getElementById("code-line-badge"),
+};
+
+let scene = null, timeline = null, duration = 0, tNow = 0;
+let playing = false, speed = 1, lastTs = 0, scrubbing = false, wasPlaying = false;
+let toastTimer = null;
+
+const SPEEDS = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2];
+const fmtTime = s => Math.floor(s / 60) + ":" + String(Math.floor(s % 60)).padStart(2, "0");
+
+function setPlaying(v) { playing = v; ui.play.textContent = v ? "❚❚" : "▶"; }
+function syncClock() { ui.clock.textContent = fmtTime(tNow) + " / " + fmtTime(duration); }
+function syncScrub() {
+  ui.scrub.max = String(Math.max(1, Math.round(duration * 1000)));
+  if (!scrubbing) ui.scrub.value = String(Math.round(tNow * 1000));
+}
+
+function flashBezel(symbol) {
+  if (!ui.bezel || !ui.bezel.classList) return;
+  ui.bezel.textContent = symbol;
+  ui.bezel.classList.remove("pop");
+  if (ui.bezel.offsetWidth !== undefined) void ui.bezel.offsetWidth;
+  ui.bezel.classList.add("pop");
+}
+
+function showToast(msg) {
+  if (!ui.toast || !ui.toast.classList) return;
+  ui.toast.textContent = msg;
+  ui.toast.classList.add("show");
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => ui.toast.classList.remove("show"), 950);
+}
+
+/* ------------------------------------------------------------------ *
+ * Timestamps sidebar: ALL timestamps are always shown so the user can
+ * jump forward or backward to any step at any time without losing later
+ * timestamps. The active timestamp is highlighted.
+ * ------------------------------------------------------------------ */
+const panelColor = fill => (fill === C.grey ? "#94a3b8" : fill);
+let tEntries = [], tActive = -2;
+let codeRows = [], cActiveKey = "";
+
+const PY_KW = new Set([
+  "def", "return", "for", "in", "if", "elif", "else", "while",
+  "not", "and", "or", "True", "False", "None", "class", "pass", "break", "continue",
+]);
+const PY_FN = new Set([
+  "enumerate", "range", "len", "min", "max", "sum", "sorted", "zip", "int", "str", "list", "dict", "set",
+]);
+
+function highlightPyLine(rawLine, container) {
+  let codePart = rawLine;
+  let commentPart = "";
+  const hashIdx = rawLine.indexOf("#");
+  if (hashIdx >= 0) {
+    codePart = rawLine.slice(0, hashIdx);
+    commentPart = rawLine.slice(hashIdx);
+  }
+  const tokenRe = /("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|\b[A-Za-z_]\w*\b|\b\d+\b)/g;
+  let lastIdx = 0;
+  let m;
+  while ((m = tokenRe.exec(codePart)) !== null) {
+    if (m.index > lastIdx) {
+      const plain = document.createElement("span");
+      plain.textContent = codePart.slice(lastIdx, m.index);
+      container.appendChild(plain);
+    }
+    const tok = m[0];
+    const span = document.createElement("span");
+    span.textContent = tok;
+    if (tok[0] === '"' || tok[0] === "'") span.className = "tok-str";
+    else if (/^\d+$/.test(tok)) span.className = "tok-num";
+    else if (PY_KW.has(tok)) span.className = "tok-kw";
+    else if (PY_FN.has(tok)) span.className = "tok-fn";
+    container.appendChild(span);
+    lastIdx = tokenRe.lastIndex;
+  }
+  if (lastIdx < codePart.length) {
+    const tail = document.createElement("span");
+    tail.textContent = codePart.slice(lastIdx);
+    container.appendChild(tail);
+  }
+  if (commentPart) {
+    const com = document.createElement("span");
+    com.className = "tok-com";
+    com.textContent = commentPart;
+    container.appendChild(com);
+  }
+}
+
+function buildCode() {
+  const pane = ui.codePane;
+  const host = ui.codeList;
+  if (!pane || !host) return;
+  host.innerHTML = "";
+  codeRows = [];
+  cActiveKey = "";
+
+  const rawCode = SCENE.code;
+  if (!rawCode) {
+    if (pane.classList) pane.classList.add("hidden");
+    if (ui.codeToggle) ui.codeToggle.style.display = "none";
+    syncWorkbenchLayout();
+    return;
+  }
+  if (pane.classList) pane.classList.remove("hidden");
+  if (ui.codeToggle) ui.codeToggle.style.display = "";
+  const lines = Array.isArray(rawCode) ? rawCode : String(rawCode).split("\n");
+
+  lines.forEach((lineStr, idx) => {
+    const lineNo = idx + 1;
+    const row = document.createElement("div");
+    row.className = "code-line";
+    row.title = "Click to jump to next execution of line " + lineNo;
+
+    const gutter = document.createElement("span");
+    gutter.className = "c-gutter";
+    const arrow = document.createElement("span");
+    arrow.className = "c-arrow";
+    arrow.textContent = "▶";
+    const num = document.createElement("span");
+    num.className = "c-num";
+    num.textContent = String(lineNo);
+    gutter.appendChild(arrow);
+    gutter.appendChild(num);
+
+    const codeSpan = document.createElement("span");
+    codeSpan.className = "c-code";
+    highlightPyLine(lineStr, codeSpan);
+
+    row.appendChild(gutter);
+    row.appendChild(codeSpan);
+
+    row.addEventListener("click", () => {
+      if (!timeline) return;
+      // Jump to the next timestamp or lineEvent that executes lineNo
+      const matchingStops = tEntries
+        .filter(e => e.lines && e.lines.indexOf(lineNo) >= 0)
+        .map(e => e.at);
+      if (!matchingStops.length) {
+        for (const le of timeline.lineEvents) {
+          if (le.lines && le.lines.indexOf(lineNo) >= 0) matchingStops.push(le.action.start + 0.01);
+        }
+      }
+      if (matchingStops.length) {
+        const ahead = matchingStops.find(s => s > tNow + 0.05);
+        seekTo(ahead !== undefined ? ahead : matchingStops[0]);
+      }
+    });
+
+    host.appendChild(row);
+    codeRows.push({ lineNo, row });
+  });
+  syncWorkbenchLayout();
+}
+
+function syncCode() {
+  if (!codeRows.length || !timeline) return;
+  // Prefer the active timestamp's lines if we are at/inside a timestamp, or timeline.linesAt(tNow)
+  let activeLines = timeline.linesAt(tNow);
+  if ((!activeLines || !activeLines.length) && tActive >= 0 && tEntries[tActive] && tEntries[tActive].lines) {
+    activeLines = tEntries[tActive].lines;
+  }
+  const key = (activeLines || []).join(",");
+  if (key === cActiveKey) return;
+  cActiveKey = key;
+
+  const set = new Set(activeLines || []);
+  let firstActiveRow = null;
+  for (const cr of codeRows) {
+    if (set.has(cr.lineNo)) {
+      cr.row.className = "code-line active";
+      if (!firstActiveRow) firstActiveRow = cr.row;
+    } else {
+      cr.row.className = "code-line";
+    }
+  }
+
+  if (ui.codeLineBadge) {
+    if (activeLines && activeLines.length === 1) {
+      ui.codeLineBadge.textContent = "Line " + activeLines[0];
+    } else if (activeLines && activeLines.length > 1) {
+      ui.codeLineBadge.textContent = "Lines " + activeLines.join(", ");
+    } else {
+      ui.codeLineBadge.textContent = "Line —";
+    }
+  }
+
+  if (firstActiveRow && typeof firstActiveRow.scrollIntoView === "function") {
+    firstActiveRow.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+}
+
+function buildTranscript() {
+  const host = ui.transcript;
+  if (!host) return;
+  host.innerHTML = "";
+  tEntries = timeline.transcript.map((entry, i) => {
+    const row = document.createElement("li");
+    row.className = "t-row";
+    const at = entry.action.start + entry.action.dur;
+    const lineInfo = entry.lines && entry.lines.length ? " · Line " + entry.lines.join(",") : "";
+    row.title = "Jump to " + fmtTime(entry.action.start) + " (step " + (i + 1) + lineInfo + ")";
+
+    const badges = document.createElement("div");
+    badges.className = "t-badges";
+
+    const timeBadge = document.createElement("span");
+    timeBadge.className = "t-time";
+    timeBadge.textContent = fmtTime(entry.action.start);
+    badges.appendChild(timeBadge);
+
+    if (entry.lines && entry.lines.length) {
+      const lineTag = document.createElement("span");
+      lineTag.className = "t-line-tag";
+      lineTag.textContent = "L" + entry.lines.join(",");
+      badges.appendChild(lineTag);
+    }
+
+    row.appendChild(badges);
+
+    const body = document.createElement("span");
+    body.className = "t-text";
+    for (const part of entry.parts) {
+      const span = document.createElement("span");
+      span.textContent = part.text;
+      span.style.color = panelColor(part.fill);
+      body.appendChild(span);
+    }
+    row.appendChild(body);
+    row.addEventListener("click", () => seekTo(at));
+    host.appendChild(row);
+    return { row, start: entry.action.start, at, lines: entry.lines || [] };
+  });
+  if (ui.tCountLabel) {
+    ui.tCountLabel.textContent = tEntries.length + " steps · click any timestamp to jump";
+  }
+  tActive = -2;
+  syncTranscript();
+}
+
+function syncTranscript() {
+  let active = -1;
+  for (let i = 0; i < tEntries.length; i++) {
+    if (tEntries[i].start <= tNow + 1e-4) active = i;
+    else break;
+  }
+  if (active === tActive) return;
+  tEntries.forEach((e, i) => {
+    if (i === active) e.row.className = "t-row current";
+    else if (i < active) e.row.className = "t-row past";
+    else e.row.className = "t-row";
+  });
+  tActive = active;
+  const cur = tEntries[active];
+  if (cur && typeof cur.row.scrollIntoView === "function") {
+    cur.row.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+}
+
+/* Render the current time everywhere (stage, scrubber, clock, timestamps, code). */
+function show() {
+  timeline.render(tNow);
+  syncScrub(); syncClock(); syncTranscript(); syncCode();
+}
+
+function seekTo(t, keepPlaying) {
+  if (!timeline) return;
+  tNow = clamp(t, 0, duration); lastTs = 0;
+  if (!keepPlaying) setPlaying(false);
+  show();
+}
+
+function togglePlay(withBezel) {
+  if (!timeline) return;
+  if (tNow >= duration) tNow = 0;
+  lastTs = 0;
+  setPlaying(!playing);
+  if (withBezel) flashBezel(playing ? "▶" : "❚❚");
+}
+
+let splitRatio = 0.52;
+let sidebarWidth = 400;
+let pipZ = 80;
+
+function hasClass(node, cls) {
+  return !!(node && node.classList && node.classList.contains(cls));
+}
+
+function syncWorkbenchLayout() {
+  const tPane = ui.tPane;
+  const cPane = ui.codePane;
+  if (!tPane || !cPane) return;
+
+  const tOpen = !hasClass(tPane, "closed") && !hasClass(tPane, "hidden");
+  const cOpen = !hasClass(cPane, "closed") && !hasClass(cPane, "hidden");
+  const tPip = hasClass(tPane, "pip");
+  const cPip = hasClass(cPane, "pip");
+  const tFold = hasClass(tPane, "folded");
+  const cFold = hasClass(cPane, "folded");
+
+  if (ui.sidebarToggle && ui.sidebarToggle.classList) {
+    if (tOpen) ui.sidebarToggle.classList.add("active");
+    else ui.sidebarToggle.classList.remove("active");
+  }
+  if (ui.codeToggle && ui.codeToggle.classList) {
+    if (cOpen) ui.codeToggle.classList.add("active");
+    else ui.codeToggle.classList.remove("active");
+  }
+
+  const tDocked = tOpen && !tPip;
+  const cDocked = cOpen && !cPip;
+
+  // Collapse the sidebar container whenever no panes are docked in it
+  if (ui.stageWrap && ui.stageWrap.classList) {
+    if (!tDocked && !cDocked) ui.stageWrap.classList.add("sidebar-collapsed");
+    else ui.stageWrap.classList.remove("sidebar-collapsed");
+  }
+
+  // Show the horizontal split sash only when BOTH panes are docked and neither is folded
+  if (ui.paneSash && ui.paneSash.classList) {
+    if (tDocked && cDocked && !tFold && !cFold) ui.paneSash.classList.remove("hidden");
+    else ui.paneSash.classList.add("hidden");
+  }
+
+  // Compute flex sizing for docked panes
+  if (tDocked && cDocked) {
+    if (!tFold && !cFold) {
+      tPane.style.flex = "0 0 " + Math.round(splitRatio * 100) + "%";
+      cPane.style.flex = "1 1 0%";
+    } else if (tFold && !cFold) {
+      tPane.style.flex = "0 0 auto";
+      cPane.style.flex = "1 1 auto";
+    } else if (!tFold && cFold) {
+      tPane.style.flex = "1 1 auto";
+      cPane.style.flex = "0 0 auto";
+    } else {
+      tPane.style.flex = "0 0 auto";
+      cPane.style.flex = "0 0 auto";
+    }
+  } else if (tDocked) {
+    tPane.style.flex = tFold ? "0 0 auto" : "1 1 auto";
+  } else if (cDocked) {
+    cPane.style.flex = cFold ? "0 0 auto" : "1 1 auto";
+  }
+}
+
+function togglePaneOpen(pane, label) {
+  if (!pane || !pane.classList || hasClass(pane, "hidden")) return;
+  const closed = pane.classList.toggle("closed");
+  syncWorkbenchLayout();
+  showToast(label + (closed ? " closed" : " opened"));
+}
+
+function togglePaneFold(pane) {
+  if (!pane || !pane.classList) return;
+  const folded = pane.classList.toggle("folded");
+  if (hasClass(pane, "pip")) {
+    if (folded) {
+      pane.dataset.prevH = pane.style.height || "290px";
+      pane.style.height = "auto";
+    } else {
+      pane.style.height = pane.dataset.prevH || "290px";
+    }
+  }
+  syncWorkbenchLayout();
+}
+
+function togglePanePip(pane, btn, defaultTop, defaultLeft) {
+  if (!pane || !pane.classList || !ui.sidebar || !ui.appShell) return;
+  const isNowPip = pane.classList.toggle("pip");
+  if (isNowPip) {
+    pane.style.zIndex = String(++pipZ);
+    pane.style.top = pane.dataset.pipTop || defaultTop;
+    pane.style.left = pane.dataset.pipLeft || defaultLeft;
+    pane.style.width = pane.dataset.pipW || "420px";
+    pane.style.height = hasClass(pane, "folded") ? "auto" : (pane.dataset.pipH || "290px");
+    if (btn) {
+      btn.textContent = "↙";
+      btn.title = "Dock back into sidebar";
+    }
+    ui.appShell.appendChild(pane);
+    showToast("Pinned in PiP mode · drag header to move");
+  } else {
+    pane.style.top = "";
+    pane.style.left = "";
+    pane.style.width = "";
+    pane.style.height = "";
+    pane.style.zIndex = "";
+    if (btn) {
+      btn.textContent = "⧉";
+      btn.title = "Float / Pin anywhere on screen (PiP mode)";
+    }
+    // Re-insert into sidebar in canonical order: t-pane, pane-sash, code-pane
+    if (pane === ui.tPane && ui.paneSash) {
+      ui.sidebar.insertBefore(pane, ui.paneSash);
+    } else {
+      ui.sidebar.appendChild(pane);
+    }
+    showToast("Docked to sidebar");
+  }
+  syncWorkbenchLayout();
+}
+
+function wirePipDragAndResize(pane, head, resizeGrip) {
+  if (!pane || !head) return;
+  head.addEventListener("pointerdown", ev => {
+    if (!hasClass(pane, "pip")) return;
+    const tag = (ev.target && ev.target.tagName || "").toLowerCase();
+    if (tag === "button" || (ev.target && ev.target.closest && ev.target.closest("button"))) return;
+    ev.preventDefault();
+    pane.style.zIndex = String(++pipZ);
+    const rect = pane.getBoundingClientRect();
+    const startX = ev.clientX;
+    const startY = ev.clientY;
+    const origLeft = rect.left;
+    const origTop = rect.top;
+
+    const onMove = me => {
+      const nx = clamp(origLeft + (me.clientX - startX), 8, Math.max(8, window.innerWidth - rect.width - 8));
+      const ny = clamp(origTop + (me.clientY - startY), 8, Math.max(8, window.innerHeight - 48));
+      pane.style.left = nx + "px";
+      pane.style.top = ny + "px";
+      pane.dataset.pipLeft = pane.style.left;
+      pane.dataset.pipTop = pane.style.top;
+    };
+    const onUp = () => {
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+    };
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  });
+
+  // Double-clicking header toggles fold/minimize just like VS Code
+  head.addEventListener("dblclick", ev => {
+    const tag = (ev.target && ev.target.tagName || "").toLowerCase();
+    if (tag === "button" || (ev.target && ev.target.closest && ev.target.closest("button"))) return;
+    togglePaneFold(pane);
+  });
+
+  if (resizeGrip) {
+    resizeGrip.addEventListener("pointerdown", ev => {
+      if (!hasClass(pane, "pip")) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      pane.style.zIndex = String(++pipZ);
+      const rect = pane.getBoundingClientRect();
+      const startX = ev.clientX;
+      const startY = ev.clientY;
+      const origW = rect.width;
+      const origH = rect.height;
+
+      const onMove = me => {
+        const nw = clamp(origW + (me.clientX - startX), 260, Math.min(820, window.innerWidth - rect.left - 8));
+        const nh = clamp(origH + (me.clientY - startY), 120, Math.min(720, window.innerHeight - rect.top - 8));
+        pane.style.width = nw + "px";
+        pane.style.height = nh + "px";
+        pane.dataset.pipW = pane.style.width;
+        pane.dataset.pipH = pane.style.height;
+      };
+      const onUp = () => {
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+      };
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    });
+  }
+}
+
+function wireSashes() {
+  if (ui.sidebarSash && ui.sidebar) {
+    ui.sidebarSash.addEventListener("pointerdown", ev => {
+      ev.preventDefault();
+      ui.sidebarSash.classList.add("dragging");
+      const startX = ev.clientX;
+      const startW = ui.sidebar.getBoundingClientRect().width || sidebarWidth;
+      const onMove = me => {
+        sidebarWidth = clamp(startW - (me.clientX - startX), 250, Math.min(760, window.innerWidth - 260));
+        ui.sidebar.style.setProperty("--sidebar-w", sidebarWidth + "px");
+      };
+      const onUp = () => {
+        ui.sidebarSash.classList.remove("dragging");
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+      };
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    });
+    ui.sidebarSash.addEventListener("dblclick", () => {
+      sidebarWidth = 400;
+      ui.sidebar.style.setProperty("--sidebar-w", "400px");
+    });
+  }
+
+  if (ui.paneSash && ui.sidebar) {
+    ui.paneSash.addEventListener("pointerdown", ev => {
+      ev.preventDefault();
+      ui.paneSash.classList.add("dragging");
+      const sbRect = ui.sidebar.getBoundingClientRect();
+      const onMove = me => {
+        if (sbRect.height <= 0) return;
+        splitRatio = clamp((me.clientY - sbRect.top) / sbRect.height, 0.16, 0.84);
+        syncWorkbenchLayout();
+      };
+      const onUp = () => {
+        ui.paneSash.classList.remove("dragging");
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pointerup", onUp);
+      };
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    });
+    ui.paneSash.addEventListener("dblclick", () => {
+      splitRatio = 0.52;
+      syncWorkbenchLayout();
+    });
+  }
+}
+
+function toggleFullscreen() {
+  const target = ui.appShell || document.documentElement;
+  if (!document.fullscreenElement) {
+    if (target && typeof target.requestFullscreen === "function") {
+      target.requestFullscreen().catch(() => {});
+    }
+  } else if (typeof document.exitFullscreen === "function") {
+    document.exitFullscreen().catch(() => {});
+  }
+}
+
+function stepSpeed(delta) {
+  const idx = SPEEDS.indexOf(speed);
+  const nextIdx = clamp((idx < 0 ? 3 : idx) + delta, 0, SPEEDS.length - 1);
+  speed = SPEEDS[nextIdx];
+  if (ui.speed) ui.speed.value = String(speed);
+  showToast(speed + "×");
+}
+
+function run(params) {
+  const ctx = createContext(ui.stage);
+  scene = SCENE.buildScene(params, ctx);
+  timeline = new Timeline();
+  SCENE.buildTimeline(scene, timeline, ctx);
+  timeline.finish();
+  timeline.resetFn = scene.reset || null;
+  duration = timeline.duration;
+  tNow = 0; lastTs = 0;
+  buildCode();
+  buildTranscript();
+  show(); setPlaying(true);
+}
+
+function loop(ts) {
+  if (playing && timeline) {
+    if (lastTs) tNow += (ts - lastTs) / 1000 * speed;
+    if (tNow >= duration) { tNow = duration; setPlaying(false); }
+    show();
+  }
+  lastTs = ts;
+  requestAnimationFrame(loop);
+}
+
+/* ------------------------------------------------------------------ *
+ * Parameter plumbing
+ * ------------------------------------------------------------------ */
+function readValues(inputsMap) {
+  const values = {};
+  for (const id in inputsMap) values[id] = inputsMap[id].value;
+  return values;
+}
+
+function fromQuery() {
+  const params = new URLSearchParams(window.location.search);
+  const seeded = {};
+  for (const spec of SCENE.meta.inputs || []) {
+    if (params.has(spec.id)) seeded[spec.id] = params.get(spec.id);
+  }
+  if (params.has("args")) {
+    try {
+      const args = JSON.parse(params.get("args"));
+      if (Array.isArray(args) && typeof SCENE.fromArgs === "function") {
+        const mapped = SCENE.fromArgs(args);
+        if (mapped) Object.assign(seeded, mapped);
+      }
+    } catch (err) { /* keep whatever we have */ }
+  }
+  return seeded;
+}
+
+function flashError() {
+  for (const input of document.querySelectorAll(".inputs input")) {
+    input.classList.add("error");
+    setTimeout(() => input.classList.remove("error"), 700);
+  }
+}
+
+function mount() {
+  const meta = SCENE.meta || {};
+  document.title = (meta.title || "code180") + " — animated walkthrough";
+  const inputsMap = buildInputs(meta, () => runFromInputs(inputsMap));
+  buildLegend(meta, document.getElementById("brand"));
+
+  const seeded = fromQuery();
+  for (const id in seeded) if (inputsMap[id]) inputsMap[id].value = seeded[id];
+  if (!runFromInputs(inputsMap, true)) {
+    for (const spec of meta.inputs || []) {
+      const input = inputsMap[spec.id];
+      if (input && spec.default != null) input.value = String(spec.default);
+    }
+    runFromInputs(inputsMap, true);
+  }
+}
+
+function runFromInputs(inputsMap, quiet) {
+  const values = readValues(inputsMap);
+  const params = SCENE.read(values);
+  if (!params) { if (!quiet) flashError(); return false; }
+  run(params);
+  return true;
+}
+
+ui.play.addEventListener("click", () => togglePlay(true));
+ui.restart.addEventListener("click", () => {
+  if (!timeline) return;
+  tNow = 0; lastTs = 0; show(); setPlaying(true);
+  showToast("0:00");
+});
+// ‹ / › step from one timestamp to the next (fully written).
+ui.next.addEventListener("click", () => {
+  if (!timeline) return;
+  seekTo(timeline.nextStop(tNow));
+});
+ui.prev.addEventListener("click", () => {
+  if (!timeline) return;
+  seekTo(timeline.prevStop(tNow));
+});
+ui.speed.addEventListener("change", () => {
+  speed = Number(ui.speed.value);
+  showToast(speed + "×");
+});
+if (ui.sidebarToggle) ui.sidebarToggle.addEventListener("click", () => togglePaneOpen(ui.tPane, "Timestamps"));
+if (ui.codeToggle) ui.codeToggle.addEventListener("click", () => togglePaneOpen(ui.codePane, "Code"));
+if (ui.tClose) ui.tClose.addEventListener("click", () => togglePaneOpen(ui.tPane, "Timestamps"));
+if (ui.cClose) ui.cClose.addEventListener("click", () => togglePaneOpen(ui.codePane, "Code"));
+if (ui.tFold) ui.tFold.addEventListener("click", () => togglePaneFold(ui.tPane));
+if (ui.cFold) ui.cFold.addEventListener("click", () => togglePaneFold(ui.codePane));
+if (ui.tPip) ui.tPip.addEventListener("click", () => togglePanePip(ui.tPane, ui.tPip, "68px", "24px"));
+if (ui.cPip) ui.cPip.addEventListener("click", () => togglePanePip(ui.codePane, ui.cPip, "380px", "24px"));
+wirePipDragAndResize(ui.tPane, ui.tHead, ui.tPipResize);
+wirePipDragAndResize(ui.codePane, ui.cHead, ui.cPipResize);
+wireSashes();
+if (ui.fullscreen) ui.fullscreen.addEventListener("click", toggleFullscreen);
+
+// YouTube-style video canvas click = play/pause, double-click = fullscreen
+if (ui.videoCard) {
+  ui.videoCard.addEventListener("click", () => togglePlay(true));
+  ui.videoCard.addEventListener("dblclick", ev => {
+    ev.preventDefault();
+    toggleFullscreen();
+  });
+}
+
+ui.scrub.addEventListener("pointerdown", () => { scrubbing = true; wasPlaying = playing; setPlaying(false); });
+ui.scrub.addEventListener("input", () => {
+  if (!timeline) return;
+  tNow = Number(ui.scrub.value) / 1000; timeline.render(tNow); syncClock(); syncTranscript();
+});
+const scrubEnd = () => {
+  if (!scrubbing) return;
+  scrubbing = false; lastTs = 0;
+  if (wasPlaying) setPlaying(true);
+};
+ui.scrub.addEventListener("pointerup", scrubEnd);
+ui.scrub.addEventListener("change", scrubEnd);
+
+// YouTube-style keyboard shortcuts
+document.addEventListener("keydown", ev => {
+  const tag = (ev.target && ev.target.tagName || "").toLowerCase();
+  if (tag === "input" || tag === "select" || tag === "textarea") return;
+  if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
+
+  const key = ev.key;
+  const lower = key.toLowerCase();
+
+  if (ev.code === "Space" || lower === "k") {
+    ev.preventDefault();
+    togglePlay(true);
+  } else if (key === "ArrowRight" || key === ".") {
+    ev.preventDefault();
+    ui.next.click();
+  } else if (key === "ArrowLeft" || key === ",") {
+    ev.preventDefault();
+    ui.prev.click();
+  } else if (lower === "l") {
+    ev.preventDefault();
+    seekTo(tNow + 5 * speed, playing);
+    showToast("+5s");
+  } else if (lower === "j") {
+    ev.preventDefault();
+    seekTo(tNow - 5 * speed, playing);
+    showToast("-5s");
+  } else if (key === ">" || (ev.shiftKey && key === ".")) {
+    ev.preventDefault();
+    stepSpeed(1);
+  } else if (key === "<" || (ev.shiftKey && key === ",")) {
+    ev.preventDefault();
+    stepSpeed(-1);
+  } else if (lower === "f") {
+    ev.preventDefault();
+    toggleFullscreen();
+  } else if (lower === "t") {
+    ev.preventDefault();
+    togglePaneOpen(ui.tPane, "Timestamps");
+  } else if (lower === "c") {
+    ev.preventDefault();
+    togglePaneOpen(ui.codePane, "Code");
+  } else if (lower === "r") {
+    ev.preventDefault();
+    ui.restart.click();
+  } else if (key === "Home" || key === "0") {
+    ev.preventDefault();
+    seekTo(0, playing);
+    showToast("0:00");
+  } else if (key === "End") {
+    ev.preventDefault();
+    seekTo(duration, false);
+  } else if (key >= "1" && key <= "9") {
+    ev.preventDefault();
+    const pct = Number(key) * 10;
+    seekTo(duration * (pct / 100), playing);
+    showToast(pct + "%");
+  }
+});
+
+/* The scene module lives in a later <script>, so boot once parsing is done. */
+function start() {
+  mount();
+  requestAnimationFrame(loop);
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", start);
+} else {
+  start();
+}

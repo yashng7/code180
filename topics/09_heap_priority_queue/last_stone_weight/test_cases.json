@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[2, 7, 4, 1, 8, 1]],
+      "expected": 1,
+      "note": "official example"
+    },
+    {
+      "args": [[1]],
+      "expected": 1,
+      "note": "single stone"
+    },
+    {
+      "args": [[2, 2]],
+      "expected": 0,
+      "note": "equal stones annihilate"
+    },
+    {
+      "args": [[1, 3]],
+      "expected": 2,
+      "note": "difference of two stones"
+    },
+    {
+      "args": [[10, 10, 10]],
+      "expected": 10,
+      "note": "two equal stones vanish, odd one out remains"
+    },
+    {
+      "args": [[5, 5, 5, 5]],
+      "expected": 0,
+      "note": "all stones destroyed in pairs"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5]],
+      "expected": 1,
+      "note": "cascading differences"
+    },
+    {
+      "args": [[4, 3, 4, 3, 2]],
+      "expected": 2,
+      "note": "repeated equal pairs leave the smallest"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "lowest_common_ancestor_of_a_bst",
+  "title": "Lowest Common Ancestor of a BST",
+  "topic": "Trees",
+  "difficulty": "Easy",
+  "function": "lowest_common_ancestor",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "binary-search-tree",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",
+  "neetcode": "https://neetcode.io/problems/lowest-common-ancestor-in-binary-search-tree"
+}

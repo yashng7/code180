@@ -1,0 +1,68 @@
+{
+  "cases": [
+    {
+      "args": [
+        [["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]],
+        ["oath", "pea", "eat", "rain"]
+      ],
+      "expected": ["eat", "oath"],
+      "note": "official example 1"
+    },
+    {
+      "args": [
+        [["a", "b"], ["c", "d"]],
+        ["abcb"]
+      ],
+      "expected": [],
+      "note": "official example 2, no word can be formed"
+    },
+    {
+      "args": [
+        [["a"]],
+        ["a"]
+      ],
+      "expected": ["a"],
+      "note": "official example 3, single cell"
+    },
+    {
+      "args": [
+        [["a", "b"], ["c", "d"]],
+        ["ab", "ac", "bd", "cd", "abcd"]
+      ],
+      "expected": ["ab", "ac", "bd", "cd"],
+      "note": "adjacent letters only; 'abcd' needs a diagonal"
+    },
+    {
+      "args": [
+        [["a"]],
+        ["a", "b", "aa"]
+      ],
+      "expected": ["a"],
+      "note": "singleton board rejects longer and absent words"
+    },
+    {
+      "args": [
+        [["x"]],
+        ["x", "x", "y"]
+      ],
+      "expected": ["x"],
+      "note": "duplicate word reported once"
+    },
+    {
+      "args": [
+        [["a", "b"], ["c", "d"]],
+        ["a", "ab", "abc", "abdc", "abcd", "b", "bd", "dca"]
+      ],
+      "expected": ["a", "ab", "abdc", "b", "bd", "dca"],
+      "note": "words that are prefixes of longer words"
+    },
+    {
+      "args": [
+        [["a", "a", "a"], ["a", "a", "a"], ["a", "a", "a"]],
+        ["a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "b", "ba", "ab", "aab", "aaab", "baaa", "aaaaaaaaaa", "aaaaaaaaaaa", "zz", "aaaaz"]
+      ],
+      "expected": ["a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa", "aaaaaaa", "aaaaaaaa", "aaaaaaaaa"],
+      "note": "long word list exercises trie pruning (only 'a'-words up to 9 fit)"
+    }
+  ]
+}

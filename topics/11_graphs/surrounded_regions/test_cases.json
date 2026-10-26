@@ -1,0 +1,92 @@
+{
+  "cases": [
+    {
+      "args": [[
+        ["X", "X", "X", "X"],
+        ["X", "O", "O", "X"],
+        ["X", "X", "O", "X"],
+        ["X", "O", "X", "X"]
+      ]],
+      "expected": [
+        ["X", "X", "X", "X"],
+        ["X", "X", "X", "X"],
+        ["X", "X", "X", "X"],
+        ["X", "O", "X", "X"]
+      ],
+      "note": "official example: bottom-edge O survives"
+    },
+    {
+      "args": [[["X"]]],
+      "expected": [["X"]],
+      "note": "single X"
+    },
+    {
+      "args": [[["O"]]],
+      "expected": [["O"]],
+      "note": "single O touches the border and survives"
+    },
+    {
+      "args": [[
+        ["X", "X", "X"],
+        ["X", "O", "X"],
+        ["X", "X", "X"]
+      ]],
+      "expected": [
+        ["X", "X", "X"],
+        ["X", "X", "X"],
+        ["X", "X", "X"]
+      ],
+      "note": "fully enclosed single O is flipped"
+    },
+    {
+      "args": [[
+        ["X", "O", "X"],
+        ["X", "O", "X"],
+        ["X", "O", "X"]
+      ]],
+      "expected": [
+        ["X", "O", "X"],
+        ["X", "O", "X"],
+        ["X", "O", "X"]
+      ],
+      "note": "column touches top and bottom borders, survives"
+    },
+    {
+      "args": [[
+        ["X", "X", "X", "X", "X"],
+        ["X", "O", "O", "O", "X"],
+        ["X", "O", "X", "O", "X"],
+        ["X", "O", "O", "O", "X"],
+        ["X", "X", "X", "X", "X"]
+      ]],
+      "expected": [
+        ["X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X"],
+        ["X", "X", "X", "X", "X"]
+      ],
+      "note": "large enclosed ring is entirely flipped"
+    },
+    {
+      "args": [[["O", "O"], ["O", "O"]]],
+      "expected": [["O", "O"], ["O", "O"]],
+      "note": "every O is on the border"
+    },
+    {
+      "args": [[
+        ["X", "X", "X", "X"],
+        ["X", "O", "O", "X"],
+        ["X", "O", "O", "X"],
+        ["X", "X", "X", "X"]
+      ]],
+      "expected": [
+        ["X", "X", "X", "X"],
+        ["X", "X", "X", "X"],
+        ["X", "X", "X", "X"],
+        ["X", "X", "X", "X"]
+      ],
+      "note": "enclosed 2x2 block is flipped"
+    }
+  ]
+}

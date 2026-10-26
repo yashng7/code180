@@ -1,0 +1,16 @@
+{
+  "id": "binary_tree_maximum_path_sum",
+  "title": "Binary Tree Maximum Path Sum",
+  "topic": "Trees",
+  "difficulty": "Hard",
+  "function": "max_path_sum",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "dynamic-programming",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/binary-tree-maximum-path-sum/",
+  "neetcode": "https://neetcode.io/problems/binary-tree-maximum-path-sum"
+}

@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[[2, 1, 1], [2, 3, 1], [3, 4, 1]], 4, 2],
+      "expected": 2,
+      "note": "classic example"
+    },
+    {
+      "args": [[[1, 2, 1]], 2, 1],
+      "expected": 1,
+      "note": "two nodes, one edge"
+    },
+    {
+      "args": [[[1, 2, 1]], 2, 2],
+      "expected": -1,
+      "note": "node 1 is unreachable from node 2"
+    },
+    {
+      "args": [[], 1, 1],
+      "expected": 0,
+      "note": "single node needs no travel"
+    },
+    {
+      "args": [[[1, 2, 1], [2, 3, 2], [3, 4, 3]], 4, 1],
+      "expected": 6,
+      "note": "chain, total is the cumulative weight"
+    },
+    {
+      "args": [[[1, 2, 1], [2, 3, 1]], 4, 1],
+      "expected": -1,
+      "note": "node 4 disconnected from the component"
+    },
+    {
+      "args": [[[1, 2, 5], [1, 3, 1], [3, 2, 1], [2, 4, 1]], 4, 1],
+      "expected": 3,
+      "note": "a 2-hop detour beats the direct edge"
+    },
+    {
+      "args": [[[1, 2, 1], [2, 3, 1], [1, 3, 3]], 3, 1],
+      "expected": 2,
+      "note": "greedy would take the direct edge; shortest path is via node 2"
+    },
+    {
+      "args": [[[1, 2, 1], [2, 3, 1], [3, 4, 1], [4, 5, 1]], 5, 1],
+      "expected": 4,
+      "note": "longer chain"
+    }
+  ]
+}

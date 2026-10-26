@@ -1,0 +1,11 @@
+{
+  "id": "edit_distance",
+  "title": "Edit Distance",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Hard",
+  "function": "min_distance",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/edit-distance/",
+  "neetcode": "https://neetcode.io/problems/edit-distance"
+}

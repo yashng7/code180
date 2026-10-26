@@ -1,0 +1,53 @@
+{
+  "cases": [
+    {
+      "args": [[
+        [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+        [0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0],
+        [0, 1, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0]
+      ]],
+      "expected": 6,
+      "note": "official example 1"
+    },
+    {
+      "args": [[[0, 0, 0, 0, 0, 0, 0, 0]]],
+      "expected": 0,
+      "note": "official example 2 (no land)"
+    },
+    {
+      "args": [[[0]]],
+      "expected": 0,
+      "note": "single water cell"
+    },
+    {
+      "args": [[[1]]],
+      "expected": 1,
+      "note": "single land cell"
+    },
+    {
+      "args": [[[1, 1], [1, 1]]],
+      "expected": 4,
+      "note": "2x2 solid block"
+    },
+    {
+      "args": [[[1, 1, 0, 1]]],
+      "expected": 2,
+      "note": "single row, two islands"
+    },
+    {
+      "args": [[[1], [1], [1]]],
+      "expected": 3,
+      "note": "single column"
+    },
+    {
+      "args": [[[1, 1, 1, 0, 0, 1], [0, 0, 1, 0, 1, 1]]],
+      "expected": 4,
+      "note": "competing islands, largest is 4"
+    }
+  ]
+}

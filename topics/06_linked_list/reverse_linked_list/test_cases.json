@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": [[1, 2, 3, 4, 5]],
+      "expected": [5, 4, 3, 2, 1],
+      "note": "classic example"
+    },
+    {
+      "args": [[1, 2]],
+      "expected": [2, 1],
+      "note": "two nodes only"
+    },
+    {
+      "args": [[]],
+      "expected": [],
+      "note": "empty list"
+    },
+    {
+      "args": [[7]],
+      "expected": [7],
+      "note": "single node"
+    },
+    {
+      "args": [[-1, 0, 1]],
+      "expected": [1, 0, -1],
+      "note": "negative values"
+    },
+    {
+      "args": [[1, 1, 2, 2]],
+      "expected": [2, 2, 1, 1],
+      "note": "duplicate values"
+    },
+    {
+      "args": [[0, 9, -5, 42]],
+      "expected": [42, -5, 9, 0],
+      "note": "mixed signs"
+    }
+  ]
+}

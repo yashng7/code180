@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[1, 2, 4], [1, 3, 4]],
+      "expected": [1, 1, 2, 3, 4, 4],
+      "note": "classic example"
+    },
+    {
+      "args": [[], []],
+      "expected": [],
+      "note": "both empty"
+    },
+    {
+      "args": [[], [0]],
+      "expected": [0],
+      "note": "first list empty"
+    },
+    {
+      "args": [[5], [1, 2, 3]],
+      "expected": [1, 2, 3, 5],
+      "note": "single node merged in front"
+    },
+    {
+      "args": [[1, 3, 5], [2, 4, 6]],
+      "expected": [1, 2, 3, 4, 5, 6],
+      "note": "fully interleaved"
+    },
+    {
+      "args": [[-5, -1], [-3, 0]],
+      "expected": [-5, -3, -1, 0],
+      "note": "negative values"
+    },
+    {
+      "args": [[1, 1, 1], [1, 1]],
+      "expected": [1, 1, 1, 1, 1],
+      "note": "all duplicates"
+    },
+    {
+      "args": [[2, 2, 2], []],
+      "expected": [2, 2, 2],
+      "note": "second list empty"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "id": "burst_balloons",
+  "title": "Burst Balloons",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Hard",
+  "function": "max_coins",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming", "interval-dp"],
+  "leetcode": "https://leetcode.com/problems/burst-balloons/",
+  "neetcode": "https://neetcode.io/problems/burst-balloons"
+}

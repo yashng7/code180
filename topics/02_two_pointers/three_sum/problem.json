@@ -1,0 +1,11 @@
+{
+  "id": "three_sum",
+  "title": "3Sum",
+  "topic": "Two Pointers",
+  "difficulty": "Medium",
+  "function": "three_sum",
+  "compare": "unordered_inner",
+  "tags": ["array", "two-pointers", "sorting"],
+  "leetcode": "https://leetcode.com/problems/3sum/",
+  "neetcode": "https://neetcode.io/problems/three-integer-sum"
+}

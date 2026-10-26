@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [["A", "A", "A", "B", "B", "B"], 2],
+      "expected": 8,
+      "note": "official example"
+    },
+    {
+      "args": [["A", "C", "A", "B", "A", "B"], 1],
+      "expected": 6,
+      "note": "official example — no idle needed"
+    },
+    {
+      "args": [["A", "A", "A", "B", "B", "B"], 0],
+      "expected": 6,
+      "note": "official example — zero cooldown"
+    },
+    {
+      "args": [["A"], 1],
+      "expected": 1,
+      "note": "single task"
+    },
+    {
+      "args": [["A", "A"], 2],
+      "expected": 4,
+      "note": "one task with idle gaps"
+    },
+    {
+      "args": [["A", "A", "A"], 2],
+      "expected": 7,
+      "note": "three identical tasks, cooldown 2"
+    },
+    {
+      "args": [["A", "A", "B", "B"], 2],
+      "expected": 5,
+      "note": "two labels, two tasks each"
+    },
+    {
+      "args": [["A", "A", "A", "B", "B", "B"], 3],
+      "expected": 10,
+      "note": "large cooldown forces idle slots"
+    },
+    {
+      "args": [["A", "B", "C", "D", "E", "A"], 2],
+      "expected": 6,
+      "note": "enough distinct tasks to fill the gaps"
+    }
+  ]
+}

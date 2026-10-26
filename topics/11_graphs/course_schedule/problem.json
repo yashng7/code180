@@ -1,0 +1,11 @@
+{
+  "id": "course_schedule",
+  "title": "Course Schedule",
+  "topic": "Graphs",
+  "difficulty": "Medium",
+  "function": "can_finish",
+  "compare": "exact",
+  "tags": ["dfs", "bfs", "graph", "topological-sort"],
+  "leetcode": "https://leetcode.com/problems/course-schedule/",
+  "neetcode": "https://neetcode.io/problems/course-schedule"
+}

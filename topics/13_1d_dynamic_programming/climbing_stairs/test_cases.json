@@ -1,0 +1,12 @@
+{
+  "cases": [
+    {"args": [2], "expected": 2, "note": "official example 1"},
+    {"args": [3], "expected": 3, "note": "official example 2"},
+    {"args": [1], "expected": 1, "note": "single step"},
+    {"args": [4], "expected": 5, "note": "small staircase"},
+    {"args": [5], "expected": 8, "note": "next Fibonacci value"},
+    {"args": [10], "expected": 89, "note": "larger value"},
+    {"args": [20], "expected": 10946, "note": "exponential blow-up for naive recursion"},
+    {"args": [45], "expected": 1836311903, "note": "upper constraint boundary"}
+  ]
+}

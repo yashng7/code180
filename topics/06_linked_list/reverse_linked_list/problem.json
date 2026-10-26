@@ -1,0 +1,11 @@
+{
+  "id": "reverse_linked_list",
+  "title": "Reverse Linked List",
+  "topic": "Linked List",
+  "difficulty": "Easy",
+  "function": "reverse_list",
+  "compare": "exact",
+  "tags": ["linked-list", "recursion"],
+  "leetcode": "https://leetcode.com/problems/reverse-linked-list/",
+  "neetcode": "https://neetcode.io/problems/reverse-a-linked-list"
+}

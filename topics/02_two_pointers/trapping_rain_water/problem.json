@@ -1,0 +1,11 @@
+{
+  "id": "trapping_rain_water",
+  "title": "Trapping Rain Water",
+  "topic": "Two Pointers",
+  "difficulty": "Hard",
+  "function": "trap",
+  "compare": "exact",
+  "tags": ["array", "two-pointers", "stack", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/trapping-rain-water/",
+  "neetcode": "https://neetcode.io/problems/trapping-rain-water"
+}

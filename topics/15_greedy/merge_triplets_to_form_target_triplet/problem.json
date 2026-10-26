@@ -1,0 +1,11 @@
+{
+  "id": "merge_triplets_to_form_target_triplet",
+  "title": "Merge Triplets to Form Target Triplet",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "merge_triplets",
+  "compare": "exact",
+  "tags": ["array", "greedy"],
+  "leetcode": "https://leetcode.com/problems/merge-triplets-to-form-target-triplet/",
+  "neetcode": "https://neetcode.io/problems/merge-triplets-to-form-target"
+}

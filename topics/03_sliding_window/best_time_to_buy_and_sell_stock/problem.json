@@ -1,0 +1,11 @@
+{
+  "id": "best_time_to_buy_and_sell_stock",
+  "title": "Best Time to Buy and Sell Stock",
+  "topic": "Sliding Window",
+  "difficulty": "Easy",
+  "function": "max_profit",
+  "compare": "exact",
+  "tags": ["array", "sliding-window", "greedy"],
+  "leetcode": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+  "neetcode": "https://neetcode.io/problems/buy-and-sell-crypto"
+}

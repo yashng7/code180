@@ -1,0 +1,117 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          3,
+          1,
+          4,
+          null,
+          2
+        ],
+        1
+      ],
+      "expected": 1,
+      "note": "classic example, smallest"
+    },
+    {
+      "args": [
+        [
+          5,
+          3,
+          6,
+          2,
+          4,
+          null,
+          null,
+          1
+        ],
+        3
+      ],
+      "expected": 3,
+      "note": "classic example, third smallest"
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        1
+      ],
+      "expected": 1,
+      "note": "single node"
+    },
+    {
+      "args": [
+        [
+          3,
+          1,
+          4,
+          null,
+          2
+        ],
+        3
+      ],
+      "expected": 3,
+      "note": "third of four"
+    },
+    {
+      "args": [
+        [
+          5,
+          3,
+          6,
+          2,
+          4,
+          null,
+          null,
+          1
+        ],
+        6
+      ],
+      "expected": 6,
+      "note": "largest value"
+    },
+    {
+      "args": [
+        [
+          2,
+          1,
+          3
+        ],
+        2
+      ],
+      "expected": 2,
+      "note": "median value"
+    },
+    {
+      "args": [
+        [
+          4,
+          2,
+          5,
+          1,
+          3
+        ],
+        5
+      ],
+      "expected": 5,
+      "note": "last in order"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          null,
+          3,
+          null,
+          4
+        ],
+        1
+      ],
+      "expected": 4,
+      "note": "in-order of a left chain"
+    }
+  ]
+}

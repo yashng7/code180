@@ -1,0 +1,11 @@
+{
+  "id": "valid_sudoku",
+  "title": "Valid Sudoku",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Medium",
+  "function": "is_valid_sudoku",
+  "compare": "exact",
+  "tags": ["array", "hash-table", "matrix"],
+  "leetcode": "https://leetcode.com/problems/valid-sudoku/",
+  "neetcode": "https://neetcode.io/problems/valid-sudoku"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "maximum_product_subarray",
+  "title": "Maximum Product Subarray",
+  "topic": "1-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "max_product",
+  "compare": "exact",
+  "tags": ["array", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/maximum-product-subarray/",
+  "neetcode": "https://neetcode.io/problems/maximum-product-subarray"
+}

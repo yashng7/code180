@@ -1,0 +1,15 @@
+{
+  "id": "same_tree",
+  "title": "Same Tree",
+  "topic": "Trees",
+  "difficulty": "Easy",
+  "function": "is_same_tree",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/same-tree/",
+  "neetcode": "https://neetcode.io/problems/same-binary-tree"
+}

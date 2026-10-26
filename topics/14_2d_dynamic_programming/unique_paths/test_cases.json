@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [3, 7], "expected": 28, "note": "official example 1"},
+    {"args": [3, 2], "expected": 3, "note": "official example 2"},
+    {"args": [1, 1], "expected": 1, "note": "smallest grid"},
+    {"args": [1, 5], "expected": 1, "note": "single row"},
+    {"args": [5, 1], "expected": 1, "note": "single column"},
+    {"args": [2, 2], "expected": 2, "note": "right-then-down or down-then-right"},
+    {"args": [7, 3], "expected": 28, "note": "transpose of example 1"},
+    {"args": [3, 3], "expected": 6, "note": "small square"},
+    {"args": [10, 10], "expected": 48620, "note": "C(18,9), larger grid"}
+  ]
+}

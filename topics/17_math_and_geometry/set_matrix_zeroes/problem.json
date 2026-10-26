@@ -1,0 +1,11 @@
+{
+  "id": "set_matrix_zeroes",
+  "title": "Set Matrix Zeroes",
+  "topic": "Math & Geometry",
+  "difficulty": "Medium",
+  "function": "set_zeroes",
+  "compare": "exact",
+  "tags": ["array", "matrix", "in-place", "hash-table"],
+  "leetcode": "https://leetcode.com/problems/set-matrix-zeroes/",
+  "neetcode": "https://neetcode.io/problems/set-zeroes-in-matrix"
+}

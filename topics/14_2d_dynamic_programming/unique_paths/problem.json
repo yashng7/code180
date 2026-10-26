@@ -1,0 +1,11 @@
+{
+  "id": "unique_paths",
+  "title": "Unique Paths",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "unique_paths",
+  "compare": "exact",
+  "tags": ["math", "dynamic-programming", "combinatorics"],
+  "leetcode": "https://leetcode.com/problems/unique-paths/",
+  "neetcode": "https://neetcode.io/problems/unique-paths"
+}

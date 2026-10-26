@@ -1,0 +1,11 @@
+{
+  "id": "n_queens",
+  "title": "N-Queens",
+  "topic": "Backtracking",
+  "difficulty": "Hard",
+  "function": "solve_n_queens",
+  "compare": "unordered",
+  "tags": ["array", "backtracking"],
+  "leetcode": "https://leetcode.com/problems/n-queens/",
+  "neetcode": "https://neetcode.io/problems/n-queens"
+}

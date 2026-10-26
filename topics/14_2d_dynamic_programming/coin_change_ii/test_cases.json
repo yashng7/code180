@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [5, [1, 2, 5]], "expected": 4, "note": "official example 1"},
+    {"args": [3, [2]], "expected": 0, "note": "official example 2 (impossible)"},
+    {"args": [10, [10]], "expected": 1, "note": "official example 3"},
+    {"args": [0, [1, 2, 5]], "expected": 1, "note": "empty combination"},
+    {"args": [3, [1, 2, 5]], "expected": 2, "note": "1+1+1 and 1+2"},
+    {"args": [7, [2]], "expected": 0, "note": "odd amount from even coin"},
+    {"args": [11, [1, 2, 5]], "expected": 11, "note": "larger amount, many combinations"},
+    {"args": [5, [2, 3]], "expected": 1, "note": "single combination 2+3"},
+    {"args": [5, [3]], "expected": 0, "note": "coin larger than amount"}
+  ]
+}

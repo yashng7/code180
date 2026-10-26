@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["aabcc", "dbbca", "aadbbcbcac"], "expected": true, "note": "official example 1"},
+    {"args": ["aabcc", "dbbca", "aadbbbaccc"], "expected": false, "note": "official example 2"},
+    {"args": ["", "", ""], "expected": true, "note": "all empty"},
+    {"args": ["a", "", "a"], "expected": true, "note": "s2 empty, exact match"},
+    {"args": ["", "a", "a"], "expected": true, "note": "s1 empty, exact match"},
+    {"args": ["a", "b", "ab"], "expected": true, "note": "s1 then s2"},
+    {"args": ["a", "b", "ba"], "expected": true, "note": "s2 then s1"},
+    {"args": ["abc", "def", "abcdef"], "expected": true, "note": "whole s1 then whole s2"},
+    {"args": ["ab", "cd", "abc"], "expected": false, "note": "length mismatch"}
+  ]
+}

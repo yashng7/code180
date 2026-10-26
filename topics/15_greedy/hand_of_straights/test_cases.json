@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[1, 2, 3, 6, 2, 3, 4, 7, 8], 3],
+      "expected": true,
+      "note": "classic example"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 4],
+      "expected": false,
+      "note": "classic example — length not divisible by group size"
+    },
+    {
+      "args": [[8, 10, 12], 3],
+      "expected": false,
+      "note": "no way to fill the gaps 9 and 11"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5, 6], 2],
+      "expected": true,
+      "note": "three pairs of consecutive cards"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5, 6], 3],
+      "expected": true,
+      "note": "two runs of three"
+    },
+    {
+      "args": [[1, 1, 2, 2, 3, 3], 3],
+      "expected": true,
+      "note": "duplicate values still form valid runs"
+    },
+    {
+      "args": [[1, 1, 2, 3], 3],
+      "expected": false,
+      "note": "duplicate smallest card cannot be absorbed"
+    },
+    {
+      "args": [[5, 5, 5, 5], 4],
+      "expected": false,
+      "note": "equal cards are not consecutive"
+    }
+  ]
+}

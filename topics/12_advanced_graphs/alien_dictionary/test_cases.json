@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [["wrt", "wrf", "er", "ett", "rftt"]],
+      "expected": "wertf",
+      "note": "classic example; expected is one valid order (checker accepts any)"
+    },
+    {
+      "args": [["z", "x"]],
+      "expected": "zx",
+      "note": "single constraint"
+    },
+    {
+      "args": [["z", "x", "z"]],
+      "expected": "",
+      "note": "cycle z->x->z, no valid order"
+    },
+    {
+      "args": [["abc", "ab"]],
+      "expected": "",
+      "note": "prefix violation: 'ab' precedes 'abc'"
+    },
+    {
+      "args": [["a", "b", "c"]],
+      "expected": "abc",
+      "note": "chain of single-letter words"
+    },
+    {
+      "args": [["abcde"]],
+      "expected": "abcde",
+      "note": "single word, five unconstrained letters (any permutation valid)"
+    },
+    {
+      "args": [["ca", "bb", "ba"]],
+      "expected": "cba",
+      "note": "constraints c<b and b<a"
+    },
+    {
+      "args": [["ab", "ac", "b"]],
+      "expected": "abc",
+      "note": "b<c from first pair, a<b from the second"
+    }
+  ]
+}

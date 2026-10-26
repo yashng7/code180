@@ -1,0 +1,11 @@
+{
+  "id": "longest_increasing_path_in_a_matrix",
+  "title": "Longest Increasing Path in a Matrix",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Hard",
+  "function": "longest_increasing_path",
+  "compare": "exact",
+  "tags": ["matrix", "dynamic-programming", "graph", "topological-sort"],
+  "leetcode": "https://leetcode.com/problems/longest-increasing-path-in-a-matrix/",
+  "neetcode": "https://neetcode.io/problems/longest-increasing-path-in-a-matrix"
+}

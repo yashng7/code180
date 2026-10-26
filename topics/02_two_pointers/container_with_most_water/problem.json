@@ -1,0 +1,11 @@
+{
+  "id": "container_with_most_water",
+  "title": "Container With Most Water",
+  "topic": "Two Pointers",
+  "difficulty": "Medium",
+  "function": "max_area",
+  "compare": "exact",
+  "tags": ["array", "two-pointers", "greedy"],
+  "leetcode": "https://leetcode.com/problems/container-with-most-water/",
+  "neetcode": "https://neetcode.io/problems/max-water-container"
+}

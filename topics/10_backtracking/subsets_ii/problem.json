@@ -1,0 +1,11 @@
+{
+  "id": "subsets_ii",
+  "title": "Subsets II",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "subsets_with_dup",
+  "compare": "unordered_inner",
+  "tags": ["array", "backtracking", "bit-manipulation"],
+  "leetcode": "https://leetcode.com/problems/subsets-ii/",
+  "neetcode": "https://neetcode.io/problems/subsets-ii"
+}

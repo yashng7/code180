@@ -1,0 +1,11 @@
+{
+  "id": "reconstruct_itinerary",
+  "title": "Reconstruct Itinerary",
+  "topic": "Advanced Graphs",
+  "difficulty": "Hard",
+  "function": "find_itinerary",
+  "compare": "exact",
+  "tags": ["graph", "eulerian-path", "dfs", "sorting"],
+  "leetcode": "https://leetcode.com/problems/reconstruct-itinerary/",
+  "neetcode": "https://neetcode.io/problems/reconstruct-itinerary"
+}

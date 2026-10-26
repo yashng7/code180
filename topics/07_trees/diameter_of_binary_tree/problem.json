@@ -1,0 +1,15 @@
+{
+  "id": "diameter_of_binary_tree",
+  "title": "Diameter of Binary Tree",
+  "topic": "Trees",
+  "difficulty": "Easy",
+  "function": "diameter_of_binary_tree",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/diameter-of-binary-tree/",
+  "neetcode": "https://neetcode.io/problems/binary-tree-diameter"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "sliding_window_maximum",
+  "title": "Sliding Window Maximum",
+  "topic": "Sliding Window",
+  "difficulty": "Hard",
+  "function": "max_sliding_window",
+  "compare": "exact",
+  "tags": ["array", "queue", "sliding-window", "monotonic-queue", "heap"],
+  "leetcode": "https://leetcode.com/problems/sliding-window-maximum/",
+  "neetcode": "https://neetcode.io/problems/sliding-window-maximum"
+}

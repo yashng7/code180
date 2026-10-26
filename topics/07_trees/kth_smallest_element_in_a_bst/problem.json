@@ -1,0 +1,16 @@
+{
+  "id": "kth_smallest_element_in_a_bst",
+  "title": "Kth Smallest Element in a BST",
+  "topic": "Trees",
+  "difficulty": "Medium",
+  "function": "kth_smallest",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "binary-search-tree",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/kth-smallest-element-in-a-bst/",
+  "neetcode": "https://neetcode.io/problems/kth-smallest-integer-in-bst"
+}

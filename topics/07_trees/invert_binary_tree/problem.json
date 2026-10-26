@@ -1,0 +1,15 @@
+{
+  "id": "invert_binary_tree",
+  "title": "Invert Binary Tree",
+  "topic": "Trees",
+  "difficulty": "Easy",
+  "function": "invert_tree",
+  "compare": "exact",
+  "tags": [
+    "tree",
+    "depth-first-search",
+    "binary-tree"
+  ],
+  "leetcode": "https://leetcode.com/problems/invert-binary-tree/",
+  "neetcode": "https://neetcode.io/problems/invert-a-binary-tree"
+}

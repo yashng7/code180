@@ -1,0 +1,39 @@
+{
+  "cases": [
+    {
+      "args": ["aab"],
+      "expected": [["a", "a", "b"], ["aa", "b"]],
+      "note": "official example"
+    },
+    {
+      "args": ["a"],
+      "expected": [["a"]],
+      "note": "official example, single character"
+    },
+    {
+      "args": ["aa"],
+      "expected": [["a", "a"], ["aa"]],
+      "note": "two identical characters"
+    },
+    {
+      "args": ["aba"],
+      "expected": [["a", "b", "a"], ["aba"]],
+      "note": "already a palindrome"
+    },
+    {
+      "args": ["abba"],
+      "expected": [["a", "b", "b", "a"], ["a", "bb", "a"], ["abba"]],
+      "note": "several palindromic prefixes"
+    },
+    {
+      "args": ["abc"],
+      "expected": [["a", "b", "c"]],
+      "note": "no multi-character palindrome"
+    },
+    {
+      "args": [""],
+      "expected": [[]],
+      "note": "empty string has one partition"
+    }
+  ]
+}

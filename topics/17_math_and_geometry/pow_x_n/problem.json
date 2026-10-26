@@ -1,0 +1,12 @@
+{
+  "id": "pow_x_n",
+  "title": "Pow(x, n)",
+  "topic": "Math & Geometry",
+  "difficulty": "Medium",
+  "function": "my_pow",
+  "compare": "float",
+  "tolerance": 1e-6,
+  "tags": ["math", "recursion", "binary-exponentiation"],
+  "leetcode": "https://leetcode.com/problems/powx-n/",
+  "neetcode": "https://neetcode.io/problems/pow-x-n"
+}

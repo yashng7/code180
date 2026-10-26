@@ -1,0 +1,11 @@
+{
+  "id": "valid_parenthesis_string",
+  "title": "Valid Parenthesis String",
+  "topic": "Greedy",
+  "difficulty": "Medium",
+  "function": "check_valid_string",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming", "stack", "greedy"],
+  "leetcode": "https://leetcode.com/problems/valid-parenthesis-string/",
+  "neetcode": "https://neetcode.io/problems/valid-parenthesis-string"
+}

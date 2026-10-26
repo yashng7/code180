@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [[1, 2, 3, 1]], "expected": 4, "note": "official example 1"},
+    {"args": [[2, 7, 9, 3, 1]], "expected": 12, "note": "official example 2"},
+    {"args": [[1]], "expected": 1, "note": "single house"},
+    {"args": [[2, 1]], "expected": 2, "note": "choose the richer of two"},
+    {"args": [[5, 2, 7, 9]], "expected": 14, "note": "skip adjacent, take 5 and 9"},
+    {"args": [[1, 2]], "expected": 2, "note": "later house wins"},
+    {"args": [[2, 1, 1, 2]], "expected": 4, "note": "take both ends"},
+    {"args": [[100, 1, 1, 100]], "expected": 200, "note": "greedy on the big ends"},
+    {"args": [[0]], "expected": 0, "note": "zero money"}
+  ]
+}

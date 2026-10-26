@@ -1,0 +1,49 @@
+{
+  "cases": [
+    {
+      "args": [[1, 2, 3, 4, 5], 2],
+      "expected": [2, 1, 4, 3, 5],
+      "note": "classic example, k = 2"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 3],
+      "expected": [3, 2, 1, 4, 5],
+      "note": "classic example, k = 3"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 1],
+      "expected": [1, 2, 3, 4, 5],
+      "note": "k = 1 leaves list unchanged"
+    },
+    {
+      "args": [[1], 1],
+      "expected": [1],
+      "note": "single node"
+    },
+    {
+      "args": [[], 2],
+      "expected": [],
+      "note": "empty list"
+    },
+    {
+      "args": [[1, 2], 2],
+      "expected": [2, 1],
+      "note": "exactly one full group"
+    },
+    {
+      "args": [[1, 2, 3, 4], 4],
+      "expected": [4, 3, 2, 1],
+      "note": "whole list is one group"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5, 6], 3],
+      "expected": [3, 2, 1, 6, 5, 4],
+      "note": "two full groups"
+    },
+    {
+      "args": [[1, 2, 3, 4, 5], 5],
+      "expected": [5, 4, 3, 2, 1],
+      "note": "k equals list length"
+    }
+  ]
+}

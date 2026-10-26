@@ -1,0 +1,11 @@
+{
+  "id": "contains_duplicate",
+  "title": "Contains Duplicate",
+  "topic": "Arrays & Hashing",
+  "difficulty": "Easy",
+  "function": "contains_duplicate",
+  "compare": "exact",
+  "tags": ["array", "hash-table", "sorting"],
+  "leetcode": "https://leetcode.com/problems/contains-duplicate/",
+  "neetcode": "https://neetcode.io/problems/duplicate-integer"
+}

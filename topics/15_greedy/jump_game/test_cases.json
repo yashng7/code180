@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[2, 3, 1, 1, 4]],
+      "expected": true,
+      "note": "classic reachable example"
+    },
+    {
+      "args": [[3, 2, 1, 0, 4]],
+      "expected": false,
+      "note": "classic unreachable example"
+    },
+    {
+      "args": [[0]],
+      "expected": true,
+      "note": "already at the last index"
+    },
+    {
+      "args": [[0, 1]],
+      "expected": false,
+      "note": "stuck at a zero on the first index"
+    },
+    {
+      "args": [[2, 0, 0]],
+      "expected": true,
+      "note": "greedy overshoots through zeros"
+    },
+    {
+      "args": [[1, 0, 1]],
+      "expected": false,
+      "note": "one-step reach cannot cross the zero"
+    },
+    {
+      "args": [[1, 1, 1, 1]],
+      "expected": true,
+      "note": "single steps the whole way"
+    },
+    {
+      "args": [[3, 0, 8, 2, 0, 0, 1]],
+      "expected": true,
+      "note": "a big jump in the middle bridges the zeros"
+    }
+  ]
+}

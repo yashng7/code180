@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[[1, 3], [-2, 2]], 1],
+      "expected": [[-2, 2]],
+      "note": "official example"
+    },
+    {
+      "args": [[[3, 3], [5, -1], [-2, 4]], 2],
+      "expected": [[3, 3], [-2, 4]],
+      "note": "official example (order free)"
+    },
+    {
+      "args": [[[0, 0]], 1],
+      "expected": [[0, 0]],
+      "note": "singleton at the origin"
+    },
+    {
+      "args": [[[1, 1], [2, 2], [3, 3]], 3],
+      "expected": [[1, 1], [2, 2], [3, 3]],
+      "note": "k equals the number of points"
+    },
+    {
+      "args": [[[-5, -5], [1, 1], [2, 2]], 1],
+      "expected": [[1, 1]],
+      "note": "negative coordinates, diagonal distances"
+    },
+    {
+      "args": [[[1, 0], [-1, 0]], 2],
+      "expected": [[1, 0], [-1, 0]],
+      "note": "tie in distance — both selected"
+    },
+    {
+      "args": [[[0, 0], [1, 0], [5, 5]], 2],
+      "expected": [[0, 0], [1, 0]],
+      "note": "origin included in the closest set"
+    },
+    {
+      "args": [[[6, 10], [2, 3]], 1],
+      "expected": [[2, 3]],
+      "note": "closest is not the first point"
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          3,
+          4,
+          5,
+          1,
+          2
+        ],
+        [
+          4,
+          1,
+          2
+        ]
+      ],
+      "expected": true,
+      "note": "classic example, subtree present"
+    },
+    {
+      "args": [
+        [
+          3,
+          4,
+          5,
+          1,
+          2,
+          null,
+          null,
+          null,
+          null,
+          0
+        ],
+        [
+          4,
+          1,
+          2
+        ]
+      ],
+      "expected": false,
+      "note": "classic example, extra node breaks match"
+    },
+    {
+      "args": [
+        [
+          1,
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "note": "single-node subtree"
+    },
+    {
+      "args": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "note": "subtree matches a leaf"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "expected": false,
+      "note": "values present but not as one subtree"
+    },
+    {
+      "args": [
+        [],
+        [
+          1
+        ]
+      ],
+      "expected": false,
+      "note": "empty root cannot contain a node"
+    },
+    {
+      "args": [
+        [
+          1
+        ],
+        [
+          1
+        ]
+      ],
+      "expected": true,
+      "note": "tree equals its subtree"
+    },
+    {
+      "args": [
+        [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        [
+          2,
+          4,
+          5
+        ]
+      ],
+      "expected": true,
+      "note": "subtree with both children"
+    }
+  ]
+}

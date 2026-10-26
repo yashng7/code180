@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": [123], "expected": 321, "note": "classic example"},
+    {"args": [-123], "expected": -321, "note": "classic example, negative"},
+    {"args": [120], "expected": 21, "note": "trailing zero is dropped"},
+    {"args": [1534236469], "expected": 0, "note": "classic overflow example"},
+    {"args": [0], "expected": 0, "note": "zero"},
+    {"args": [5], "expected": 5, "note": "single digit"},
+    {"args": [100], "expected": 1, "note": "leading zeros vanish"},
+    {"args": [1463847412], "expected": 2147483641, "note": "largest valid reverse"},
+    {"args": [-2147483648], "expected": 0, "note": "INT_MIN overflows when reversed"}
+  ]
+}

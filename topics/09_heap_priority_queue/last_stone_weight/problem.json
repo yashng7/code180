@@ -1,0 +1,11 @@
+{
+  "id": "last_stone_weight",
+  "title": "Last Stone Weight",
+  "topic": "Heap / Priority Queue",
+  "difficulty": "Easy",
+  "function": "last_stone_weight",
+  "compare": "exact",
+  "tags": ["heap", "array", "simulation"],
+  "leetcode": "https://leetcode.com/problems/last-stone-weight/",
+  "neetcode": "https://neetcode.io/problems/last-stone-weight"
+}

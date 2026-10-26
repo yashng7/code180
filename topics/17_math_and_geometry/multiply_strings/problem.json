@@ -1,0 +1,11 @@
+{
+  "id": "multiply_strings",
+  "title": "Multiply Strings",
+  "topic": "Math & Geometry",
+  "difficulty": "Medium",
+  "function": "multiply",
+  "compare": "exact",
+  "tags": ["math", "string", "simulation"],
+  "leetcode": "https://leetcode.com/problems/multiply-strings/",
+  "neetcode": "https://neetcode.io/problems/multiply-strings"
+}

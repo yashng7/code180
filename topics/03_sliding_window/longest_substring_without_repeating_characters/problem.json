@@ -1,0 +1,11 @@
+{
+  "id": "longest_substring_without_repeating_characters",
+  "title": "Longest Substring Without Repeating Characters",
+  "topic": "Sliding Window",
+  "difficulty": "Medium",
+  "function": "length_of_longest_substring",
+  "compare": "exact",
+  "tags": ["hash-table", "string", "sliding-window"],
+  "leetcode": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+  "neetcode": "https://neetcode.io/problems/longest-substring-without-duplicates"
+}

@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["abcde", "ace"], "expected": 3, "note": "official example 1"},
+    {"args": ["abc", "abc"], "expected": 3, "note": "official example 2 (identical)"},
+    {"args": ["abc", "def"], "expected": 0, "note": "official example 3 (no overlap)"},
+    {"args": ["", "abc"], "expected": 0, "note": "empty text1"},
+    {"args": ["a", "a"], "expected": 1, "note": "single matching character"},
+    {"args": ["aaa", "aaa"], "expected": 3, "note": "all duplicates"},
+    {"args": ["bsbininm", "jmjkbkjkv"], "expected": 1, "note": "mostly disjoint"},
+    {"args": ["oxcpqrsvwf", "shmtulqrypy"], "expected": 2, "note": "LCS is qr"},
+    {"args": ["bl", "yby"], "expected": 1, "note": "single shared character"}
+  ]
+}

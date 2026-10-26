@@ -1,0 +1,11 @@
+{
+  "id": "reverse_bits",
+  "title": "Reverse Bits",
+  "topic": "Bit Manipulation",
+  "difficulty": "Easy",
+  "function": "reverse_bits",
+  "compare": "exact",
+  "tags": ["bit-manipulation", "divide-and-conquer"],
+  "leetcode": "https://leetcode.com/problems/reverse-bits/",
+  "neetcode": "https://neetcode.io/problems/reverse-bits"
+}

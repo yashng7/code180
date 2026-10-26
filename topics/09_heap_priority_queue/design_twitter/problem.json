@@ -1,0 +1,12 @@
+{
+  "id": "design_twitter",
+  "title": "Design Twitter",
+  "topic": "Heap / Priority Queue",
+  "difficulty": "Medium",
+  "type": "design",
+  "class": "Twitter",
+  "compare": "exact",
+  "tags": ["heap", "design", "hash-table", "linked-list"],
+  "leetcode": "https://leetcode.com/problems/design-twitter/",
+  "neetcode": "https://neetcode.io/problems/design-twitter-feed"
+}

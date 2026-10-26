@@ -1,0 +1,11 @@
+{
+  "id": "longest_common_subsequence",
+  "title": "Longest Common Subsequence",
+  "topic": "2-D Dynamic Programming",
+  "difficulty": "Medium",
+  "function": "longest_common_subsequence",
+  "compare": "exact",
+  "tags": ["string", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/longest-common-subsequence/",
+  "neetcode": "https://neetcode.io/problems/longest-common-subsequence"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "cheapest_flights_within_k_stops",
+  "title": "Cheapest Flights Within K Stops",
+  "topic": "Advanced Graphs",
+  "difficulty": "Medium",
+  "function": "find_cheapest_price",
+  "compare": "exact",
+  "tags": ["graph", "bellman-ford", "shortest-path", "dynamic-programming"],
+  "leetcode": "https://leetcode.com/problems/cheapest-flights-within-k-stops/",
+  "neetcode": "https://neetcode.io/problems/cheapest-flight-path"
+}

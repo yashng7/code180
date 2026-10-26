@@ -1,0 +1,68 @@
+{
+  "cases": [
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"],
+        "vals": [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+      },
+      "expected": [null, null, null, 1, null, -1, null, -1, 3, 4],
+      "note": "classic example"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "get"],
+        "vals": [[1], [1]]
+      },
+      "expected": [null, -1],
+      "note": "get on empty cache"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "get", "put", "get", "get"],
+        "vals": [[1], [2, 1], [2], [3, 2], [2], [3]]
+      },
+      "expected": [null, null, 1, null, -1, 2],
+      "note": "capacity 1 evicts on second put"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "put", "get", "put", "get"],
+        "vals": [[2], [1, 1], [2, 2], [1], [1, 10], [1]]
+      },
+      "expected": [null, null, null, 1, null, 10],
+      "note": "put on existing key updates value"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "put", "get", "put", "get", "get"],
+        "vals": [[2], [1, 1], [2, 2], [1], [3, 3], [2], [3]]
+      },
+      "expected": [null, null, null, 1, null, -1, 3],
+      "note": "get refreshes recency before eviction"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "put", "get"],
+        "vals": [[1], [2, 1], [2, 2], [2]]
+      },
+      "expected": [null, null, null, 2],
+      "note": "same key put twice, capacity 1"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "put", "get", "get"],
+        "vals": [[2], [0, -1], [-1, 5], [0], [-1]]
+      },
+      "expected": [null, null, null, -1, 5],
+      "note": "zero and negative keys"
+    },
+    {
+      "args": {
+        "ops": ["LRUCache", "put", "put", "put", "get", "get", "get"],
+        "vals": [[3], [1, 1], [2, 2], [3, 3], [1], [2], [3]]
+      },
+      "expected": [null, null, null, null, 1, 2, 3],
+      "note": "no eviction when under capacity"
+    }
+  ]
+}

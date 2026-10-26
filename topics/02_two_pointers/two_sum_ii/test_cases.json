@@ -1,0 +1,44 @@
+{
+  "cases": [
+    {
+      "args": [[2, 7, 11, 15], 9],
+      "expected": [1, 2],
+      "note": "classic example"
+    },
+    {
+      "args": [[2, 3, 4], 6],
+      "expected": [1, 3],
+      "note": "answer spans the whole array"
+    },
+    {
+      "args": [[-1, 0], -1],
+      "expected": [1, 2],
+      "note": "minimum length with negatives"
+    },
+    {
+      "args": [[1, 2, 3, 4, 4, 9, 56, 90], 8],
+      "expected": [4, 5],
+      "note": "duplicate values form the pair"
+    },
+    {
+      "args": [[5, 25, 75], 100],
+      "expected": [2, 3],
+      "note": "answer at the tail"
+    },
+    {
+      "args": [[1, 3, 4, 5, 7, 11], 9],
+      "expected": [3, 4],
+      "note": "interior pair"
+    },
+    {
+      "args": [[-3, 3, 4, 90], 0],
+      "expected": [1, 2],
+      "note": "opposite signs"
+    },
+    {
+      "args": [[1, 2], 3],
+      "expected": [1, 2],
+      "note": "two-element array"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "cases": [
+    {"args": ["()"], "expected": true, "note": "single pair"},
+    {"args": ["()[]{}"], "expected": true, "note": "official example, all bracket types"},
+    {"args": ["(]"], "expected": false, "note": "official example, mismatched type"},
+    {"args": ["([])"], "expected": true, "note": "correctly nested"},
+    {"args": ["([)]"], "expected": false, "note": "interleaved, not nested"},
+    {"args": [""], "expected": true, "note": "empty string is valid"},
+    {"args": ["("], "expected": false, "note": "unclosed opener"},
+    {"args": [")"], "expected": false, "note": "closer with empty stack"},
+    {"args": ["{[]}"], "expected": true, "note": "nested mixed types"}
+  ]
+}

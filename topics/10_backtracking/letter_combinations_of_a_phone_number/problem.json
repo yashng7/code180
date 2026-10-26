@@ -1,0 +1,11 @@
+{
+  "id": "letter_combinations_of_a_phone_number",
+  "title": "Letter Combinations of a Phone Number",
+  "topic": "Backtracking",
+  "difficulty": "Medium",
+  "function": "letter_combinations",
+  "compare": "unordered",
+  "tags": ["string", "backtracking", "hash-table"],
+  "leetcode": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+  "neetcode": "https://neetcode.io/problems/letter-combinations-of-a-phone-number"
+}

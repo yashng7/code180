@@ -1,0 +1,110 @@
+{
+  "cases": [
+    {
+      "args": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "expected": 6,
+      "note": "classic example, both branches positive"
+    },
+    {
+      "args": [
+        [
+          -10,
+          9,
+          20,
+          null,
+          null,
+          15,
+          7
+        ]
+      ],
+      "expected": 42,
+      "note": "classic example, bend inside the right subtree"
+    },
+    {
+      "args": [
+        [
+          2,
+          -1
+        ]
+      ],
+      "expected": 2,
+      "note": "ignore the negative child"
+    },
+    {
+      "args": [
+        [
+          -3
+        ]
+      ],
+      "expected": -3,
+      "note": "single negative node"
+    },
+    {
+      "args": [
+        [
+          1
+        ]
+      ],
+      "expected": 1,
+      "note": "single positive node"
+    },
+    {
+      "args": [
+        [
+          -2,
+          -1
+        ]
+      ],
+      "expected": -1,
+      "note": "all negative: pick the largest single node"
+    },
+    {
+      "args": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expected": 3,
+      "note": "two-node path"
+    },
+    {
+      "args": [
+        [
+          -1,
+          2,
+          3
+        ]
+      ],
+      "expected": 4,
+      "note": "root is negative but bridges both children"
+    },
+    {
+      "args": [
+        [
+          5,
+          4,
+          8,
+          11,
+          null,
+          13,
+          4,
+          7,
+          2,
+          null,
+          null,
+          null,
+          1
+        ]
+      ],
+      "expected": 48,
+      "note": "deep path up through the root"
+    }
+  ]
+}
